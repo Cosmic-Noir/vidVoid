@@ -2,9 +2,17 @@
 const apiKey = "41852c5354f2d366f322d470d71ec51f";
 const baseURL = "https://api.themoviedb.org/3/";
 
-// Turn search parameter into object
+function handleForm() {
+  // handles search into query from form data
+  $("#js-searchForm").submit(event => {
+    event.preventDefault();
 
-const params = {};
+    // Convert user input into variable to pass as a param
+    let searchTerm = $("#js-query").val();
+    console.log("`handleForm()` ran");
+    getMedia(searchTerm);
+  });
+}
 
 function formatQueryParams(params) {
   // turns keys in params object into html string to append to the search URL endpoint
@@ -14,8 +22,22 @@ function formatQueryParams(params) {
   return queryItems.join("&");
 }
 
+function getMedia(query) {
+  // Takes keyword from user input
+  const params = {
+    query: query,
+    page: 1
+  };
+  // Calls either TV or Movies
+  let mediaForm = $("#media").val();
+
+  const queryString = formatQueryParams(params);
+  const url = baseURL + mediaForm + "?" + queryString;
+  console.log(url);
+}
+
 // Create parameters string by passing params object then create
-const queryString = formatQueryParams(params);
-const url = baseURL + "?" + queryString;
 
 console.log("VidVoid App Active");
+
+handleForm();
