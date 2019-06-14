@@ -26,7 +26,8 @@ function getMedia(query) {
   // Takes keyword from user input
   const params = {
     query: query,
-    page: 1
+    page: 1,
+    api_key: apiKey
   };
   // Calls either TV or Movies
   let mediaForm = $("#media").val();
