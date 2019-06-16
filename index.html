@@ -14,21 +14,23 @@
         <form action="" id="js-searchForm">
           <label for="mediaSearch">Find:</label>
           <select id="media" name="mediaSearch">
-            <option value="search/keyword">None</option>
             <option value="movie">Movies</option>
             <option value="tv">TV Shows</option>
+            <option value="person">Actor/Actress</option>
           </select>
           <input
             type="text"
             name="mediaSearch"
-            placeholder="Mood..."
+            placeholder="Search..."
             id="js-query"
           />
           <button type="submit">Fill the Void</button>
         </form>
       </section>
-      <div class="results js-results hidden">
-        <h2>Results</h2>
+      <div class="flex-container">
+        <div class="hidden js-results">
+          <h2>Results</h2>
+        </div>
       </div>
     </main>
     <script

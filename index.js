@@ -1,6 +1,6 @@
 // API key
 const apiKey = "41852c5354f2d366f322d470d71ec51f";
-const baseURL = "https://api.themoviedb.org/3/";
+const baseURL = "https://api.themoviedb.org/3/search/";
 
 function handleForm() {
   // handles search into query from form data
@@ -27,7 +27,9 @@ function getMedia(query) {
   const params = {
     query: query,
     page: 1,
-    api_key: apiKey
+    api_key: apiKey,
+    include_video: false,
+    language: "en-US"
   };
   // Calls either TV or Movies
   let mediaForm = $("#media").val();
@@ -35,6 +37,15 @@ function getMedia(query) {
   const queryString = formatQueryParams(params);
   const url = baseURL + mediaForm + "?" + queryString;
   console.log(url);
+
+  fetch(url)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statustext);
+    })
+    .then(responseJson => console.log(responseJson));
 }
 
 // Create parameters string by passing params object then create
