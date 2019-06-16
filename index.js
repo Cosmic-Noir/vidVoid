@@ -45,7 +45,30 @@ function getMedia(query) {
       }
       throw new Error(response.statustext);
     })
-    .then(responseJson => console.log(responseJson));
+    .then(responseJson => displayResults(responseJson));
+}
+
+function displayResults(responseJson) {
+  // Displays results returned from MDB.
+  console.log(responseJson);
+
+  // Unhide results div
+  $(".js-results").removeClass("hidden");
+
+  // Empty previous display area
+  $("js-results").empty();
+
+  $("#js-resultNum").text(responseJson.total_results);
+
+  for (let i = 0; i < responseJson.results.length - 1; i++) {
+    $("#js-resultList").append(`
+    <li class="result">
+      <h3>${responseJson.results[i].original_title}</h3>
+    </li>
+    `);
+    console.log("the inner loop ran");
+  }
+  console.log("displayResults ran");
 }
 
 // Create parameters string by passing params object then create
