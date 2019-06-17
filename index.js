@@ -53,11 +53,12 @@ function displayResults(responseJson) {
   // Displays results returned from MDB.
   console.log(responseJson);
 
+  // Empty list per each search
+  $("#js-resultList").empty();
+
   // Unhide results div
   $(".js-results").removeClass("hidden");
-
-  // Empty previous display area
-  $("js-results").empty();
+  $(".js-resultCounter").removeClass("hidden");
 
   $("#js-resultNum").text(responseJson.total_results);
 
