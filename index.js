@@ -46,10 +46,10 @@ function getMedia(query) {
       }
       throw new Error(response.statustext);
     })
-    .then(responseJson => displayResults(responseJson));
+    .then(responseJson => displayResults(responseJson, mediaForm));
 }
 
-function displayResults(responseJson) {
+function displayResults(responseJson, mediaForm) {
   // Displays results returned from MDB.
   console.log(responseJson);
 
@@ -62,19 +62,45 @@ function displayResults(responseJson) {
 
   $("#js-resultNum").text(responseJson.total_results);
 
-  for (let i = 0; i < responseJson.results.length - 1; i++) {
-    $("#js-resultList").append(`
-    <li class="result">
-      <img src="https://image.tmdb.org/t/p/w185/${
+  if (mediaForm === "movie") {
+    for (let i = 0; i < responseJson.results.length - 1; i++) {
+      $("#js-resultList").append(`
+      <li class="result">
+        <img src="https://image.tmdb.org/t/p/w185/${
+          responseJson.results[i].poster_path
+        }">
+        <h3>${responseJson.results[i].original_title}</h3>
+        <h4>Average Rating: ${responseJson.results[i].vote_average}</h4>
+        <h4>Released: ${responseJson.results[i].release_date}</h4>
+      </li>
+      `);
+      console.log("Movie result generation complete");
+    }
+  }
+
+  if (mediaForm === "tv") {
+    for (let i = 0; i < responseJson.results.length - 1; i++) {
+      $("#js-resultList").append(`
+      <li class="result">
+        <img id="pic${
+          responseJson.results[i].id
+        }" src="https://image.tmdb.org/t/p/w185/${
         responseJson.results[i].poster_path
       }">
-      <h3>${responseJson.results[i].original_title}</h3>
-      <h4>Average Rating: ${responseJson.results[i].vote_average}</h4>
-      <h4>Released: ${responseJson.results[i].release_date}</h4>
-    </li>
-    `);
-    console.log("the inner loop ran");
+        <h3>${responseJson.results[i].original_name}</h3>
+        <h4>Average Rating: ${responseJson.results[i].vote_average}</h4>
+        <h4>First Air Date: ${responseJson.results[i].first_air_date}</h4>
+      </li>
+      `);
+      if (!responseJson.results[i].poster_path) {
+        $(`#pic${responseJson.results[i].id}`).remove();
+      }
+      console.log("Movie result generation complete");
+    }
+
+    console.log("TV result generation complete");
   }
+
   console.log("displayResults ran");
 }
 
