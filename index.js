@@ -66,16 +66,18 @@ function displayResults(responseJson, mediaForm) {
     for (let i = 0; i < responseJson.results.length - 1; i++) {
       $("#js-resultList").append(`
       <li class="result">
-        <img src="https://image.tmdb.org/t/p/w185/${
-          responseJson.results[i].poster_path
-        }">
+        <img id="pic${
+          responseJson.results[i].id
+        }" src="https://image.tmdb.org/t/p/w185/${
+        responseJson.results[i].poster_path
+      }">
         <h3>${responseJson.results[i].original_title}</h3>
         <h4>Average Rating: ${responseJson.results[i].vote_average}</h4>
         <h4>Released: ${responseJson.results[i].release_date}</h4>
       </li>
       `);
-      console.log("Movie result generation complete");
     }
+    console.log("Movie result generation complete");
   }
 
   if (mediaForm === "tv") {
@@ -92,12 +94,17 @@ function displayResults(responseJson, mediaForm) {
         <h4>First Air Date: ${responseJson.results[i].first_air_date}</h4>
       </li>
       `);
+      // If show does not have a poster_path, remove broken link element.
       if (!responseJson.results[i].poster_path) {
-        $(`#pic${responseJson.results[i].id}`).remove();
+        $(`#pic${responseJson.results[i].id}`).replaceWith(`
+        <img src="missingImage.jpeg">`);
+        console.log(
+          `${
+            responseJson.results[i].original_name
+          } img element removed due to missing poster`
+        );
       }
-      console.log("Movie result generation complete");
     }
-
     console.log("TV result generation complete");
   }
 
