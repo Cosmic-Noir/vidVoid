@@ -28,6 +28,7 @@ function getMedia(query) {
     query: query,
     page: 1,
     api_key: apiKey,
+    indlucde_adult: false,
     include_video: false,
     language: "en-US"
   };
@@ -63,7 +64,12 @@ function displayResults(responseJson) {
   for (let i = 0; i < responseJson.results.length - 1; i++) {
     $("#js-resultList").append(`
     <li class="result">
+      <img src="https://image.tmdb.org/t/p/w185/${
+        responseJson.results[i].poster_path
+      }">
       <h3>${responseJson.results[i].original_title}</h3>
+      <h4>Average Rating: ${responseJson.results[i].vote_average}</h4>
+      <h4>Released: ${responseJson.results[i].release_date}</h4>
     </li>
     `);
     console.log("the inner loop ran");
