@@ -159,9 +159,25 @@ function handleResultSelect() {
     $(".js-results").addClass("hidden");
     console.log("handleResultSelect ran phase 1: hide results");
     $(".js-details").removeClass("hidden");
+    getSingleResult();
     handleBackResults();
   });
+
   console.log("handleResultSelect ran");
+}
+
+function getSingleResult() {
+  let mediaID = 9836;
+  let url = `https://api.themoviedb.org/3/movie/${mediaID}?api_key=${apiKey}`;
+  console.log(url);
+  fetch(url)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statustext);
+    })
+    .then(responseJson => console.log(responseJson));
 }
 
 function handleBackResults() {
