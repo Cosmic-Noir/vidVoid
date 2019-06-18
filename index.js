@@ -136,7 +136,7 @@ function displayResults(responseJson, mediaForm) {
   }
 
   createNext(responseJson);
-  handleResultSelect(responseJson);
+  handleResultSelect();
 
   console.log("displayResults ran");
   // call function to hanlde clicking on any movie result
@@ -154,13 +154,22 @@ function createNext(responseJson) {
   // displayed when user displays results, allows new GET request for page 2
 }
 
-function handleResultSelect(responseJson) {
+function handleResultSelect() {
   $(".result").click(function() {
     $(".js-results").addClass("hidden");
     console.log("handleResultSelect ran phase 1: hide results");
     $(".js-details").removeClass("hidden");
+    handleBackResults();
   });
   console.log("handleResultSelect ran");
+}
+
+function handleBackResults() {
+  // Unhides the results div and hides the details div
+  $("#backResults").click(function() {
+    $(".js-details").addClass("hidden");
+    $(".js-results").removeClass("hidden");
+  });
 }
 
 console.log("VidVoid App Active");
