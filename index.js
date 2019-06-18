@@ -136,6 +136,7 @@ function displayResults(responseJson, mediaForm) {
   }
 
   createNext(responseJson);
+  handleResultSelect(responseJson);
 
   console.log("displayResults ran");
   // call function to hanlde clicking on any movie result
@@ -153,7 +154,14 @@ function createNext(responseJson) {
   // displayed when user displays results, allows new GET request for page 2
 }
 
-// Create parameters string by passing params object then create
+function handleResultSelect(responseJson) {
+  $(".result").click(function() {
+    $(".js-results").addClass("hidden");
+    console.log("handleResultSelect ran phase 1: hide results");
+    $(".js-details").removeClass("hidden");
+  });
+  console.log("handleResultSelect ran");
+}
 
 console.log("VidVoid App Active");
 
