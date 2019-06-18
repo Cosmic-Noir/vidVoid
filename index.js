@@ -65,7 +65,7 @@ function displayResults(responseJson, mediaForm) {
   if (mediaForm === "movie") {
     for (let i = 0; i < responseJson.results.length; i++) {
       $("#js-resultList").append(`
-      <li class="result">
+      <li class="result" id="result${responseJson.results[i].id}">
         <img id="pic${
           responseJson.results[i].id
         }" src="https://image.tmdb.org/t/p/w185/${
@@ -83,7 +83,7 @@ function displayResults(responseJson, mediaForm) {
   if (mediaForm === "tv") {
     for (let i = 0; i < responseJson.results.length; i++) {
       $("#js-resultList").append(`
-      <li class="result">
+      <li class="result" id="result${responseJson.results[i].id}">
         <img id="pic${
           responseJson.results[i].id
         }" src="https://image.tmdb.org/t/p/w185/${
@@ -111,7 +111,7 @@ function displayResults(responseJson, mediaForm) {
   if (mediaForm === "person") {
     for (let i = 0; i < responseJson.results.length; i++) {
       $("#js-resultList").append(`
-      <li class="result">
+      <li class="result" id="result${responseJson.results[i].id}">
         <img id="pic${
           responseJson.results[i].id
         }" src="https://image.tmdb.org/t/p/w185/${
@@ -134,11 +134,22 @@ function displayResults(responseJson, mediaForm) {
     }
     console.log("Person result generation complete");
   }
+
+  createNext(responseJson);
+
   console.log("displayResults ran");
   // call function to hanlde clicking on any movie result
 }
 
-function handleNext() {
+function createNext(responseJson) {
+  // First create the button if the results are more than 20
+  if (responseJson.total_results - 20 > 20) {
+    $(".js-results").append(`
+    <button id="next">Next</button>`);
+    console.log("createNext ran");
+  } else {
+    $("#next").remove();
+  }
   // displayed when user displays results, allows new GET request for page 2
 }
 
