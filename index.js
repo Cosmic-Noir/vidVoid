@@ -108,7 +108,38 @@ function displayResults(responseJson, mediaForm) {
     console.log("TV result generation complete");
   }
 
+  if (mediaForm === "person") {
+    for (let i = 0; i < responseJson.results.length - 1; i++) {
+      $("#js-resultList").append(`
+      <li class="result">
+        <img id="pic${
+          responseJson.results[i].id
+        }" src="https://image.tmdb.org/t/p/w185/${
+        responseJson.results[i].profile_path
+      }">
+        <h3>${responseJson.results[i].name}</h3>
+        <h4>Popularity Rating: ${responseJson.results[i].popularity}</h4>
+      </li>
+      `);
+      // If show does not have a poster_path, remove broken link element.
+      if (!responseJson.results[i].profile_path) {
+        $(`#pic${responseJson.results[i].id}`).replaceWith(`
+        <img src="missingImage.jpeg">`);
+        console.log(
+          `${
+            responseJson.results[i].name
+          } img element removed due to missing poster`
+        );
+      }
+    }
+    console.log("Person result generation complete");
+  }
   console.log("displayResults ran");
+  // call function to hanlde clicking on any movie result
+}
+
+function handleNext() {
+  // displayed when user displays results, allows new GET request for page 2
 }
 
 // Create parameters string by passing params object then create
