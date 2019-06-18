@@ -63,7 +63,7 @@ function displayResults(responseJson, mediaForm) {
   $("#js-resultNum").text(responseJson.total_results);
 
   if (mediaForm === "movie") {
-    for (let i = 0; i < responseJson.results.length - 1; i++) {
+    for (let i = 0; i < responseJson.results.length; i++) {
       $("#js-resultList").append(`
       <li class="result">
         <img id="pic${
@@ -81,7 +81,7 @@ function displayResults(responseJson, mediaForm) {
   }
 
   if (mediaForm === "tv") {
-    for (let i = 0; i < responseJson.results.length - 1; i++) {
+    for (let i = 0; i < responseJson.results.length; i++) {
       $("#js-resultList").append(`
       <li class="result">
         <img id="pic${
@@ -109,7 +109,7 @@ function displayResults(responseJson, mediaForm) {
   }
 
   if (mediaForm === "person") {
-    for (let i = 0; i < responseJson.results.length - 1; i++) {
+    for (let i = 0; i < responseJson.results.length; i++) {
       $("#js-resultList").append(`
       <li class="result">
         <img id="pic${
