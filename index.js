@@ -188,22 +188,22 @@ function createNext(responseJson) {
   // displayed when user displays results, allows new GET request for page 2
 }
 
-// Need to find a way to pass correct movie ID to use in new GET request
+// Need to find a way to pass correct movie ID to use in new GET request - UNTESTED
 function handleResultSelect() {
   $(`#${responseJson.results[i].id}`).click(function() {
     $(".js-results").addClass("hidden");
     console.log("handleResultSelect ran phase 1: hide results list");
     $(".js-details").removeClass("hidden");
-    getSingleResult(responseJson);
+    getSingleResult(`${responseJson.results[i].id}`);
     handleBackResults();
   });
 
   console.log("handleResultSelect ran");
 }
 
-function getSingleResult(responseJson) {
+function getSingleResult(mediaID) {
   // let mediaID = 9836; // Default test value - works
-  let mediaID = `${responseJson.results[i].id}`;
+  let mediaID = mediaID; // Untested - unclear if I can pass interpolated value to this function
   let url = `https://api.themoviedb.org/3/movie/${mediaID}?api_key=${apiKey}`;
   console.log(url);
   fetch(url)
@@ -214,6 +214,7 @@ function getSingleResult(responseJson) {
       throw new Error(response.statustext);
     })
     .then(responseJson => console.log(responseJson));
+    // Must replace above with call to displayDetails(responseJson) - but unsure if still working after changes made without testing due to internet outage. 
 }
 
 function handleBackResults() {
@@ -222,6 +223,12 @@ function handleBackResults() {
     $(".js-details").addClass("hidden");
     $(".js-results").removeClass("hidden");
   });
+}
+
+function displayDetails(responseJson) {
+  // Displays details about single selected result
+  
+
 }
 
 console.log("VidVoid App Active");
