@@ -62,23 +62,47 @@ function displayResults(responseJson, mediaForm) {
 
   $("#js-resultNum").text(responseJson.total_results);
 
-  if (mediaForm === "movie") {
-    for (let i = 0; i < responseJson.results.length; i++) {
-      $("#js-resultList").append(`
-      <li class="result" id="result${responseJson.results[i].id}">
-        <img id="pic${
-          responseJson.results[i].id
-        }" src="https://image.tmdb.org/t/p/w185/${
-        responseJson.results[i].poster_path
-      }">
-        <h3>${responseJson.results[i].original_title}</h3>
-        <h4>Average Rating: ${responseJson.results[i].vote_average}</h4>
-        <h4>Released: ${responseJson.results[i].release_date}</h4>
-      </li>
-      `);
+  // New for loop will add unfilled content to the containing <ul>, identified by JSON ID
+  for (let i = 0; i < responseJson.results.length; i++){
+    $('#js-resultList').append(
+      `<li class="result" id="${responseJson.results[i].id}">
+        <img id="img${responseJson.results[i].id}" src=""></img>
+        <h3 id="title${responseJson.results[i].id}">TITLE</h3>
+        <h4 id="rating${responseJson.results[i].id}">RATING</h4>
+        <h4 id="release${responseJson.results[i].id}">RELEASE DATE</h4>
+      </li>`
+    )
+  }
+
+  // New if statements will add correct content depending on mediaForm
+  if (mediaForm ==="movie") {
+    for (let i = 0; i < responseJson.results.length; i++){
+      $(`#${responseJson.results[i].id}`).text("TEST");
+      $(`img${responseJson.results[i].id}`).attr("src", `${responseJson.results[i].poster_path}`);
+      $(`title${responseJson.results[i].id}`).text(`${responseJson.results[i].original_title}`);
+      $(`rating${responseJson.results[i].id}`).text(`${responseJson.results[i].vote_average}`);
+      $(`release${responseJson.results[i].id}`).text(`${responseJson.results[i].release_date}`);
     }
     console.log("Movie result generation complete");
   }
+
+  // if (mediaForm === "movie") {
+  //   for (let i = 0; i < responseJson.results.length; i++) {
+  //     $("#js-resultList").append(`
+  //     <li class="result" id="result${responseJson.results[i].id}">
+  //       <img id="pic${
+  //         responseJson.results[i].id
+  //       }" src="https://image.tmdb.org/t/p/w185/${
+  //       responseJson.results[i].poster_path
+  //     }">
+  //       <h3>${responseJson.results[i].original_title}</h3>
+  //       <h4>Average Rating: ${responseJson.results[i].vote_average}</h4>
+  //       <h4>Released: ${responseJson.results[i].release_date}</h4>
+  //     </li>
+  //     `);
+  //   }
+  //   console.log("Movie result generation complete");
+  // }
 
   if (mediaForm === "tv") {
     for (let i = 0; i < responseJson.results.length; i++) {
