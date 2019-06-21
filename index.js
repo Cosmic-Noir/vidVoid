@@ -190,9 +190,9 @@ function createNext(responseJson) {
 
 // Need to find a way to pass correct movie ID to use in new GET request
 function handleResultSelect() {
-  $(".result").click(function() {
+  $(`#${responseJson.results[i].id}`).click(function() {
     $(".js-results").addClass("hidden");
-    console.log("handleResultSelect ran phase 1: hide results");
+    console.log("handleResultSelect ran phase 1: hide results list");
     $(".js-details").removeClass("hidden");
     getSingleResult(responseJson);
     handleBackResults();
