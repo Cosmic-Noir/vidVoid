@@ -77,101 +77,47 @@ function displayResults(responseJson, mediaForm) {
   // New if statements will add correct content depending on mediaForm
   if (mediaForm ==="movie") {
     for (let i = 0; i < responseJson.results.length; i++){
-      $(`img${responseJson.results[i].id}`).attr("src", `${responseJson.results[i].poster_path}`);
-      $(`title${responseJson.results[i].id}`).text(`${responseJson.results[i].original_title}`);
-      $(`rating${responseJson.results[i].id}`).text(`${responseJson.results[i].vote_average}`);
-      $(`release${responseJson.results[i].id}`).text(`${responseJson.results[i].release_date}`);
+      $(`#img${responseJson.results[i].id}`).attr("src", `http://image.tmdb.org/t/p/w185${responseJson.results[i].poster_path}`);
+      $(`#title${responseJson.results[i].id}`).text(`${responseJson.results[i].original_title}`);
+      $(`#rating${responseJson.results[i].id}`).text(`${responseJson.results[i].vote_average}`);
+      $(`#release${responseJson.results[i].id}`).text(`${responseJson.results[i].release_date}`);
     }
     console.log("Movie result generation complete");
   }
 
-  // if (mediaForm === "movie") {
-  //   for (let i = 0; i < responseJson.results.length; i++) {
-  //     $("#js-resultList").append(`
-  //     <li class="result" id="result${responseJson.results[i].id}">
-  //       <img id="pic${
-  //         responseJson.results[i].id
-  //       }" src="https://image.tmdb.org/t/p/w185/${
-  //       responseJson.results[i].poster_path
-  //     }">
-  //       <h3>${responseJson.results[i].original_title}</h3>
-  //       <h4>Average Rating: ${responseJson.results[i].vote_average}</h4>
-  //       <h4>Released: ${responseJson.results[i].release_date}</h4>
-  //     </li>
-  //     `);
-  //   }
-  //   console.log("Movie result generation complete");
-  // }
-
   // If mediaForm === tv
   if (mediaForm ==="tv") {
     for (let i = 0; i < responseJson.results.length; i++){
-      $(`img${responseJson.results[i].id}`).attr("src", `${responseJson.results[i].poster_path}`);
-      $(`title${responseJson.results[i].id}`).text(`${responseJson.results[i].original_name}`);
-      $(`rating${responseJson.results[i].id}`).text(`${responseJson.results[i].vote_average}`);
-      $(`release${responseJson.results[i].id}`).text(`${responseJson.results[i].first_air_date}`);
+      $(`#img${responseJson.results[i].id}`).attr("src", `http://image.tmdb.org/t/p/w185${responseJson.results[i].poster_path}`);
+      $(`#title${responseJson.results[i].id}`).text(`${responseJson.results[i].original_name}`);
+      $(`#rating${responseJson.results[i].id}`).text(`${responseJson.results[i].vote_average}`);
+      $(`#release${responseJson.results[i].id}`).text(`${responseJson.results[i].first_air_date}`);
     }
     console.log("TV result generation complete");
   }
 
-  // if (mediaForm === "tv") {
-  //   for (let i = 0; i < responseJson.results.length; i++) {
-  //     $("#js-resultList").append(`
-  //     <li class="result" id="result${responseJson.results[i].id}">
-  //       <img id="pic${
-  //         responseJson.results[i].id
-  //       }" src="https://image.tmdb.org/t/p/w185/${
-  //       responseJson.results[i].poster_path
-  //     }">
-  //       <h3>${responseJson.results[i].original_name}</h3>
-  //       <h4>Average Rating: ${responseJson.results[i].vote_average}</h4>
-  //       <h4>First Air Date: ${responseJson.results[i].first_air_date}</h4>
-  //     </li>
-  //     `);
-  //   }
-  //   console.log("TV result generation complete");
-  // }
-
    // If mediaForm === person
    if (mediaForm ==="person") {
     for (let i = 0; i < responseJson.results.length; i++){
-      $(`img${responseJson.results[i].id}`).attr("src", `${responseJson.results[i].profile_path}`);
-      $(`title${responseJson.results[i].id}`).text(`${responseJson.results[i].name}`);
-      $(`rating${responseJson.results[i].id}`).text(`${responseJson.results[i].popularity}`);
+      $(`#img${responseJson.results[i].id}`).attr("src", `http://image.tmdb.org/t/p/w185${responseJson.results[i].profile_path}`);
+      $(`#title${responseJson.results[i].id}`).text(`${responseJson.results[i].name}`);
+      $(`#rating${responseJson.results[i].id}`).text(`${responseJson.results[i].popularity}`);
     }
     console.log("Person result generation complete");
   }
 
-  // if (mediaForm === "person") {
-  //   for (let i = 0; i < responseJson.results.length; i++) {
-  //     $("#js-resultList").append(`
-  //     <li class="result" id="result${responseJson.results[i].id}">
-  //       <img id="pic${
-  //         responseJson.results[i].id
-  //       }" src="https://image.tmdb.org/t/p/w185/${
-  //       responseJson.results[i].profile_path
-  //     }">
-  //       <h3>${responseJson.results[i].name}</h3>
-  //       <h4>Popularity Rating: ${responseJson.results[i].popularity}</h4>
-  //     </li>
-  //     `);
-  //   }
-  //   console.log("Person result generation complete");
-  // }
-
-// If media does not have a poster_path(tv and movie) or a profile_path(actor), replace img element. *** Not working atm
-// if (!responseJson.results[i].poster_path || !responseJson.results[i].profile_path) {
-//   $(`#img${responseJson.results[i].id}`).replaceWith(`
-//   <img src="missingImage.jpeg">`);
-//   console.log(
-//     `${
-//       responseJson.results[i].id
-//     } img element replaced due to missing poster`
-//   );
-// }
+  if (!responseJson.results[i].poster_path) {
+  $(`#img${responseJson.results[i].id}`).replaceWith(`
+  <img src="missingImage.jpeg">`);
+  console.log(
+    `${
+      responseJson.results[i].id
+    } img element replaced due to missing poster`
+  );
+}
 
   createNext(responseJson);
-  handleResultSelect();
+  handleResultSelect(responseJson);
 
   console.log("displayResults ran");
 }
@@ -189,19 +135,19 @@ function createNext(responseJson) {
 }
 
 // Need to find a way to pass correct movie ID to use in new GET request - UNTESTED
-function handleResultSelect() {
-  $(`#${responseJson.results[i].id}`).click(function() {
+function handleResultSelect(responseJson) {
+  $(`.result`).click(function() {
     $(".js-results").addClass("hidden");
     console.log("handleResultSelect ran phase 1: hide results list");
     $(".js-details").removeClass("hidden");
-    getSingleResult(`${responseJson.results[i].id}`);
+    getSingleResult();
     handleBackResults();
   });
 
   console.log("handleResultSelect ran");
 }
 
-function getSingleResult(mediaID) {
+function getSingleResult() {
   // let mediaID = 9836; // Default test value - works
   
   let url = `https://api.themoviedb.org/3/movie/${mediaID}?api_key=${apiKey}`;
