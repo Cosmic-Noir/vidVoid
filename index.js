@@ -159,16 +159,16 @@ function displayResults(responseJson, mediaForm) {
   //   console.log("Person result generation complete");
   // }
 
-// If media does not have a poster_path(tv and movie) or a profile_path(actor), replace img element.
-if (!responseJson.results[i].poster_path || !responseJson.results[i].profile_path) {
-  $(`#img${responseJson.results[i].id}`).replaceWith(`
-  <img src="missingImage.jpeg">`);
-  console.log(
-    `${
-      responseJson.results[i].id
-    } img element replaced due to missing poster`
-  );
-}
+// If media does not have a poster_path(tv and movie) or a profile_path(actor), replace img element. *** Not working atm
+// if (!responseJson.results[i].poster_path || !responseJson.results[i].profile_path) {
+//   $(`#img${responseJson.results[i].id}`).replaceWith(`
+//   <img src="missingImage.jpeg">`);
+//   console.log(
+//     `${
+//       responseJson.results[i].id
+//     } img element replaced due to missing poster`
+//   );
+// }
 
   createNext(responseJson);
   handleResultSelect();
@@ -203,7 +203,7 @@ function handleResultSelect() {
 
 function getSingleResult(mediaID) {
   // let mediaID = 9836; // Default test value - works
-  let mediaID = mediaID; // Untested - unclear if I can pass interpolated value to this function
+  
   let url = `https://api.themoviedb.org/3/movie/${mediaID}?api_key=${apiKey}`;
   console.log(url);
   fetch(url)
@@ -227,7 +227,7 @@ function handleBackResults() {
 
 function displayDetails(responseJson) {
   // Displays details about single selected result
-  
+
 
 }
 
