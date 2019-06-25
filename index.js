@@ -32,7 +32,7 @@ function displaySuggestion(responseJson){
   let randomSelect = Math.floor(Math.random()*20);
   console.log(randomSelect);
   $('#suggestedImage').attr("src", `http://image.tmdb.org/t/p/w185${responseJson.results[randomSelect].poster_path}`);
-  $('#suggestedTitle').text(responseJson.results[randomSelect].original_title);
+  $('#suggestedTitle').text(responseJson.results[randomSelect].original_title || responseJson.results[randomSelect].name);
   $('#suggestedRating').text(responseJson.results[randomSelect].vote_average);
   $('#suggestedRelease').text(responseJson.results[randomSelect].release_date);
   
