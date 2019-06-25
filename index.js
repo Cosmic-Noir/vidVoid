@@ -106,15 +106,16 @@ function displayResults(responseJson, mediaForm) {
     console.log("Person result generation complete");
   }
 
-  if (!responseJson.results[i].poster_path) {
-  $(`#img${responseJson.results[i].id}`).replaceWith(`
-  <img src="missingImage.jpeg">`);
-  console.log(
-    `${
-      responseJson.results[i].id
-    } img element replaced due to missing poster`
-  );
-}
+  // If no image is located for specified title. But doesn't work. 
+//   if (!responseJson.results[i].poster_path) {
+//   $(`#img${responseJson.results[i].id}`).replaceWith(`
+//   <img src="missingImage.jpeg">`);
+//   console.log(
+//     `${
+//       responseJson.results[i].id
+//     } img element replaced due to missing poster`
+//   );
+// }
 
   createNext(responseJson);
   handleResultSelect(responseJson);
