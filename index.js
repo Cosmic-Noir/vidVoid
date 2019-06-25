@@ -2,14 +2,14 @@
 const apiKey = "41852c5354f2d366f322d470d71ec51f";
 const baseURL = "https://api.themoviedb.org/3/search/";
 
-function handleForm() {
+function handleSearchForm() {
   // handles search into query from form data
   $("#js-searchForm").submit(event => {
     event.preventDefault();
 
     // Convert user input into variable to pass as a param
     let searchTerm = $("#js-query").val();
-    console.log("`handleForm()` ran");
+    console.log("`handleSearchForm()` ran");
     getMedia(searchTerm);
   });
 }
@@ -180,4 +180,4 @@ function displayDetails(responseJson) {
 
 console.log("VidVoid App Active");
 
-handleForm();
+handleSearchForm();
