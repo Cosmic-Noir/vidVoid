@@ -20,8 +20,19 @@ function getSuggestion(){
       }
       throw new Error(response.statustext);
     })
-    .then(responseJson => console.log(responseJson));
+    .then(responseJson => displaySuggestion(responseJson));
     console.log('getSuggestion has run and should have returned a Json object');
+
+}
+
+function displaySuggestion(responseJson){
+  // Should randomly select one result from array and display those details
+  console.log(responseJson);
+  let randomSelect = Math.floor(Math.random()*20);
+  console.log(randomSelect);
+  console.log('displaySuggestion has run');
+
+
 }
 
 function handleSearchForm() {
