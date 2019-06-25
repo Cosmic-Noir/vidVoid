@@ -7,6 +7,18 @@ function handleSuggest() {
   $('#genRandom').click(function(){
     console.log("handleSuggest has button has been clicked");
     getSuggestion();
+    // In case they were previously using search, hide the search form when asking for a suggestion 
+    $('.js-search').addClass('hide');
+    $('.js-results').addClass('hidden');
+  })
+}
+
+function handleSearch() {
+  // user clickes Search The Void button and reveals the search form options
+  $('#showSearch').click(function(){
+    $('.js-search').removeClass('hidden');
+    $('.js-suggestion').addClass('hidden');
+    
   })
 }
 
@@ -28,6 +40,7 @@ function getSuggestion(){
 function displaySuggestion(responseJson){
   // Should randomly select one result from array and display those details
   $('.js-suggestion').removeClass('hidden');
+  $('.js-search').addClass('hidden');
   console.log(responseJson);
   let randomSelect = Math.floor(Math.random()*20);
   console.log(randomSelect);
@@ -222,3 +235,4 @@ console.log("VidVoid App Active");
 
 handleSearchForm();
 handleSuggest();
+handleSearch();
