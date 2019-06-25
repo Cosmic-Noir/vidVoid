@@ -35,6 +35,7 @@ function displaySuggestion(responseJson){
   $('#suggestedTitle').text(responseJson.results[randomSelect].original_title || responseJson.results[randomSelect].name);
   $('#suggestedRating').text(responseJson.results[randomSelect].vote_average);
   $('#suggestedRelease').text(responseJson.results[randomSelect].release_date);
+  $('#suggestedDesc').text(responseJson.results[randomSelect].overview);
   
   console.log('displaySuggestion has run');
 
