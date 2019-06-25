@@ -2,6 +2,14 @@
 const apiKey = "41852c5354f2d366f322d470d71ec51f";
 const baseURL = "https://api.themoviedb.org/3/search/";
 
+function handleSuggest() {
+  // User clicks suggest button to generate a recommended result
+  $('#genRandom').click(function(){
+    console.log("handleSuggest has button has been clicked");
+  })
+
+}
+
 function handleSearchForm() {
   // handles search into query from form data
   $("#js-searchForm").submit(event => {
@@ -181,3 +189,4 @@ function displayDetails(responseJson) {
 console.log("VidVoid App Active");
 
 handleSearchForm();
+handleSuggest();
