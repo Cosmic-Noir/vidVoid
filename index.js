@@ -6,8 +6,22 @@ function handleSuggest() {
   // User clicks suggest button to generate a recommended result
   $('#genRandom').click(function(){
     console.log("handleSuggest has button has been clicked");
+    getSuggestion();
   })
+}
 
+function getSuggestion(){
+  // sends GET request to MDB for trending movie/tv media
+  let url = "https://api.themoviedb.org/3/trending/all/week?api_key=41852c5354f2d366f322d470d71ec51f";
+  fetch(url)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statustext);
+    })
+    .then(responseJson => console.log(responseJson));
+    console.log('getSuggestion has run and should have returned a Json object');
 }
 
 function handleSearchForm() {
