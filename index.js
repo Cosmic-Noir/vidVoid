@@ -203,30 +203,34 @@ function displayResults(responseJson, mediaForm) {
   //   );
   // }
 
-  createNext(responseJson);
+  handleNext(responseJson);
   handleResultSelect(responseJson);
 
   console.log("displayResults ran");
 }
 
-function createNext(responseJson) {
-  // First create the button if the results are more than 20
+function handleNext(responseJson) {
   if (responseJson.total_results > 20) {
-    $(".js-results").append(`
-    <button id="next">Next</button>`);
-    console.log("createNext ran");
-  } else {
-    $("#next").remove();
+    $("#next").removeClass("hidden");
+    $("#next").click(function() {
+      page += 1;
+      getMedia(currentQuery);
+      console.log("handleNext ran");
+    });
+    // once page number is 2 or greater:
+    if (page > 1) {
+      handlBack();
+    }
   }
-  handleNext();
-  // displayed when user displays results, allows new GET request for page 2
 }
 
-function handleNext() {
-  // user clicks next, page value increased by 1
-  $("#next").click(function() {
-    page += 1;
+function handlBack() {
+  // creates back button
+  $("#back").removeClass("hidden");
+  $("#back").click(function() {
+    page -= 1;
     getMedia(currentQuery);
+    console.log("handlBack ran");
   });
 }
 
