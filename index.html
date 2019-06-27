@@ -10,10 +10,18 @@
   <body>
     <header></header>
     <main>
-      <section class="random">
+      <section class="options">
         <button id="genRandom">Fill The Void</button>
+        <button id="showSearch">Search The Void</button>
       </section>
-      <section>
+      <div class="hidden js-suggestion">
+        <img src="" alt="Suggested movie image" id="suggestedImage">
+        <h3 id="suggestedTitle">SUGGESTED MEDIA TITLE</h3>
+        <h4 id="suggestedRating">SUGGESTED MEDIA'S RATING</h4>
+        <h4 id="suggestedRelease">SUGGESTED MEDIA'S RELEASE DATE</h4>
+        <p id="suggestedDesc">SUGGESTED MEDIA DESCRITPION</p>
+      </div>
+      <section class="js-search hidden">
         <form action="" id="js-searchForm">
           <label for="mediaSearch">Find:</label>
           <select id="media" name="mediaSearch">

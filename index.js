@@ -2,6 +2,59 @@
 const apiKey = "41852c5354f2d366f322d470d71ec51f";
 const baseURL = "https://api.themoviedb.org/3/search/";
 
+function handleSuggest() {
+  // User clicks suggest button to generate a recommended result
+  $('#genRandom').click(function(){
+    console.log("handleSuggest has button has been clicked");
+    getSuggestion();
+    // In case they were previously using search, hide the search form when asking for a suggestion 
+    $('.js-search').addClass('hide');
+    $('.js-results').addClass('hidden');
+  })
+}
+
+function handleSearch() {
+  // user clickes Search The Void button and reveals the search form options
+  $('#showSearch').click(function(){
+    $('.js-search').removeClass('hidden');
+    $('.js-suggestion').addClass('hidden');
+    
+  })
+}
+
+function getSuggestion(){
+  // sends GET request to MDB for trending movie/tv media
+  let url = "https://api.themoviedb.org/3/trending/all/week?api_key=41852c5354f2d366f322d470d71ec51f";
+  fetch(url)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statustext);
+    })
+    .then(responseJson => displaySuggestion(responseJson));
+    console.log('getSuggestion has run and should have returned a Json object');
+
+}
+
+function displaySuggestion(responseJson){
+  // Should randomly select one result from array and display those details
+  $('.js-suggestion').removeClass('hidden');
+  $('.js-search').addClass('hidden');
+  console.log(responseJson);
+  let randomSelect = Math.floor(Math.random()*20);
+  console.log(randomSelect);
+  $('#suggestedImage').attr("src", `http://image.tmdb.org/t/p/w185${responseJson.results[randomSelect].poster_path}`);
+  $('#suggestedTitle').text(responseJson.results[randomSelect].original_title || responseJson.results[randomSelect].name);
+  $('#suggestedRating').text(responseJson.results[randomSelect].vote_average);
+  $('#suggestedRelease').text(responseJson.results[randomSelect].release_date);
+  $('#suggestedDesc').text(responseJson.results[randomSelect].overview);
+  
+  console.log('displaySuggestion has run');
+
+
+}
+
 function handleSearchForm() {
   // handles search into query from form data
   $("#js-searchForm").submit(event => {
@@ -181,3 +234,5 @@ function displayDetails(responseJson) {
 console.log("VidVoid App Active");
 
 handleSearchForm();
+handleSuggest();
+handleSearch();
