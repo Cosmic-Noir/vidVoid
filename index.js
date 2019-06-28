@@ -196,24 +196,23 @@ function displayResults(responseJson, mediaForm) {
     console.log("`displayResults` ran and displayed person results");
   }
 
-  // If no image is located for specified title. But doesn't work.
-  //   if (!responseJson.results[i].poster_path) {
-  //   $(`#img${responseJson.results[i].id}`).replaceWith(`
-  //   <img src="missingImage.jpeg">`);
-  //   console.log(
-  //     `${
-  //       responseJson.results[i].id
-  //     } img element replaced due to missing poster`
-  //   );
-  // }
-  handleMissingPic();
+  handleMissingPic(responseJson);
   handleResultSelect(responseJson, mediaForm);
   showNext(responseJson);
   hideBack(responseJson);
 }
 
-function handleMissingPic() {
+function handleMissingPic(responseJson) {
   // replace missing picture links
+  for (let i = 0; i < responseJson.results.length; i++) {
+    if (
+      !responseJson.results[i].poster_path &&
+      !responseJson.results[i].profile_path
+    ) {
+      $(`#img${responseJson.results[i].id}`).attr("src", "missingImage.jpeg");
+      console.log(i);
+    }
+  }
 }
 
 function showNext(responseJson) {
@@ -295,16 +294,25 @@ function displayDetails(responseJson) {
   // Displays details about single selected result
   $("#selectedImage").attr(
     "src",
-    `http://image.tmdb.org/t/p/w185${responseJson.poster_path}`
+    `http://image.tmdb.org/t/p/w185${responseJson.poster_path ||
+      responseJson.profile_path}`
   );
   $("#selectedTitle").text(
-    responseJson.original_title || responseJson.original_name
+    responseJson.original_title ||
+      responseJson.original_name ||
+      responseJson.name
   );
-  $("#selectedTagline").text(responseJson.tagline);
-  $("#selectedPopularity").text(responseJson.popularity);
-  $("#selectedRelease").text(responseJson.release_date);
+  $("#selectedTagline").text(
+    responseJson.tagline || responseJson.homepage || responseJson.birthday
+  );
+  $("#selectedPopularity").text(
+    responseJson.vote_average || responseJson.vote_average
+  );
+  $("#selectedRelease").text(
+    responseJson.release_date || responseJson.first_air_date
+  );
   $("#selectedDescription").text(responseJson.overview);
-  console.log("`displayDetails` ran");
+  console.log("`displayDetails` ran and provided movie/tv/person details");
 }
 
 console.log("VidVoid App Active");
