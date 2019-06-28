@@ -7,7 +7,7 @@ let currentQuery;
 function handleSuggest() {
   // User clicks suggest button to generate a recommended result
   $("#genRandom").click(function() {
-    console.log("handleSuggest has button has been clicked");
+    console.log("`handleSuggest` has run");
     getSuggestion();
     // In case they were previously using search, hide the search form when asking for a suggestion
     $(".js-search").addClass("hide");
@@ -70,7 +70,9 @@ function handleSearchForm() {
     // Convert user input into variable to pass as a param
     let query = $("#js-query").val();
     currentQuery = query;
-    console.log("`handleSearchForm()` ran");
+    // Hide back button as the first page will return to 1
+    $("#back").addClass("hidden");
+    console.log("`handleSearchForm` ran");
     getMedia(query);
   });
 }
@@ -93,12 +95,14 @@ function getMedia(query) {
     include_video: false,
     language: "en-US"
   };
-  // Calls either TV or Movies
+  // Calls either TV, Movie, or person
   let mediaForm = $("#media").val();
+  console.log(mediaForm);
 
   const queryString = formatQueryParams(params);
   const url = baseURL + mediaForm + "?" + queryString;
   console.log(url);
+  console.log("`getMedia` ran, returned the below JSON object:");
 
   fetch(url)
     .then(response => {
@@ -152,7 +156,7 @@ function displayResults(responseJson, mediaForm) {
         `${responseJson.results[i].release_date}`
       );
     }
-    console.log("Movie result generation complete");
+    console.log("`displayResults` ran and displayed movie results");
   }
 
   // If mediaForm === tv
@@ -172,7 +176,7 @@ function displayResults(responseJson, mediaForm) {
         `${responseJson.results[i].first_air_date}`
       );
     }
-    console.log("TV result generation complete");
+    console.log("`displayResults` ran and displayed tv results");
   }
 
   // If mediaForm === person
@@ -189,7 +193,7 @@ function displayResults(responseJson, mediaForm) {
         `${responseJson.results[i].popularity}`
       );
     }
-    console.log("Person result generation complete");
+    console.log("`displayResults` ran and displayed person results");
   }
 
   // If no image is located for specified title. But doesn't work.
@@ -203,48 +207,48 @@ function displayResults(responseJson, mediaForm) {
   //   );
   // }
 
-  handleNext(responseJson);
   handleResultSelect(responseJson);
-
-  console.log("displayResults ran");
+  showNext(responseJson);
 }
 
-function handleNext(responseJson) {
+function showNext(responseJson) {
+  // unhides next button, increases current page and sends GET request for that new page
   if (responseJson.total_results > 20) {
     $("#next").removeClass("hidden");
-    $("#next").click(function() {
-      page += 1;
-      getMedia(currentQuery);
-      console.log("handleNext ran");
-    });
-    // once page number is 2 or greater:
-    if (page > 1) {
-      handlBack();
-    }
+    console.log("`handleNext` unhides next button if total results > 20");
   }
+  // if (page > 1) {
+  //   // handlBack();
+  // }
 }
 
-function handlBack() {
-  // creates back button
-  $("#back").removeClass("hidden");
-  $("#back").click(function() {
-    page -= 1;
+function handleNext() {
+  $("#next").click(function() {
+    console.log("`handleNext` ran because #next was clicked");
+    page += 1;
+    console.log("page is now:" + page);
     getMedia(currentQuery);
-    console.log("handlBack ran");
   });
 }
+// function handlBack() {
+//   // unhides back button, decreases current page and sends GET request for that new page
+//   $("#back").removeClass("hidden");
+//   $("#back").click(function() {
+//     page -= 1;
+//     console.log("handlBack ran");
+//     getMedia(currentQuery);
+//   });
+// }
 
 // Need to find a way to pass correct movie ID to use in new GET request - UNTESTED
 function handleResultSelect(responseJson) {
   $(`.result`).click(function() {
     $(".js-results").addClass("hidden");
-    console.log("handleResultSelect ran phase 1: hide results list");
+    console.log("`handleResultSelect` ran phase 1: hide results list");
     $(".js-details").removeClass("hidden");
     getSingleResult();
     handleBackToResults();
   });
-
-  console.log("handleResultSelect ran");
 }
 
 function getSingleResult() {
@@ -280,3 +284,4 @@ console.log("VidVoid App Active");
 handleSearchForm();
 handleSuggest();
 handleSearch();
+handleNext();
