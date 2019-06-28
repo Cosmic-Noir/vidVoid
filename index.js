@@ -42,6 +42,7 @@ function displaySuggestion(responseJson) {
   // Should randomly select one result from array and display those details
   $(".js-suggestion").removeClass("hidden");
   $(".js-search").addClass("hidden");
+  $(".js-details").addClass("hidden");
   console.log(responseJson);
   let randomSelect = Math.floor(Math.random() * 20);
   console.log(randomSelect);
@@ -206,7 +207,7 @@ function displayResults(responseJson, mediaForm) {
   //   );
   // }
 
-  handleResultSelect(responseJson);
+  handleResultSelect(responseJson, mediaForm);
   showNext(responseJson);
   hideBack(responseJson);
 }
@@ -251,20 +252,21 @@ function handleBack() {
 }
 
 // Need to find a way to pass correct movie ID to use in new GET request - UNTESTED
-function handleResultSelect(responseJson) {
-  $(`.result`).click(function() {
+function handleResultSelect(responseJson, mediaForm) {
+  $(".result").click(function() {
     $(".js-results").addClass("hidden");
-    console.log("`handleResultSelect` ran phase 1: hide results list");
+    console.log("`handleResultSelect` ran and hid results list");
     $(".js-details").removeClass("hidden");
-    getSingleResult();
+    let mediaID = $(this).attr("id");
+    getSingleResult(mediaID, mediaForm);
     handleBackToResults();
   });
 }
 
-function getSingleResult() {
-  let mediaID = 9836; // Default test value - works
+function getSingleResult(mediaID, mediaForm) {
+  // let mediaID = 609256; // Default test value - works
 
-  let url = `https://api.themoviedb.org/3/movie/${mediaID}?api_key=${apiKey}`;
+  let url = `https://api.themoviedb.org/3/${mediaForm}/${mediaID}?api_key=${apiKey}`;
   console.log(url);
   fetch(url)
     .then(response => {
@@ -282,18 +284,23 @@ function handleBackToResults() {
   $("#backResults").click(function() {
     $(".js-details").addClass("hidden");
     $(".js-results").removeClass("hidden");
+    console.log("`handleBackToResults` ran");
   });
 }
 
 function displayDetails(responseJson) {
   console.log(responseJson);
   // Displays details about single selected result
-  // $('#selectedImage').attr("src", `http://image.tmdb.org/t/p/w185${}`);
+  $("#selectedImage").attr(
+    "src",
+    `http://image.tmdb.org/t/p/w185${responseJson.poster_path}`
+  );
   $("#selectedTitle").text(responseJson.original_title);
   $("#selectedTagline").text(responseJson.tagline);
   $("#selectedPopularity").text(responseJson.popularity);
   $("#selectedRelease").text(responseJson.release_date);
   $("#selectedDescription").text(responseJson.overview);
+  console.log("`displayDetails` ran");
 }
 
 console.log("VidVoid App Active");
