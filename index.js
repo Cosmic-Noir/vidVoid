@@ -6,7 +6,7 @@ let currentQuery;
 
 function handleSuggest() {
   // User clicks suggest button to generate a recommended result
-  $("#genRandom").click(function() {
+  $("#genRandom").click(function () {
     console.log("`handleSuggest` has run");
     getSuggestion();
     // In case they were previously using search, hide the search form when asking for a suggestion
@@ -17,7 +17,7 @@ function handleSuggest() {
 
 function handleSearch() {
   // user clickes Search The Void button and reveals the search form options
-  $("#showSearch").click(function() {
+  $("#showSearch").click(function () {
     $(".js-search").removeClass("hidden");
     $(".js-suggestion").addClass("hidden");
   });
@@ -48,12 +48,12 @@ function displaySuggestion(responseJson) {
   $("#suggestedImage").attr(
     "src",
     `http://image.tmdb.org/t/p/w185${
-      responseJson.results[randomSelect].poster_path
+    responseJson.results[randomSelect].poster_path
     }`
   );
   $("#suggestedTitle").text(
     responseJson.results[randomSelect].original_title ||
-      responseJson.results[randomSelect].name
+    responseJson.results[randomSelect].name
   );
   $("#suggestedRating").text(responseJson.results[randomSelect].vote_average);
   $("#suggestedRelease").text(responseJson.results[randomSelect].release_date);
@@ -208,6 +208,7 @@ function displayResults(responseJson, mediaForm) {
 
   handleResultSelect(responseJson);
   showNext(responseJson);
+  hideBack(responseJson);
 }
 
 function showNext(responseJson) {
@@ -216,13 +217,18 @@ function showNext(responseJson) {
     $("#next").removeClass("hidden");
     console.log("`handleNext` unhides next button if total results > 20");
   }
-  // if (page > 1) {
-  //   // handlBack();
-  // }
+}
+
+function hideBack(responseJson) {
+  console.log(responseJson.page);
+  if (responseJson.page === 1) {
+    $("#back").addClass('hidden');
+    console.log("`hideBack` ran");
+  }
 }
 
 function handleNext() {
-  $("#next").click(function() {
+  $("#next").click(function () {
     page += 1;
     console.log("`handleNext` ran and page is now:" + page);
     getMedia(currentQuery);
@@ -235,7 +241,7 @@ function handleNext() {
 
 function handleBack() {
   // unhides back button, decreases current page and sends GET request for that new page
-  $("#back").click(function() {
+  $("#back").click(function () {
     page -= 1;
     console.log("`handleBack` ran and page is now:" + page);
     getMedia(currentQuery);
@@ -244,7 +250,7 @@ function handleBack() {
 
 // Need to find a way to pass correct movie ID to use in new GET request - UNTESTED
 function handleResultSelect(responseJson) {
-  $(`.result`).click(function() {
+  $(`.result`).click(function () {
     $(".js-results").addClass("hidden");
     console.log("`handleResultSelect` ran phase 1: hide results list");
     $(".js-details").removeClass("hidden");
@@ -271,7 +277,7 @@ function getSingleResult() {
 
 function handleBackToResults() {
   // Unhides the results div and hides the details div
-  $("#backResults").click(function() {
+  $("#backResults").click(function () {
     $(".js-details").addClass("hidden");
     $(".js-results").removeClass("hidden");
   });
