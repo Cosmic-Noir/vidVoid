@@ -206,10 +206,14 @@ function displayResults(responseJson, mediaForm) {
   //     } img element replaced due to missing poster`
   //   );
   // }
-
+  handleMissingPic();
   handleResultSelect(responseJson, mediaForm);
   showNext(responseJson);
   hideBack(responseJson);
+}
+
+function handleMissingPic() {
+  // replace missing picture links
 }
 
 function showNext(responseJson) {
@@ -251,7 +255,6 @@ function handleBack() {
   });
 }
 
-// Need to find a way to pass correct movie ID to use in new GET request - UNTESTED
 function handleResultSelect(responseJson, mediaForm) {
   $(".result").click(function() {
     $(".js-results").addClass("hidden");
@@ -276,7 +279,6 @@ function getSingleResult(mediaID, mediaForm) {
       throw new Error(response.statustext);
     })
     .then(responseJson => displayDetails(responseJson));
-  // Must replace above with call to displayDetails(responseJson) - but unsure if still working after changes made without testing due to internet outage.
 }
 
 function handleBackToResults() {
