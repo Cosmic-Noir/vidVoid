@@ -297,7 +297,9 @@ function displayDetails(responseJson) {
     "src",
     `http://image.tmdb.org/t/p/w185${responseJson.poster_path}`
   );
-  $("#selectedTitle").text(responseJson.original_title);
+  $("#selectedTitle").text(
+    responseJson.original_title || responseJson.original_name
+  );
   $("#selectedTagline").text(responseJson.tagline);
   $("#selectedPopularity").text(responseJson.popularity);
   $("#selectedRelease").text(responseJson.release_date);
