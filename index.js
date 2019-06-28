@@ -200,6 +200,7 @@ function displayResults(responseJson, mediaForm) {
   handleResultSelect(responseJson, mediaForm);
   showNext(responseJson);
   hideBack(responseJson);
+  trackPage();
 }
 
 function handleMissingPic(responseJson) {
@@ -241,6 +242,7 @@ function handleNext() {
     if (page > 1) {
       $("#back").removeClass("hidden");
       console.log("`handleNext` unhid #back because ");
+      trackPage();
     }
   });
 }
@@ -251,6 +253,7 @@ function handleBack() {
     page -= 1;
     console.log("`handleBack` ran and page is now:" + page);
     getMedia(currentQuery);
+    trackPage();
   });
 }
 
@@ -313,6 +316,10 @@ function displayDetails(responseJson) {
   );
   $("#selectedDescription").text(responseJson.overview);
   console.log("`displayDetails` ran and provided movie/tv/person details");
+}
+
+function trackPage() {
+  $("#pageNum").text("Page: " + page);
 }
 
 console.log("VidVoid App Active");
