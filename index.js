@@ -213,7 +213,9 @@ function displayResults(responseJson, mediaForm) {
 
 function showNext(responseJson) {
   // unhides next button, increases current page and sends GET request for that new page
-  if (responseJson.total_results > 20) {
+  if (page === responseJson.total_pages) {
+    $("#next").addClass('hidden');
+  } else if (responseJson.total_results > 20) {
     $("#next").removeClass("hidden");
     console.log("`handleNext` unhides next button if total results > 20");
   }
