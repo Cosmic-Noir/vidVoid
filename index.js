@@ -97,7 +97,6 @@ function getMedia(query) {
   };
   // Calls either TV, Movie, or person
   let mediaForm = $("#media").val();
-  console.log(mediaForm);
 
   const queryString = formatQueryParams(params);
   const url = baseURL + mediaForm + "?" + queryString;
@@ -224,21 +223,24 @@ function showNext(responseJson) {
 
 function handleNext() {
   $("#next").click(function() {
-    console.log("`handleNext` ran because #next was clicked");
     page += 1;
-    console.log("page is now:" + page);
+    console.log("`handleNext` ran and page is now:" + page);
+    getMedia(currentQuery);
+    if (page > 1) {
+      $("#back").removeClass("hidden");
+      console.log("`handleNext` unhid #back because ");
+    }
+  });
+}
+
+function handleBack() {
+  // unhides back button, decreases current page and sends GET request for that new page
+  $("#back").click(function() {
+    page -= 1;
+    console.log("`handleBack` ran and page is now:" + page);
     getMedia(currentQuery);
   });
 }
-// function handlBack() {
-//   // unhides back button, decreases current page and sends GET request for that new page
-//   $("#back").removeClass("hidden");
-//   $("#back").click(function() {
-//     page -= 1;
-//     console.log("handlBack ran");
-//     getMedia(currentQuery);
-//   });
-// }
 
 // Need to find a way to pass correct movie ID to use in new GET request - UNTESTED
 function handleResultSelect(responseJson) {
@@ -285,3 +287,4 @@ handleSearchForm();
 handleSuggest();
 handleSearch();
 handleNext();
+handleBack();
