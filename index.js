@@ -8,20 +8,11 @@ function handleSuggest() {
   // User clicks suggest button to generate a recommended result
   // let counter = 0;
   $("#genRandom").click(function() {
-    console.log("`handleSuggest` has run");
+    console.log("`handleSuggest` has run with the below URL:");
     getSuggestion();
     // In case they were previously using search, hide the search form when asking for a suggestion
     $(".js-search").addClass("hide");
     $(".js-results").addClass("hidden");
-    // counter++;
-    // console.log("counter has increased to " + counter);
-    // if (counter > 19) {
-    //   page++;
-    //   console.log(
-    //     "Fill void button pressed 20 times, increased page to " + page
-    //   );
-    //   counter = 0;
-    // }
   });
 }
 
@@ -47,7 +38,9 @@ function getSuggestion() {
       throw new Error(response.statustext);
     })
     .then(responseJson => displaySuggestion(responseJson));
-  console.log("getSuggestion has run and should have returned a Json object");
+  console.log(
+    "getSuggestion ran and with a random page returned the following JSON object:"
+  );
 }
 
 function makePageRandom() {
@@ -64,7 +57,6 @@ function displaySuggestion(responseJson) {
   console.log(responseJson);
 
   let randomSelect = Math.floor(Math.random() * 20);
-  console.log(randomSelect);
 
   $("#suggestedImage").attr(
     "src",
@@ -86,7 +78,15 @@ function displaySuggestion(responseJson) {
   );
   $("#suggestedDesc").text(responseJson.results[randomSelect].overview);
 
-  console.log("`displaySuggestion` has run");
+  console.log(
+    "`displaySuggestion` has run and suggested the title: " +
+      (responseJson.results[randomSelect].name ||
+        responseJson.results[randomSelect].original_title) +
+      " at index: " +
+      randomSelect +
+      " on page: " +
+      page
+  );
   makePageRandom(responseJson);
 }
 
@@ -323,12 +323,16 @@ function displayDetails(responseJson, mediaForm) {
     );
     if (responseJson.tagline) {
       $("#selectedTagline").text("Tagline: " + responseJson.tagline);
+    } else {
+      $("#selectedTagline").empty();
     }
   }
 
   if (mediaForm === "tv") {
     $("#selectedTagline").text("Homepage: " + responseJson.homepage);
-    $("#selectedRelease").text("Release Date:" + responseJson.release_date);
+    $("#selectedRelease").text(
+      "First Air-date: " + responseJson.first_air_date
+    );
     $("#selectedPopularity").text(
       "Voter Average: " + responseJson.vote_average
     );
@@ -346,7 +350,12 @@ function displayDetails(responseJson, mediaForm) {
   }
 
   $("#selectedDescription").text(responseJson.overview);
-  console.log("`displayDetails` ran and provided movie/tv/person details");
+  console.log(
+    "`displayDetails` ran and provided details on: " +
+      (responseJson.name ||
+        responseJson.original_name ||
+        responseJson.original_title)
+  );
 
   if (!responseJson.poster_path && !responseJson.profile_path) {
     $("#selectedImage").attr("src", "missingImage.jpeg");
