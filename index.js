@@ -133,8 +133,6 @@ function displayResults(responseJson, mediaForm) {
       `<li class="result" id="${responseJson.results[i].id}">
         <img id="img${responseJson.results[i].id}" src=""></img>
         <h3 id="title${responseJson.results[i].id}">TITLE</h3>
-        <h4 id="rating${responseJson.results[i].id}">RATING</h4>
-        <h4 id="release${responseJson.results[i].id}"></h4>
       </li>`
     );
   }
@@ -148,12 +146,6 @@ function displayResults(responseJson, mediaForm) {
       );
       $(`#title${responseJson.results[i].id}`).text(
         `${responseJson.results[i].original_title}`
-      );
-      $(`#rating${responseJson.results[i].id}`).text(
-        `${responseJson.results[i].vote_average}`
-      );
-      $(`#release${responseJson.results[i].id}`).text(
-        `${responseJson.results[i].release_date}`
       );
     }
     console.log("`displayResults` ran and displayed movie results");
@@ -169,12 +161,6 @@ function displayResults(responseJson, mediaForm) {
       $(`#title${responseJson.results[i].id}`).text(
         `${responseJson.results[i].original_name}`
       );
-      $(`#rating${responseJson.results[i].id}`).text(
-        `${responseJson.results[i].vote_average}`
-      );
-      $(`#release${responseJson.results[i].id}`).text(
-        `${responseJson.results[i].first_air_date}`
-      );
     }
     console.log("`displayResults` ran and displayed tv results");
   }
@@ -188,9 +174,6 @@ function displayResults(responseJson, mediaForm) {
       );
       $(`#title${responseJson.results[i].id}`).text(
         `${responseJson.results[i].name}`
-      );
-      $(`#rating${responseJson.results[i].id}`).text(
-        `${responseJson.results[i].popularity}`
       );
     }
     console.log("`displayResults` ran and displayed person results");
@@ -211,7 +194,7 @@ function handleMissingPic(responseJson) {
       !responseJson.results[i].profile_path
     ) {
       $(`#img${responseJson.results[i].id}`).attr("src", "missingImage.jpeg");
-      console.log(i);
+      console.log("`handleMissingPic` ran");
     }
   }
 }
@@ -306,10 +289,11 @@ function displayDetails(responseJson, mediaForm) {
       responseJson.name
   );
 
-  $("#selectedPopularity").text("Voter Average: " + responseJson.vote_average);
-
   if (mediaForm === "movie") {
-    $("#selectedRelease").prepend("Release Date: ");
+    $("#selectedRelease").text("Release Date: " + responseJson.release_date);
+    $("#selectedPopularity").text(
+      "Voter Average: " + responseJson.vote_average
+    );
     if (responseJson.tagline) {
       $("#selectedTagline").text("Tagline: " + responseJson.tagline);
     }
@@ -317,28 +301,29 @@ function displayDetails(responseJson, mediaForm) {
 
   if (mediaForm === "tv") {
     $("#selectedTagline").text("Homepage: " + responseJson.homepage);
-    $("#selectedRelease").text("Homepage:" + responseJson.release_date);
+    $("#selectedRelease").text("Release Date:" + responseJson.release_date);
+    $("#selectedPopularity").text(
+      "Voter Average: " + responseJson.vote_average
+    );
   }
 
   if (mediaForm === "person") {
+    $("#selectedTagline").text("Popularity: " + responseJson.popularity);
+    $("#selectedPopularity").text("Birthday: " + responseJson.birthday);
+    $("#selectedDescription").text("Bio: " + responseJson.biography);
+    if (responseJson.deathday === null) {
+      $("#selectedRelease").text("Date of Death: Still Alive!");
+    } else {
+      $("#selectedRelease").text("Date of Death: " + responseJson.deathday);
+    }
   }
-
-  $("#selectedTagline").text(responseJson.birthday);
-
-  $("#selectedRelease").text(responseJson.first_air_date);
 
   $("#selectedDescription").text(responseJson.overview);
   console.log("`displayDetails` ran and provided movie/tv/person details");
 
-  if (mediaForm === "person") {
-    $("#selectedTagline").prepend("Birthday: ");
-    if (responseJson.deathday === null) {
-      $("#selectedRelease").prepend("Date of Death: Still Alive!");
-    } else {
-      $("#selectedRelease").prepend("Date of Death: ");
-    }
+  if (!responseJson.poster_path && !responseJson.profile_path) {
+    $("#selectedImage").attr("src", "missingImage.jpeg");
   }
-  // if all mediaForm property is the same:
 }
 
 function trackPage() {
