@@ -280,7 +280,7 @@ function getSingleResult(mediaID, mediaForm) {
       }
       throw new Error(response.statustext);
     })
-    .then(responseJson => displayDetails(responseJson));
+    .then(responseJson => displayDetails(responseJson, mediaForm));
 }
 
 function handleBackToResults() {
@@ -292,7 +292,7 @@ function handleBackToResults() {
   });
 }
 
-function displayDetails(responseJson) {
+function displayDetails(responseJson, mediaForm) {
   console.log(responseJson);
   // Displays details about single selected result
   $("#selectedImage").attr(
@@ -305,17 +305,40 @@ function displayDetails(responseJson) {
       responseJson.original_name ||
       responseJson.name
   );
-  $("#selectedTagline").text(
-    responseJson.tagline || responseJson.homepage || responseJson.birthday
-  );
-  $("#selectedPopularity").text(
-    responseJson.vote_average || responseJson.vote_average
-  );
-  $("#selectedRelease").text(
-    responseJson.release_date || responseJson.first_air_date
-  );
+
+  $("#selectedPopularity").text("Voter Average: " + responseJson.vote_average);
+
+  if (mediaForm === "movie") {
+    $("#selectedRelease").prepend("Release Date: ");
+    if (responseJson.tagline) {
+      $("#selectedTagline").text("Tagline: " + responseJson.tagline);
+    }
+  }
+
+  if (mediaForm === "tv") {
+    $("#selectedTagline").text("Homepage: " + responseJson.homepage);
+    $("#selectedRelease").text("Homepage:" + responseJson.release_date);
+  }
+
+  if (mediaForm === "person") {
+  }
+
+  $("#selectedTagline").text(responseJson.birthday);
+
+  $("#selectedRelease").text(responseJson.first_air_date);
+
   $("#selectedDescription").text(responseJson.overview);
   console.log("`displayDetails` ran and provided movie/tv/person details");
+
+  if (mediaForm === "person") {
+    $("#selectedTagline").prepend("Birthday: ");
+    if (responseJson.deathday === null) {
+      $("#selectedRelease").prepend("Date of Death: Still Alive!");
+    } else {
+      $("#selectedRelease").prepend("Date of Death: ");
+    }
+  }
+  // if all mediaForm property is the same:
 }
 
 function trackPage() {
