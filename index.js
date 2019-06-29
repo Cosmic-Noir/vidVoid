@@ -6,22 +6,22 @@ let currentQuery;
 
 function handleSuggest() {
   // User clicks suggest button to generate a recommended result
-  let counter = 0;
+  // let counter = 0;
   $("#genRandom").click(function() {
     console.log("`handleSuggest` has run");
     getSuggestion();
     // In case they were previously using search, hide the search form when asking for a suggestion
     $(".js-search").addClass("hide");
     $(".js-results").addClass("hidden");
-    counter++;
-    console.log("counter has increased to " + counter);
-    if (counter > 19) {
-      page++;
-      console.log(
-        "Fill void button pressed 20 times, increased page to " + page
-      );
-      counter = 0;
-    }
+    // counter++;
+    // console.log("counter has increased to " + counter);
+    // if (counter > 19) {
+    //   page++;
+    //   console.log(
+    //     "Fill void button pressed 20 times, increased page to " + page
+    //   );
+    //   counter = 0;
+    // }
   });
 }
 
@@ -48,6 +48,12 @@ function getSuggestion() {
     })
     .then(responseJson => displaySuggestion(responseJson));
   console.log("getSuggestion has run and should have returned a Json object");
+}
+
+function makePageRandom() {
+  // turns the page to a random number so that next suggested results will be truly random
+  let randomPage = Math.floor(Math.random() * 1000);
+  page = randomPage;
 }
 
 function displaySuggestion(responseJson) {
@@ -81,6 +87,7 @@ function displaySuggestion(responseJson) {
   $("#suggestedDesc").text(responseJson.results[randomSelect].overview);
 
   console.log("`displaySuggestion` has run");
+  makePageRandom(responseJson);
 }
 
 function handleSearchForm() {
