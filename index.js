@@ -6,12 +6,22 @@ let currentQuery;
 
 function handleSuggest() {
   // User clicks suggest button to generate a recommended result
+  let counter = 0;
   $("#genRandom").click(function() {
     console.log("`handleSuggest` has run");
     getSuggestion();
     // In case they were previously using search, hide the search form when asking for a suggestion
     $(".js-search").addClass("hide");
     $(".js-results").addClass("hidden");
+    counter++;
+    console.log("counter has increased to " + counter);
+    if (counter > 19) {
+      page++;
+      console.log(
+        "Fill void button pressed 20 times, increased page to " + page
+      );
+      counter = 0;
+    }
   });
 }
 
@@ -26,7 +36,9 @@ function handleSearch() {
 function getSuggestion() {
   // sends GET request to MDB for trending movie/tv media
   let url =
-    "https://api.themoviedb.org/3/trending/all/week?api_key=41852c5354f2d366f322d470d71ec51f";
+    "https://api.themoviedb.org/3/trending/all/week?api_key=41852c5354f2d366f322d470d71ec51f&page=" +
+    page;
+  console.log(url);
   fetch(url)
     .then(response => {
       if (response.ok) {
@@ -44,8 +56,10 @@ function displaySuggestion(responseJson) {
   $(".js-search").addClass("hidden");
   $(".js-details").addClass("hidden");
   console.log(responseJson);
+
   let randomSelect = Math.floor(Math.random() * 20);
   console.log(randomSelect);
+
   $("#suggestedImage").attr(
     "src",
     `http://image.tmdb.org/t/p/w185${
@@ -56,11 +70,17 @@ function displaySuggestion(responseJson) {
     responseJson.results[randomSelect].original_title ||
       responseJson.results[randomSelect].name
   );
-  $("#suggestedRating").text(responseJson.results[randomSelect].vote_average);
-  $("#suggestedRelease").text(responseJson.results[randomSelect].release_date);
+  $("#suggestedRating").text(
+    "Average Rating: " + responseJson.results[randomSelect].vote_average
+  );
+  $("#suggestedRelease").text(
+    "Release Date: " +
+      (responseJson.results[randomSelect].release_date ||
+        responseJson.results[randomSelect].first_air_date)
+  );
   $("#suggestedDesc").text(responseJson.results[randomSelect].overview);
 
-  console.log("displaySuggestion has run");
+  console.log("`displaySuggestion` has run");
 }
 
 function handleSearchForm() {
@@ -87,7 +107,7 @@ function formatQueryParams(params) {
 }
 
 function getMedia(query) {
-  // Takes keyword from user input
+  // Takes query from user input
   const params = {
     query: query,
     page: page,
