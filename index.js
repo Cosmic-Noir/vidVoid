@@ -110,14 +110,19 @@ This sections handles the specific media search portion that returns a list of m
  *
 **/
 
+/*
+ * Responsible for unhiding the "search" area when "Search The Void" button is pressed
+ */
 function handleSearch() {
-  // user clickes Search The Void button and reveals the search form options
   $("#showSearch").click(function() {
     $(".js-search").removeClass("hidden");
     $(".js-suggestion").addClass("hidden");
   });
 }
 
+/*
+ * Responsible for taking user input when form button is clicked and
+ */
 function handleSearchForm() {
   // handles search into query from form data
   $("#js-searchForm").submit(event => {
@@ -125,9 +130,9 @@ function handleSearchForm() {
     page = 1;
     // Convert user input into variable to pass as a param
     currentQuerry = $("#js-query").val();
-    // Hide back button as the first page will return to 1
-    backButton.addClass("hidden");
+
     console.log("`handleSearchForm` ran");
+    hideBack();
     getMedia();
   });
 }
@@ -370,11 +375,9 @@ function showNext(responseJson) {
   }
 }
 
-function hideBack(responseJson) {
-  console.log(responseJson.page);
-  if (responseJson.page === 1) {
+function hideBack() {
+  if (page === 1) {
     backButton.addClass("hidden");
-    console.log("`hideBack` ran");
   }
 }
 
