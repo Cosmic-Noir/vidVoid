@@ -19,20 +19,23 @@ This section handles the "Fill the Void" button, generating a single, random tv 
  * Responsible for when "Fill the Void" button is pressed and unhides .js-results <ul>
  */
 function handleSuggest() {
-  // User clicks suggest button to generate a recommended result
   $("#genRandom").click(function() {
-    console.log("`handleSuggest` has run with the below URL:");
+    console.log(
+      "`handleSuggest` has run due to 'Fill The Void' button being pressed"
+    );
     resultList.addClass("hidden");
     getSuggestion();
   });
 }
 
+/*
+ * Responsible for requesting JSON object from MDB with global page number, uses MDB trending call for unlimited content
+ */
 function getSuggestion() {
-  // sends GET request to MDB for trending movie/tv media
   let url =
     "https://api.themoviedb.org/3/trending/all/week?api_key=41852c5354f2d366f322d470d71ec51f&page=" +
     page;
-  console.log(url);
+  console.log("`getSuggestion` ran with the url: " + url);
   fetch(url)
     .then(response => {
       if (response.ok) {
@@ -41,18 +44,21 @@ function getSuggestion() {
       throw new Error(response.statustext);
     })
     .then(responseJson => displaySuggestion(responseJson));
-  console.log(
-    "getSuggestion ran and with a random page returned the following JSON object:"
-  );
 }
 
-function displaySuggestion(responseJson) {
-  // Should randomly select one result from array and display those details
+/*
+ * Responsible for unhiding the suggestion section and hiding the search area along with search list
+ */
+function unHideSuggestion() {
   $(".js-suggestion").removeClass("hidden");
   $(".js-search").addClass("hidden");
   $(".js-details").addClass("hidden");
-  console.log(responseJson);
+}
 
+/*
+ * Responsible for selecting a random result from the returned results array and displaying on DOM
+ */
+function displaySuggestion(responseJson) {
   let randomSelect = Math.floor(Math.random() * 20);
 
   $("#suggestedImage").attr(
@@ -76,7 +82,7 @@ function displaySuggestion(responseJson) {
   $("#suggestedDesc").text(responseJson.results[randomSelect].overview);
 
   console.log(
-    "`displaySuggestion` has run and suggested the title: " +
+    "`displaySuggestion` ran and suggested the title: " +
       (responseJson.results[randomSelect].name ||
         responseJson.results[randomSelect].original_title) +
       " at index: " +
@@ -84,13 +90,18 @@ function displaySuggestion(responseJson) {
       " on page: " +
       page
   );
-  makePageRandom(responseJson);
+  console.log("`displaySuggestion` ran with the returned object: ");
+  console.log(responseJson);
+  unHideSuggestion();
+  makePageRandom();
 }
 
+/*
+ * Responsible for changing the page number to a random page between 1-1000
+ */
 function makePageRandom() {
-  // turns the page to a random number so that next suggested results will be truly random
-  let randomPage = Math.floor(Math.random() * 1000);
-  page = randomPage;
+  page = Math.floor(Math.random() * 1000);
+  console.log("`makePageRandom` ran and the page is now: " + page);
 }
 
 /**
