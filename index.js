@@ -166,7 +166,7 @@ function createURL() {
 
   const queryString = formatQueryParams(params);
   const rawurl = baseURL + mediaForm + "?" + queryString;
-  console.log("`createURL` ran produce this url: " + rawurl);
+  console.log("`createURL` ran and produced this url: " + rawurl);
   return rawurl;
 }
 
@@ -253,7 +253,7 @@ function displayResults(responseJson) {
   }
 
   handleMissingPic(responseJson);
-  handleResultSelect(responseJson, mediaForm);
+  handleResultSelect(mediaForm);
   showNext(responseJson);
   hideBack(responseJson);
   trackPage();
@@ -280,7 +280,10 @@ function handleMissingPic(responseJson) {
  * 
  **/
 
-function handleResultSelect(responseJson, mediaForm) {
+/*
+ * Responsible for when any media <li> result is clicked, hides the results list, and unhides the details section
+ */
+function handleResultSelect(mediaForm) {
   $(".result").click(function() {
     resultList.addClass("hidden");
     console.log("`handleResultSelect` ran and hid results list");
@@ -291,6 +294,9 @@ function handleResultSelect(responseJson, mediaForm) {
   });
 }
 
+/*
+ * Responsible for sending GET request based on the media ID and mediaForm
+ */
 function getSingleResult(mediaID, mediaForm) {
   // let mediaID = 609256; // Default test value - works
 
@@ -303,26 +309,23 @@ function getSingleResult(mediaID, mediaForm) {
       }
       throw new Error(response.statustext);
     })
-    .then(responseJson => displayDetails(responseJson, mediaForm));
+    .then(responseJson => {
+      console.log("`getSingleResult` ran and returned: ");
+      console.log(responseJson);
+      displayDetails(responseJson, mediaForm);
+    });
 }
 
-function handleBackToResults() {
-  // Unhides the results div and hides the details div
-  $("#backResults").click(function() {
-    $(".js-details").addClass("hidden");
-    resultList.removeClass("hidden");
-    console.log("`handleBackToResults` ran");
-  });
-}
-
+/*
+ * Responsible for handling single media response and displaying more details about selected media
+ */
 function displayDetails(responseJson, mediaForm) {
-  console.log(responseJson);
-  // Displays details about single selected result
   $("#selectedImage").attr(
     "src",
     `http://image.tmdb.org/t/p/w185${responseJson.poster_path ||
       responseJson.profile_path}`
   );
+
   $("#selectedTitle").text(
     responseJson.original_title ||
       responseJson.original_name ||
@@ -370,9 +373,22 @@ function displayDetails(responseJson, mediaForm) {
         responseJson.original_title)
   );
 
+  // If the response doesn't have a pic, replace with missingImage
   if (!responseJson.poster_path && !responseJson.profile_path) {
     $("#selectedImage").attr("src", "missingImage.jpeg");
   }
+}
+
+/*
+ * Responsible for handling button click "Back to Results" which hides details and unhides results list
+ */
+function handleBackToResults() {
+  // Unhides the results div and hides the details div
+  $("#backResults").click(function() {
+    $(".js-details").addClass("hidden");
+    resultList.removeClass("hidden");
+    console.log("`handleBackToResults` ran");
+  });
 }
 
 /** * 
@@ -381,22 +397,30 @@ function displayDetails(responseJson, mediaForm) {
  * 
  **/
 
+/*
+ * Responsible for hiding "Next" button when page = max num of pages, and unhiding "Next" when results are > 20
+ */
 function showNext(responseJson) {
-  // unhides next button, increases current page and sends GET request for that new page
   if (page === responseJson.total_pages) {
     nextButton.addClass("hidden");
+    console.log('`showNext` ran and hid "Next" button as max page reached');
   } else if (responseJson.total_results > 20) {
     nextButton.removeClass("hidden");
-    console.log("`handleNext` unhides next button if total results > 20");
   }
 }
 
+/*
+ * Responsible for hiding the "Back" button if page = 1
+ */
 function hideBack() {
   if (page === 1) {
     backButton.addClass("hidden");
   }
 }
 
+/*
+ * Responsible for when user clicks "Next" button, increases page +1, and reveals the back button if page > 1
+ */
 function handleNext() {
   nextButton.click(function() {
     page += 1;
@@ -404,14 +428,15 @@ function handleNext() {
     getMedia(currentQuery);
     if (page > 1) {
       backButton.removeClass("hidden");
-      console.log("`handleNext` unhid #back because ");
       trackPage();
     }
   });
 }
 
+/*
+ * Responsible for when user clicks "Back" button, decreasing page -1
+ */
 function handleBack() {
-  // unhides back button, decreases current page and sends GET request for that new page
   backButton.click(function() {
     page -= 1;
     console.log("`handleBack` ran and page is now:" + page);
@@ -420,11 +445,12 @@ function handleBack() {
   });
 }
 
+/*
+ * Responsible for changing displayed page number equal to current page
+ */
 function trackPage() {
   $("#pageNum").text("Page: " + page);
 }
-
-console.log("VidVoid App Active");
 
 /*
 *
@@ -432,10 +458,15 @@ Section handles storing selected objects in localStorage to display in personal 
 *
 */
 
-handleSearchForm();
-handleSuggest();
-handleSearch();
-handleNext();
-handleBack();
+function vidVoid() {
+  handleSearchForm();
+  handleSuggest();
+  handleSearch();
+  handleNext();
+  handleBack();
+  console.log("VidVoid App Active");
+}
 
-// Testing using local storage:
+/* Call */
+
+vidVoid();
