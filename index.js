@@ -4,6 +4,7 @@ const baseURL = "https://api.themoviedb.org/3/search/";
 let page = 1;
 let currentQuery;
 let resultList = $(".js-results");
+let mediaForm;
 
 // Button variables
 const backButton = $("#back");
@@ -121,30 +122,41 @@ function handleSearch() {
 }
 
 /*
- * Responsible for taking user input when form button is clicked and
+ * Responsible for setting user input to currentQuery and reseting page to 1
  */
 function handleSearchForm() {
-  // handles search into query from form data
   $("#js-searchForm").submit(event => {
     event.preventDefault();
     page = 1;
-    // Convert user input into variable to pass as a param
     currentQuerry = $("#js-query").val();
+    mediaForm = $("#media").val();
 
-    console.log("`handleSearchForm` ran");
+    console.log(
+      "`handleSearchForm` ran with the user search term: " + currentQuerry
+    );
     hideBack();
     getMedia();
   });
 }
 
+/*
+ * Responsible for formatting params object into a queriable string for the url
+ */
 function formatQueryParams(params) {
-  // turns keys in params object into html string to append to the search URL endpoint
   const queryItems = Object.keys(params).map(
     key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
   );
   return queryItems.join("&");
 }
 
+/*
+ * Responsible for creating url for GET request
+ */
+function createURL() {}
+
+/*
+ * Responsible for sending GET request with given parameters
+ */
 function getMedia() {
   // Takes query from user input
   const params = {
@@ -156,7 +168,6 @@ function getMedia() {
     language: "en-US"
   };
   // Calls either TV, Movie, or person
-  let mediaForm = $("#media").val();
 
   const queryString = formatQueryParams(params);
   const url = baseURL + mediaForm + "?" + queryString;
