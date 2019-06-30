@@ -1,8 +1,10 @@
-// API key
+// Global Variables
 const apiKey = "41852c5354f2d366f322d470d71ec51f";
 const baseURL = "https://api.themoviedb.org/3/search/";
 let page = 1;
 let currentQuery;
+let resultList = $(".js-results");
+
 // Button variables
 const backButton = $("#back");
 const nextButton = $("#next");
@@ -13,14 +15,15 @@ This section handles the "Fill the Void" button, generating a single, random tv 
  * 
 **/
 
+/*
+ * Responsible for when "Fill the Void" button is pressed and unhides .js-results <ul>
+ */
 function handleSuggest() {
   // User clicks suggest button to generate a recommended result
   $("#genRandom").click(function() {
     console.log("`handleSuggest` has run with the below URL:");
+    resultList.addClass("hidden");
     getSuggestion();
-    // In case they were previously using search, hide the search form when asking for a suggestion
-    $(".js-search").addClass("hide");
-    $(".js-results").addClass("hidden");
   });
 }
 
@@ -162,7 +165,7 @@ function displayResults(responseJson, mediaForm) {
   $("#js-resultList").empty();
 
   // Unhide results div
-  $(".js-results").removeClass("hidden");
+  resultList.removeClass("hidden");
   $(".js-resultCounter").removeClass("hidden");
 
   $("#js-resultNum").text(responseJson.total_results);
@@ -247,7 +250,7 @@ function handleMissingPic(responseJson) {
 
 function handleResultSelect(responseJson, mediaForm) {
   $(".result").click(function() {
-    $(".js-results").addClass("hidden");
+    resultList.addClass("hidden");
     console.log("`handleResultSelect` ran and hid results list");
     $(".js-details").removeClass("hidden");
     let mediaID = $(this).attr("id");
@@ -275,7 +278,7 @@ function handleBackToResults() {
   // Unhides the results div and hides the details div
   $("#backResults").click(function() {
     $(".js-details").addClass("hidden");
-    $(".js-results").removeClass("hidden");
+    resultList.removeClass("hidden");
     console.log("`handleBackToResults` ran");
   });
 }
