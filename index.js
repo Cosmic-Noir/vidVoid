@@ -7,6 +7,12 @@ let currentQuery;
 const backButton = $("#back");
 const nextButton = $("#next");
 
+/**
+ * 
+This section handles the "Fill the Void" button, generating a single, random tv or movie suggestion.
+ * 
+**/
+
 function handleSuggest() {
   // User clicks suggest button to generate a recommended result
   $("#genRandom").click(function() {
@@ -15,14 +21,6 @@ function handleSuggest() {
     // In case they were previously using search, hide the search form when asking for a suggestion
     $(".js-search").addClass("hide");
     $(".js-results").addClass("hidden");
-  });
-}
-
-function handleSearch() {
-  // user clickes Search The Void button and reveals the search form options
-  $("#showSearch").click(function() {
-    $(".js-search").removeClass("hidden");
-    $(".js-suggestion").addClass("hidden");
   });
 }
 
@@ -43,12 +41,6 @@ function getSuggestion() {
   console.log(
     "getSuggestion ran and with a random page returned the following JSON object:"
   );
-}
-
-function makePageRandom() {
-  // turns the page to a random number so that next suggested results will be truly random
-  let randomPage = Math.floor(Math.random() * 1000);
-  page = randomPage;
 }
 
 function displaySuggestion(responseJson) {
@@ -92,18 +84,37 @@ function displaySuggestion(responseJson) {
   makePageRandom(responseJson);
 }
 
+function makePageRandom() {
+  // turns the page to a random number so that next suggested results will be truly random
+  let randomPage = Math.floor(Math.random() * 1000);
+  page = randomPage;
+}
+
+/**
+ * 
+This sections handles the specific media search portion that returns a list of matching results.
+ *
+**/
+
+function handleSearch() {
+  // user clickes Search The Void button and reveals the search form options
+  $("#showSearch").click(function() {
+    $(".js-search").removeClass("hidden");
+    $(".js-suggestion").addClass("hidden");
+  });
+}
+
 function handleSearchForm() {
   // handles search into query from form data
   $("#js-searchForm").submit(event => {
     event.preventDefault();
     page = 1;
     // Convert user input into variable to pass as a param
-    let query = $("#js-query").val();
-    currentQuery = query;
+    currentQuerry = $("#js-query").val();
     // Hide back button as the first page will return to 1
     backButton.addClass("hidden");
     console.log("`handleSearchForm` ran");
-    getMedia(query);
+    getMedia();
   });
 }
 
@@ -115,10 +126,10 @@ function formatQueryParams(params) {
   return queryItems.join("&");
 }
 
-function getMedia(query) {
+function getMedia() {
   // Takes query from user input
   const params = {
-    query: query,
+    query: currentQuerry,
     page: page,
     api_key: apiKey,
     indlucde_adult: false,
@@ -228,46 +239,11 @@ function handleMissingPic(responseJson) {
   }
 }
 
-function showNext(responseJson) {
-  // unhides next button, increases current page and sends GET request for that new page
-  if (page === responseJson.total_pages) {
-    nextButton.addClass("hidden");
-  } else if (responseJson.total_results > 20) {
-    nextButton.removeClass("hidden");
-    console.log("`handleNext` unhides next button if total results > 20");
-  }
-}
-
-function hideBack(responseJson) {
-  console.log(responseJson.page);
-  if (responseJson.page === 1) {
-    backButton.addClass("hidden");
-    console.log("`hideBack` ran");
-  }
-}
-
-function handleNext() {
-  nextButton.click(function() {
-    page += 1;
-    console.log("`handleNext` ran and page is now:" + page);
-    getMedia(currentQuery);
-    if (page > 1) {
-      backButton.removeClass("hidden");
-      console.log("`handleNext` unhid #back because ");
-      trackPage();
-    }
-  });
-}
-
-function handleBack() {
-  // unhides back button, decreases current page and sends GET request for that new page
-  backButton.click(function() {
-    page -= 1;
-    console.log("`handleBack` ran and page is now:" + page);
-    getMedia(currentQuery);
-    trackPage();
-  });
-}
+/** * 
+ * 
+ This section handles the selection of individual results from the search lists, generating content and displaying details.
+ * 
+ **/
 
 function handleResultSelect(responseJson, mediaForm) {
   $(".result").click(function() {
@@ -362,6 +338,53 @@ function displayDetails(responseJson, mediaForm) {
   if (!responseJson.poster_path && !responseJson.profile_path) {
     $("#selectedImage").attr("src", "missingImage.jpeg");
   }
+}
+
+/** * 
+ * 
+ This section handles page navigation and page display, as well as the returned num of results from a search.
+ * 
+ **/
+
+function showNext(responseJson) {
+  // unhides next button, increases current page and sends GET request for that new page
+  if (page === responseJson.total_pages) {
+    nextButton.addClass("hidden");
+  } else if (responseJson.total_results > 20) {
+    nextButton.removeClass("hidden");
+    console.log("`handleNext` unhides next button if total results > 20");
+  }
+}
+
+function hideBack(responseJson) {
+  console.log(responseJson.page);
+  if (responseJson.page === 1) {
+    backButton.addClass("hidden");
+    console.log("`hideBack` ran");
+  }
+}
+
+function handleNext() {
+  nextButton.click(function() {
+    page += 1;
+    console.log("`handleNext` ran and page is now:" + page);
+    getMedia(currentQuery);
+    if (page > 1) {
+      backButton.removeClass("hidden");
+      console.log("`handleNext` unhid #back because ");
+      trackPage();
+    }
+  });
+}
+
+function handleBack() {
+  // unhides back button, decreases current page and sends GET request for that new page
+  backButton.click(function() {
+    page -= 1;
+    console.log("`handleBack` ran and page is now:" + page);
+    getMedia(currentQuery);
+    trackPage();
+  });
 }
 
 function trackPage() {
