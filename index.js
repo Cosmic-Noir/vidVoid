@@ -2,8 +2,10 @@
 const apiKey = "41852c5354f2d366f322d470d71ec51f";
 const baseURL = "https://api.themoviedb.org/3/search/";
 let page = 1;
-let currentQuery;
 let resultList = $(".js-results");
+
+// Variables set by user input
+let currentQuery;
 let mediaForm;
 
 // Button variables
@@ -150,15 +152,9 @@ function formatQueryParams(params) {
 }
 
 /*
- * Responsible for creating url for GET request
+ * Responsible for creating url for GET request based on parameters, selected media form, and currentQuery
  */
-function createURL() {}
-
-/*
- * Responsible for sending GET request with given parameters
- */
-function getMedia() {
-  // Takes query from user input
+function createURL() {
   const params = {
     query: currentQuerry,
     page: page,
@@ -167,13 +163,18 @@ function getMedia() {
     include_video: false,
     language: "en-US"
   };
-  // Calls either TV, Movie, or person
 
   const queryString = formatQueryParams(params);
-  const url = baseURL + mediaForm + "?" + queryString;
-  console.log(url);
-  console.log("`getMedia` ran, returned the below JSON object:");
+  const rawurl = baseURL + mediaForm + "?" + queryString;
+  console.log("`createURL` ran produce this url: " + rawurl);
+  return rawurl;
+}
 
+/*
+ * Responsible for sending GET request with given url and passing the returned JSON object to be displayed
+ */
+function getMedia() {
+  let url = createURL();
   fetch(url)
     .then(response => {
       if (response.ok) {
@@ -181,14 +182,17 @@ function getMedia() {
       }
       throw new Error(response.statustext);
     })
-    .then(responseJson => displayResults(responseJson, mediaForm));
+    .then(responseJson => {
+      displayResults(responseJson);
+      console.log("`getMedia` ran and returned: ");
+      console.log(responseJson);
+    });
 }
 
-function displayResults(responseJson, mediaForm) {
-  // Displays results returned from MDB.
-  console.log(responseJson);
-
-  // Empty list per each search
+/*
+ * Responsible for displaying the given results and emptying previous list
+ */
+function displayResults(responseJson) {
   $("#js-resultList").empty();
 
   // Unhide results div
