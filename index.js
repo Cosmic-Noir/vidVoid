@@ -458,6 +458,11 @@ Section handles storing selected objects in localStorage to display in personal 
 *
 */
 
+/*
+ * Responsible for when user clicks "Remove From List" button and removes media item from localStorage
+ */
+function handleRemove() {}
+
 function vidVoid() {
   handleSearchForm();
   handleSuggest();
