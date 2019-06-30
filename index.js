@@ -3,10 +3,12 @@ const apiKey = "41852c5354f2d366f322d470d71ec51f";
 const baseURL = "https://api.themoviedb.org/3/search/";
 let page = 1;
 let currentQuery;
+// Button variables
+const backButton = $("#back");
+const nextButton = $("#next");
 
 function handleSuggest() {
   // User clicks suggest button to generate a recommended result
-  // let counter = 0;
   $("#genRandom").click(function() {
     console.log("`handleSuggest` has run with the below URL:");
     getSuggestion();
@@ -99,7 +101,7 @@ function handleSearchForm() {
     let query = $("#js-query").val();
     currentQuery = query;
     // Hide back button as the first page will return to 1
-    $("#back").addClass("hidden");
+    backButton.addClass("hidden");
     console.log("`handleSearchForm` ran");
     getMedia(query);
   });
@@ -229,9 +231,9 @@ function handleMissingPic(responseJson) {
 function showNext(responseJson) {
   // unhides next button, increases current page and sends GET request for that new page
   if (page === responseJson.total_pages) {
-    $("#next").addClass("hidden");
+    nextButton.addClass("hidden");
   } else if (responseJson.total_results > 20) {
-    $("#next").removeClass("hidden");
+    nextButton.removeClass("hidden");
     console.log("`handleNext` unhides next button if total results > 20");
   }
 }
@@ -239,18 +241,18 @@ function showNext(responseJson) {
 function hideBack(responseJson) {
   console.log(responseJson.page);
   if (responseJson.page === 1) {
-    $("#back").addClass("hidden");
+    backButton.addClass("hidden");
     console.log("`hideBack` ran");
   }
 }
 
 function handleNext() {
-  $("#next").click(function() {
+  nextButton.click(function() {
     page += 1;
     console.log("`handleNext` ran and page is now:" + page);
     getMedia(currentQuery);
     if (page > 1) {
-      $("#back").removeClass("hidden");
+      backButton.removeClass("hidden");
       console.log("`handleNext` unhid #back because ");
       trackPage();
     }
@@ -259,7 +261,7 @@ function handleNext() {
 
 function handleBack() {
   // unhides back button, decreases current page and sends GET request for that new page
-  $("#back").click(function() {
+  backButton.click(function() {
     page -= 1;
     console.log("`handleBack` ran and page is now:" + page);
     getMedia(currentQuery);
@@ -368,8 +370,16 @@ function trackPage() {
 
 console.log("VidVoid App Active");
 
+/*
+*
+Section handles storing selected objects in localStorage to display in personal list  
+*
+*/
+
 handleSearchForm();
 handleSuggest();
 handleSearch();
 handleNext();
 handleBack();
+
+// Testing using local storage:
