@@ -190,15 +190,14 @@ function getMedia() {
 }
 
 /*
- * Responsible for displaying the given results and emptying previous list
+ * Responsible for displaying the given results, unhiding results list and result Num, and emptying previous list
+ * Should likely be two functions, one displayResults to unhide area and update display
+ * The other function to display the actual content
  */
 function displayResults(responseJson) {
   $("#js-resultList").empty();
-
-  // Unhide results div
   resultList.removeClass("hidden");
   $(".js-resultCounter").removeClass("hidden");
-
   $("#js-resultNum").text(responseJson.total_results);
 
   // New for loop will add unfilled content to the containing <ul>, identified by JSON ID - Removed inner defaul text from "release date" <h4> due to no population when "person" searched.
@@ -260,8 +259,10 @@ function displayResults(responseJson) {
   trackPage();
 }
 
+/*
+ * Responsible for replacing any missing pictures with the "missing image" jpeg
+ */
 function handleMissingPic(responseJson) {
-  // replace missing picture links
   for (let i = 0; i < responseJson.results.length; i++) {
     if (
       !responseJson.results[i].poster_path &&
