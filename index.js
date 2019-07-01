@@ -293,7 +293,7 @@ function getSingleResult(mediaID, mediaForm) {
  * Responsible for handling single media response and displaying more details about selected media
  */
 function displayDetails(responseJson, mediaForm, mediaID) {
-  $("#js-singleDetail").attr("meidaId", `${mediaID}`);
+  $("#js-singleDetail").attr("data-meidaId", `${mediaID}`);
 
   $("#selectedImage").attr(
     "src",
@@ -461,7 +461,9 @@ function addToList() {
     console.log(stringContent);
     let listItem = $(this).parents("li");
     console.log(listItem);
-    console.log("`addToList` ");
+    let storeKey = listItem[0].attributes[1];
+    console.log(storeKey);
+    console.log("`addToList` ran ");
   });
 }
 
