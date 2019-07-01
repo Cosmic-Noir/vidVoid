@@ -459,9 +459,51 @@ Section handles storing selected objects in localStorage to display in personal 
 */
 
 /*
+ * Responsible for displaying "View My List" button if any exists
+ */
+function viewList() {
+  if (localStorage.length > 1) {
+    $("#js-viewList").removeClass("hidden");
+  }
+}
+
+/*
+ * Responsible for when user clicks "Add to List" button, converts JSON objec to string and adds to local storage
+ */
+function addToList() {
+  $("#addToList").click(function() {
+    console.log(this);
+  });
+}
+
+/*
+ * Responsible for displaying user's list in localStorage and converting from string to JSON object
+ */
+function displayList() {
+  let savedArray = JSON.parse(localStorage.getItem());
+  console.log(savedArray);
+}
+
+/*
+ * Responsible for hiding localStorage list
+ */
+function hideList() {
+  $("#js-hideList").click(function() {
+    $("#js-pickList").addClass("hidden");
+  });
+}
+
+/*
  * Responsible for when user clicks "Remove From List" button and removes media item from localStorage
  */
 function handleRemove() {}
+
+/*
+ * Responsible for creating e-mail with media list ready for e-mail
+ */
+function emailList() {}
+
+/***^_^****/
 
 function vidVoid() {
   handleSearchForm();
@@ -470,6 +512,8 @@ function vidVoid() {
   handleNext();
   handleBack();
   console.log("VidVoid App Active");
+  console.log("Number of items in local storage: " + localStorage.length);
+  console.log(localStorage);
 }
 
 /* Call */

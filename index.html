@@ -13,13 +13,15 @@
       <section class="options">
         <button id="genRandom">Fill The Void</button>
         <button id="showSearch">Search The Void</button>
+        <button id="js-viewList" class="hidden">View My List</button>
       </section>
       <div class="hidden js-suggestion">
-        <img src="" alt="Suggested movie image" id="suggestedImage">
-        <h3 id="suggestedTitle">SUGGESTED MEDIA TITLE</h3>
-        <h4 id="suggestedRating">Average Rating: </h4>
-        <h4 id="suggestedRelease">Release Date: </h4>
-        <p id="suggestedDesc">Description: </p>
+        <li><img src="" alt="Suggested movie image" id="suggestedImage">
+          <h3 id="suggestedTitle">SUGGESTED MEDIA TITLE</h3>
+          <h4 id="suggestedRating">Average Rating: </h4>
+          <h4 id="suggestedRelease">Release Date: </h4>
+          <p id="suggestedDesc">Description: </p>
+          <button id="addToList">Add to List</button></li>
       </div>
       <section class="js-search hidden">
         <form action="" id="js-searchForm">
@@ -59,12 +61,15 @@
           <h4 id="selectedRelease"></h4>
             <p id="selectedDescription">Description</p>
           <button id="backResults">Back to Results</button>
+          <button id="addToList">Add to List</button>
         </div>
       </div>
       <div class="flex-container">
         <div class="hidden js-pickList">
-          <button id="remove">Remove From List</button>
+          <button id="js-remove">Remove From List</button>
+          <button id="js-hideList">Hide List</button>
         </div>
+        
       </div>
     </main>
     <script
