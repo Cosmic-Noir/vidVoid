@@ -442,9 +442,8 @@ function viewList() {
  * Should consider condition if matching element found in local storage to hide button or change to remove button
  */
 function addToList() {
-  $("#addToList").click(function() {
-    console.log("`addToList` ran butt currently doesnt do anything");
-    displayList();
+  $(".addToList").click(function() {
+    console.log("`addToList` ran but currently doesnt do anything");
   });
 }
 
