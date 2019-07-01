@@ -443,6 +443,13 @@ function viewList() {
  */
 function addToList() {
   $(".addToList").click(function() {
+    let parent = $(this).parents("div");
+    let content = parent[0].innerHTML;
+
+    console.log(content);
+    let stringContent = JSON.stringify(content);
+    console.log(stringContent);
+
     console.log("`addToList` ran but currently doesnt do anything");
   });
 }
