@@ -134,7 +134,10 @@ function handleSearchForm() {
     mediaForm = $("#media").val();
 
     console.log(
-      "`handleSearchForm` ran with the user search term: " + currentQuerry
+      "`handleSearchForm` ran with the user search term: " +
+        currentQuerry +
+        "with mediaForm: " +
+        mediaForm
     );
     hideBack();
     getMedia();
@@ -469,10 +472,12 @@ function viewList() {
 
 /*
  * Responsible for when user clicks "Add to List" button, converts JSON objec to string and adds to local storage
+ * Should consider condition if matching element found in local storage to hide button or change to remove button
  */
 function addToList() {
   $("#addToList").click(function() {
-    console.log(this);
+    console.log("`addToList` ran butt currently doesnt do anything");
+    displayList();
   });
 }
 
@@ -480,8 +485,9 @@ function addToList() {
  * Responsible for displaying user's list in localStorage and converting from string to JSON object
  */
 function displayList() {
-  let savedArray = JSON.parse(localStorage.getItem());
-  console.log(savedArray);
+  $("#js-viewList").click(function() {
+    console.log("`displayList` ran but currently doesnt do anything");
+  });
 }
 
 /*
@@ -490,27 +496,50 @@ function displayList() {
 function hideList() {
   $("#js-hideList").click(function() {
     $("#js-pickList").addClass("hidden");
+    console.log("`hideList` ran and hide picked list");
   });
 }
 
 /*
  * Responsible for when user clicks "Remove From List" button and removes media item from localStorage
  */
-function handleRemove() {}
+function handleRemove() {
+  $("#js-remove").click(function() {
+    console.log("`handleRemove` ran but currently doesnt do anything");
+  });
+}
+
+/*
+ * Responsible for when user clicks "Remove From List" button and removes media item from localStorage
+ */
+function clearList() {
+  $("#js-clearClist").click(function() {
+    console.log("`clearList` ran but currently doesnt do anything");
+  });
+}
 
 /*
  * Responsible for creating e-mail with media list ready for e-mail
  */
-function emailList() {}
+function emailList() {
+  $("#js-emailList").click(function() {
+    console.log("`emailList` ran but currently doesnt do anything");
+  });
+}
 
 /***^_^****/
 
 function vidVoid() {
-  handleSearchForm();
-  handleSuggest();
-  handleSearch();
-  handleNext();
+  addToList();
   handleBack();
+  handleNext();
+  handleSearchForm();
+  handleSearch();
+  handleSuggest();
+  handleRemove();
+  displayList();
+  viewList();
+
   console.log("VidVoid App Active");
   console.log("Number of items in local storage: " + localStorage.length);
   console.log(localStorage);
