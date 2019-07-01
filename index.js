@@ -64,24 +64,33 @@ function unHideSuggestion() {
 function displaySuggestion(responseJson) {
   let randomSelect = Math.floor(Math.random() * 20);
 
+  $(".suggest").attr(
+    "data-mediaId",
+    `${responseJson.results[randomSelect].id}`
+  );
+
   $("#suggestedImage").attr(
     "src",
     `http://image.tmdb.org/t/p/w185${
       responseJson.results[randomSelect].poster_path
     }`
   );
+
   $("#suggestedTitle").text(
     responseJson.results[randomSelect].original_title ||
       responseJson.results[randomSelect].name
   );
+
   $("#suggestedRating").text(
     "Average Rating: " + responseJson.results[randomSelect].vote_average
   );
+
   $("#suggestedRelease").text(
     "Release Date: " +
       (responseJson.results[randomSelect].release_date ||
         responseJson.results[randomSelect].first_air_date)
   );
+
   $("#suggestedDesc").text(responseJson.results[randomSelect].overview);
 
   console.log(
@@ -276,14 +285,16 @@ function getSingleResult(mediaID, mediaForm) {
     .then(responseJson => {
       console.log("`getSingleResult` ran and returned: ");
       console.log(responseJson);
-      displayDetails(responseJson, mediaForm);
+      displayDetails(responseJson, mediaForm, mediaID);
     });
 }
 
 /*
  * Responsible for handling single media response and displaying more details about selected media
  */
-function displayDetails(responseJson, mediaForm) {
+function displayDetails(responseJson, mediaForm, mediaID) {
+  $("#js-singleDetail").attr("meidaId", `${mediaID}`);
+
   $("#selectedImage").attr(
     "src",
     `http://image.tmdb.org/t/p/w185${responseJson.poster_path ||
@@ -445,12 +456,12 @@ function addToList() {
   $(".addToList").click(function() {
     let parent = $(this).parents("div");
     let content = parent[0].innerHTML;
-
     console.log(content);
     let stringContent = JSON.stringify(content);
     console.log(stringContent);
-
-    console.log("`addToList` ran but currently doesnt do anything");
+    let listItem = $(this).parents("li");
+    console.log(listItem);
+    console.log("`addToList` ");
   });
 }
 

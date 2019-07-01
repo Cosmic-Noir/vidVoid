@@ -16,7 +16,7 @@
         <button id="js-viewList" class="hidden">View My List</button>
       </section>
       <div class="hidden js-suggestion">
-        <li><img src="" alt="Suggested movie image" id="suggestedImage">
+        <li class="suggest"><img src="" alt="Suggested movie image" id="suggestedImage">
           <h3 id="suggestedTitle">SUGGESTED MEDIA TITLE</h3>
           <h4 id="suggestedRating">Average Rating: </h4>
           <h4 id="suggestedRelease">Release Date: </h4>
@@ -54,14 +54,14 @@
       </div>
       <div class="flex-container">
         <div class="hidden js-details">
-          <h2 id="selectedTitle">Selected Title</h2>
-          <img src="" alt="Selected Result Image" id="selectedImage">
-          <h3 id="selectedTagline"></h3>
-          <h4 id="selectedPopularity">Popularity:</h3>
-          <h4 id="selectedRelease"></h4>
-            <p id="selectedDescription">Description</p>
-          <button id="backResults">Back to Results</button>
-          <button class="addToList">Add to List</button>
+          <li id="js-singleDetail"><h2 id="selectedTitle">Selected Title</h2>
+            <img src="" alt="Selected Result Image" id="selectedImage">
+            <h3 id="selectedTagline"></h3>
+            <h4 id="selectedPopularity">Popularity:</h3>
+            <h4 id="selectedRelease"></h4>
+              <p id="selectedDescription">Description</p>
+            <button id="backResults">Back to Results</button>
+            <button class="addToList">Add to List</button></li>
         </div>
       </div>
       <div class="flex-container">
