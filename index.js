@@ -203,56 +203,19 @@ function displayResults(responseJson) {
   $(".js-resultCounter").removeClass("hidden");
   $("#js-resultNum").text(responseJson.total_results);
 
-  // New for loop will add unfilled content to the containing <ul>, identified by JSON ID - Removed inner defaul text from "release date" <h4> due to no population when "person" searched.
   for (let i = 0; i < responseJson.results.length; i++) {
     $("#js-resultList").append(
       `<li class="result" id="${responseJson.results[i].id}">
-        <img id="img${responseJson.results[i].id}" src=""></img>
-        <h3 id="title${responseJson.results[i].id}">TITLE</h3>
+        <img id="img${
+          responseJson.results[i].id
+        }" src="http://image.tmdb.org/t/p/w185${responseJson.results[i]
+        .poster_path || responseJson.results[i].profile_path}"></img>
+        <h3 id="title${responseJson.results[i].id}">
+        ${responseJson.results[i].original_title ||
+          responseJson.results[i].original_name ||
+          responseJson.results[i].name}</h3>
       </li>`
     );
-  }
-
-  // New if statements will add correct content depending on mediaForm
-  if (mediaForm === "movie") {
-    for (let i = 0; i < responseJson.results.length; i++) {
-      $(`#img${responseJson.results[i].id}`).attr(
-        "src",
-        `http://image.tmdb.org/t/p/w185${responseJson.results[i].poster_path}`
-      );
-      $(`#title${responseJson.results[i].id}`).text(
-        `${responseJson.results[i].original_title}`
-      );
-    }
-    console.log("`displayResults` ran and displayed movie results");
-  }
-
-  // If mediaForm === tv
-  if (mediaForm === "tv") {
-    for (let i = 0; i < responseJson.results.length; i++) {
-      $(`#img${responseJson.results[i].id}`).attr(
-        "src",
-        `http://image.tmdb.org/t/p/w185${responseJson.results[i].poster_path}`
-      );
-      $(`#title${responseJson.results[i].id}`).text(
-        `${responseJson.results[i].original_name}`
-      );
-    }
-    console.log("`displayResults` ran and displayed tv results");
-  }
-
-  // If mediaForm === person
-  if (mediaForm === "person") {
-    for (let i = 0; i < responseJson.results.length; i++) {
-      $(`#img${responseJson.results[i].id}`).attr(
-        "src",
-        `http://image.tmdb.org/t/p/w185${responseJson.results[i].profile_path}`
-      );
-      $(`#title${responseJson.results[i].id}`).text(
-        `${responseJson.results[i].name}`
-      );
-    }
-    console.log("`displayResults` ran and displayed person results");
   }
 
   handleMissingPic(responseJson);
