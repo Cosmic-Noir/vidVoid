@@ -194,8 +194,6 @@ function getMedia() {
 
 /*
  * Responsible for displaying the given results, unhiding results list and result Num, and emptying previous list
- * Should likely be two functions, one displayResults to unhide area and update display
- * The other function to display the actual content
  */
 function displayResults(responseJson) {
   $("#js-resultList").empty();
@@ -205,7 +203,7 @@ function displayResults(responseJson) {
 
   for (let i = 0; i < responseJson.results.length; i++) {
     $("#js-resultList").append(
-      `<li class="result" id="${responseJson.results[i].id}">
+      `<li class="result" data-mediaId="${responseJson.results[i].id}">
         <img id="img${
           responseJson.results[i].id
         }" src="http://image.tmdb.org/t/p/w185${responseJson.results[i]
@@ -254,7 +252,7 @@ function handleResultSelect(mediaForm) {
     resultList.addClass("hidden");
     console.log("`handleResultSelect` ran and hid results list");
     $(".js-details").removeClass("hidden");
-    let mediaID = $(this).attr("id");
+    let mediaID = $(this).attr("data-mediaId");
     getSingleResult(mediaID, mediaForm);
     handleBackToResults();
   });
@@ -308,22 +306,28 @@ function displayDetails(responseJson, mediaForm) {
     } else {
       $("#selectedTagline").empty();
     }
-  }
-
-  if (mediaForm === "tv") {
-    $("#selectedTagline").text("Homepage: " + responseJson.homepage);
+  } else if (mediaForm === "tv") {
     $("#selectedRelease").text(
       "First Air-date: " + responseJson.first_air_date
     );
     $("#selectedPopularity").text(
       "Voter Average: " + responseJson.vote_average
     );
-  }
-
-  if (mediaForm === "person") {
+    if (responseJson.homepage) {
+      $("#selectedTagline").text("Homepage: " + responseJson.homepage);
+    }
+  } else {
     $("#selectedTagline").text("Popularity: " + responseJson.popularity);
-    $("#selectedPopularity").text("Birthday: " + responseJson.birthday);
-    $("#selectedDescription").text("Bio: " + responseJson.biography);
+    if (responseJson.birthday === null) {
+      $("#selectedPopularity").text("Birthday: Unknown");
+    } else {
+      $("#selectedPopularity").text("Birthday: " + responseJson.birthday);
+    }
+    if (responseJson.biography === "") {
+      $("#selectedDescription").text("No bio is currently available.");
+    } else {
+      $("#selectedDescription").text("Bio: " + responseJson.biography);
+    }
     if (responseJson.deathday === null) {
       $("#selectedRelease").text("Date of Death: Still Alive!");
     } else {
