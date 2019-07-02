@@ -364,8 +364,17 @@ function displayDetails(responseJson, mediaForm, mediaID) {
   if (!responseJson.poster_path && !responseJson.profile_path) {
     $("#selectedImage").attr("src", "missingImage.jpeg");
   }
+
+  hideResults();
 }
 
+function hideResults() {
+  $(".js-results").addClass("hidden");
+}
+
+function hideDetails() {
+  $(".js-details").addClass("hidden");
+}
 /*
  * Responsible for handling button click "Back to Results" which hides details and unhides results list
  */
@@ -493,6 +502,8 @@ function displayList() {
       $(".js-pickList").append(localStorage.getItem(localStorage.key(i)));
     }
     console.log("`displayList` ran");
+    hideDetails();
+    hideResults();
   });
 }
 
