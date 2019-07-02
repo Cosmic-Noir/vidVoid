@@ -28,6 +28,7 @@ function handleSuggest() {
     );
     resultList.addClass("hidden");
     getSuggestion();
+    hideList();
   });
 }
 
@@ -150,6 +151,7 @@ function handleSearchForm() {
     );
     hideBack();
     getMedia();
+    hideList();
   });
 }
 
@@ -455,22 +457,22 @@ function viewList() {
  */
 function addToList() {
   $(".addToList").click(function() {
-    // First select the entire <li> element and turn it into a storable string
-    let parent = $(this).parents("div");
-    let content = parent[0].innerHTML;
-    let stringContent = JSON.stringify(content);
-    console.log(stringContent);
+    // Select the parent <li> to store as a string and gain their data-mediaId value to use as a storage key
+    let listItem = $(this).parents("li");
+    console.log(listItem);
+    let htmlContent = listItem[0].outerHTML;
+    // let stringItem = JSON.stringify(listItem);
+    console.log(htmlContent);
+    console.log(typeof htmlContent);
 
-    // Next select the parent <li> and gain their data-mediaId value to use as a storage key
-    // let listItem = $(this).parents("li");
-    // console.log(listItem);
-    let storeKey = localStorage.length + 1;
-    console.log(storeKey);
+    let storeKey = listItem[0].console.log(storeKey);
 
     // Store the string value of the <li> with all media content
-    // localStorage.setItem(storeKey, content);
+    localStorage.setItem(storeKey, htmlContent);
     console.log(localStorage);
 
+    let test = localStorage.getItem(1);
+    console.log(test);
     console.log("`addToList` ran ");
     viewList();
   });
@@ -482,6 +484,10 @@ function addToList() {
 function displayList() {
   $("#js-viewList").click(function() {
     $(".js-pickList").removeClass("hidden");
+    $(".js-suggestion").addClass("hidden");
+    for (let i = 0; i < localStorage.length; i++) {
+      $(".js-pickList").append(localStorage.getItem(localStorage.key(i)));
+    }
 
     console.log("`displayList` ran");
   });
