@@ -26,9 +26,10 @@ function handleSuggest() {
     console.log(
       "`handleSuggest` has run due to 'Fill The Void' button being pressed"
     );
-    resultList.addClass("hidden");
+    $(".js-selectedList").addClass("hidden");
     getSuggestion();
     hideList();
+    viewList();
   });
 }
 
@@ -57,6 +58,7 @@ function unHideSuggestion() {
   $(".js-suggestion").removeClass("hidden");
   $(".js-search").addClass("hidden");
   $(".js-details").addClass("hidden");
+  $(".js-selectedList").addClass("hidden");
 }
 
 /*
@@ -107,6 +109,7 @@ function displaySuggestion(responseJson) {
   console.log(responseJson);
   unHideSuggestion();
   makePageRandom();
+  handleMissingPic(responseJson);
 }
 
 /*
@@ -130,6 +133,7 @@ function handleSearch() {
   $("#showSearch").click(function() {
     $(".js-search").removeClass("hidden");
     $(".js-suggestion").addClass("hidden");
+    $(".js-selectList").addClass("hidden");
   });
 }
 
@@ -260,12 +264,12 @@ function handleMissingPic(responseJson) {
  */
 function handleResultSelect(mediaForm) {
   $(".result").click(function() {
-    resultList.addClass("hidden");
     console.log("`handleResultSelect` ran and hid results list");
     $(".js-details").removeClass("hidden");
     let mediaID = $(this).attr("data-mediaId");
     getSingleResult(mediaID, mediaForm);
     handleBackToResults();
+    hideList();
   });
 }
 
@@ -445,9 +449,8 @@ Section handles storing selected objects in localStorage to display in personal 
  * Responsible for displaying "View My List" button if any exists
  */
 function viewList() {
-  if (localStorage.length > 1) {
+  if (localStorage.length > 0) {
     $("#js-viewList").removeClass("hidden");
-    console.log('`viewList` ran and unhid the "View My List" button');
   }
 }
 
@@ -465,31 +468,40 @@ function addToList() {
     console.log(htmlContent);
     console.log(typeof htmlContent);
 
-    let storeKey = listItem[0].console.log(storeKey);
+    let storeKey = listItem[0].attributes[1].value;
 
     // Store the string value of the <li> with all media content
-    localStorage.setItem(storeKey, htmlContent);
-    console.log(localStorage);
+    // Prevents duplicates
 
-    let test = localStorage.getItem(1);
-    console.log(test);
+    localStorage.setItem(storeKey, htmlContent);
+
+    console.log(localStorage);
     console.log("`addToList` ran ");
     viewList();
   });
 }
 
 /*
- * Responsible for displaying user's list in localStorage and converting from string to JSON object
+ * Responsible for displaying user's list in localStorage
  */
 function displayList() {
   $("#js-viewList").click(function() {
-    $(".js-pickList").removeClass("hidden");
+    $(".js-pickList").empty();
+    $(".js-selectList").removeClass("hidden");
     $(".js-suggestion").addClass("hidden");
     for (let i = 0; i < localStorage.length; i++) {
       $(".js-pickList").append(localStorage.getItem(localStorage.key(i)));
     }
-
     console.log("`displayList` ran");
+  });
+}
+
+/*
+ * Responsible for when user clicks "Hide List" button
+ */
+function handleHide() {
+  $("#js-hideList").click(function() {
+    hideList();
   });
 }
 
@@ -497,10 +509,12 @@ function displayList() {
  * Responsible for hiding localStorage list
  */
 function hideList() {
-  $("#js-hideList").click(function() {
-    $(".js-pickList").addClass("hidden");
-    console.log("`hideList` ran and hide picked list");
-  });
+  $(".js-selectList").addClass("hidden");
+  console.log("`hideList` ran and hid selectedList");
+}
+
+function revealRemove() {
+  $("#js-remove").removeClass("hidden");
 }
 
 /*
@@ -519,6 +533,7 @@ function clearList() {
   $("#js-clearList").click(function() {
     localStorage.clear();
     console.log("`clearList` ran and has cleared localStorage");
+    displayList();
   });
 }
 
@@ -538,6 +553,7 @@ function vidVoid() {
   clearList();
   displayList();
   handleBack();
+  handleHide();
   handleNext();
   handleSearchForm();
   handleSearch();
