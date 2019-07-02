@@ -492,7 +492,7 @@ function displayList() {
  */
 function hideList() {
   $("#js-hideList").click(function() {
-    $("#js-pickList").addClass("hidden");
+    $(".js-pickList").addClass("hidden");
     console.log("`hideList` ran and hide picked list");
   });
 }
@@ -536,6 +536,7 @@ function vidVoid() {
   handleSearch();
   handleSuggest();
   handleRemove();
+  hideList();
   viewList();
 
   console.log("VidVoid App Active");
