@@ -445,6 +445,7 @@ Section handles storing selected objects in localStorage to display in personal 
 function viewList() {
   if (localStorage.length > 1) {
     $("#js-viewList").removeClass("hidden");
+    console.log('`viewList` ran and unhid the "View My List" button');
   }
 }
 
@@ -454,17 +455,24 @@ function viewList() {
  */
 function addToList() {
   $(".addToList").click(function() {
+    // First select the entire <li> element and turn it into a storable string
     let parent = $(this).parents("div");
     let content = parent[0].innerHTML;
-    console.log(content);
     let stringContent = JSON.stringify(content);
     console.log(stringContent);
 
-    let listItem = $(this).parents("li");
-    console.log(listItem);
-    let storeKey = listItem[0].attributes[1].value;
+    // Next select the parent <li> and gain their data-mediaId value to use as a storage key
+    // let listItem = $(this).parents("li");
+    // console.log(listItem);
+    let storeKey = localStorage.length + 1;
     console.log(storeKey);
+
+    // Store the string value of the <li> with all media content
+    // localStorage.setItem(storeKey, content);
+    console.log(localStorage);
+
     console.log("`addToList` ran ");
+    viewList();
   });
 }
 
@@ -473,7 +481,9 @@ function addToList() {
  */
 function displayList() {
   $("#js-viewList").click(function() {
-    console.log("`displayList` ran but currently doesnt do anything");
+    $(".js-pickList").removeClass("hidden");
+
+    console.log("`displayList` ran");
   });
 }
 
@@ -501,7 +511,8 @@ function handleRemove() {
  */
 function clearList() {
   $("#js-clearClist").click(function() {
-    console.log("`clearList` ran but currently doesnt do anything");
+    localStorage.clear();
+    console.log("`clearList` ran and has cleared localStorage");
   });
 }
 
@@ -518,13 +529,13 @@ function emailList() {
 
 function vidVoid() {
   addToList();
+  displayList();
   handleBack();
   handleNext();
   handleSearchForm();
   handleSearch();
   handleSuggest();
   handleRemove();
-  displayList();
   viewList();
 
   console.log("VidVoid App Active");
