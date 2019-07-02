@@ -510,7 +510,7 @@ function handleRemove() {
  * Responsible for when user clicks "Remove From List" button and removes media item from localStorage
  */
 function clearList() {
-  $("#js-clearClist").click(function() {
+  $("#js-clearList").click(function() {
     localStorage.clear();
     console.log("`clearList` ran and has cleared localStorage");
   });
@@ -529,6 +529,7 @@ function emailList() {
 
 function vidVoid() {
   addToList();
+  clearList();
   displayList();
   handleBack();
   handleNext();
