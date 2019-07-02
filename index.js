@@ -459,9 +459,10 @@ function addToList() {
     console.log(content);
     let stringContent = JSON.stringify(content);
     console.log(stringContent);
+
     let listItem = $(this).parents("li");
     console.log(listItem);
-    let storeKey = listItem[0].attributes[1];
+    let storeKey = listItem[0].attributes[1].value;
     console.log(storeKey);
     console.log("`addToList` ran ");
   });
