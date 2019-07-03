@@ -110,6 +110,7 @@ function displaySuggestion(responseJson) {
   unHideSuggestion();
   makePageRandom();
   handleMissingPic(responseJson);
+  handleAddRemove(responseJson.results[randomSelect].id);
 }
 
 /*
@@ -270,6 +271,7 @@ function handleResultSelect(mediaForm) {
     getSingleResult(mediaID, mediaForm);
     handleBackToResults();
     hideList();
+    handleAddRemove(mediaID);
   });
 }
 
@@ -366,6 +368,7 @@ function displayDetails(responseJson, mediaForm, mediaID) {
   }
 
   hideResults();
+  handleAddRemove(mediaID);
 }
 
 function hideResults() {
@@ -489,6 +492,7 @@ function addToList() {
     console.log(localStorage);
     console.log("`addToList` ran ");
     viewList();
+    handleAddRemove(storeKey);
   });
 }
 
@@ -502,6 +506,8 @@ function displayList() {
     $(".js-suggestion").addClass("hidden");
     for (let i = 0; i < localStorage.length; i++) {
       $(".js-pickList").append(localStorage.getItem(localStorage.key(i)));
+      $(".addToList").addClass("hidden");
+      $(".remove").removeClass("hidden");
     }
     console.log("`displayList` ran");
     hideDetails();
@@ -526,15 +532,11 @@ function hideList() {
   console.log("`hideList` ran and hid selectedList");
 }
 
-function revealRemove() {
-  $("#js-remove").removeClass("hidden");
-}
-
 /*
  * Responsible for when user clicks "Remove From List" button and removes media item from localStorage
  */
 function handleRemove() {
-  $("#js-remove").click(function() {
+  $(".remove").click(function() {
     console.log("`handleRemove` ran but currently doesnt do anything");
   });
 }
@@ -564,7 +566,25 @@ function emailList() {
 /*
  * Responsible for hiding "Add to List" button and unhiding "Remove From List" button
  */
-function hideAdd() {}
+function handleAddRemove(mediaID) {
+  console.log("The mediaID used was : " + mediaID);
+  if (localStorage[mediaID]) {
+    console.log(
+      "The key existed in local storage so the remove button was revealed"
+    );
+    $(".addToList").addClass("hidden");
+    $(".remove").removeClass("hidden");
+  } else {
+    console.log("No match found, hides remove button and reveals add button");
+    $(".addToList").removeClass("hidden");
+    $(".remove").addClass("hidden");
+  }
+}
+
+/*
+ * Responsible for hiding any "Back To Results" button from items in pickLlist
+ */
+function hideBackToResults() {}
 
 /***^_^****/
 
