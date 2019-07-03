@@ -519,6 +519,8 @@ function displayList() {
     $(".remove").removeClass("hidden");
     console.log("`displayList` ran ");
   }
+  handleRemove();
+  hideBackToResults();
 }
 
 /*
