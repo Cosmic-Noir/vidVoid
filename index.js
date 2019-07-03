@@ -111,6 +111,7 @@ function displaySuggestion(responseJson) {
   makePageRandom();
   handleMissingPic(responseJson);
   handleAddRemove(responseJson.results[randomSelect].id);
+  // handleAddRemove(responseJson.results[randomSelect].id);
 }
 
 /*
@@ -499,20 +500,25 @@ function addToList() {
 /*
  * Responsible for displaying user's list in localStorage
  */
-function displayList() {
+function clickList() {
   $("#js-viewList").click(function() {
-    $(".js-pickList").empty();
-    $(".js-selectList").removeClass("hidden");
-    $(".js-suggestion").addClass("hidden");
-    for (let i = 0; i < localStorage.length; i++) {
-      $(".js-pickList").append(localStorage.getItem(localStorage.key(i)));
-      $(".addToList").addClass("hidden");
-      $(".remove").removeClass("hidden");
-    }
+    displayList();
     console.log("`displayList` ran");
     hideDetails();
     hideResults();
   });
+}
+
+function displayList() {
+  $(".js-pickList").empty();
+  $(".js-selectList").removeClass("hidden");
+  $(".js-suggestion").addClass("hidden");
+  for (let i = 0; i < localStorage.length; i++) {
+    $(".js-pickList").append(localStorage.getItem(localStorage.key(i)));
+    $(".addToList").addClass("hidden");
+    $(".remove").removeClass("hidden");
+    console.log("`displayList` ran ");
+  }
 }
 
 /*
@@ -537,7 +543,15 @@ function hideList() {
  */
 function handleRemove() {
   $(".remove").click(function() {
-    console.log("`handleRemove` ran but currently doesnt do anything");
+    let listItem = $(this).parents("li");
+    console.log(listItem);
+    let inputID = listItem[0].attributes[1].value;
+
+    console.log(
+      "`handleRemove` ran and this key from localStorage: " + inputID
+    );
+    localStorage.removeItem(inputID);
+    handleAddRemove(inputID);
   });
 }
 
@@ -591,7 +605,7 @@ function hideBackToResults() {}
 function vidVoid() {
   addToList();
   clearList();
-  displayList();
+  clickList();
   handleBack();
   handleHide();
   handleNext();
