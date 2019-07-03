@@ -460,6 +460,8 @@ Section handles storing selected objects in localStorage to display in personal 
 function viewList() {
   if (localStorage.length > 0) {
     $("#js-viewList").removeClass("hidden");
+  } else {
+    $("#js-viewList").addClass("hidden");
   }
 }
 
@@ -544,6 +546,8 @@ function clearList() {
   $("#js-clearList").click(function() {
     localStorage.clear();
     console.log("`clearList` ran and has cleared localStorage");
+    hideList();
+    viewList();
     displayList();
   });
 }
@@ -556,6 +560,11 @@ function emailList() {
     console.log("`emailList` ran but currently doesnt do anything");
   });
 }
+
+/*
+ * Responsible for hiding "Add to List" button and unhiding "Remove From List" button
+ */
+function hideAdd() {}
 
 /***^_^****/
 
