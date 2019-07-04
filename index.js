@@ -478,6 +478,7 @@ function addToList() {
     // Select the parent <li> to store as a string and gain their data-mediaId value to use as a storage key
     let listItem = $(this).parents("li");
     console.log(listItem);
+
     let htmlContent = listItem[0].outerHTML;
     // let stringItem = JSON.stringify(listItem);
     console.log(htmlContent);
@@ -517,10 +518,11 @@ function displayList() {
     $(".js-pickList").append(localStorage.getItem(localStorage.key(i)));
     $(".addToList").addClass("hidden");
     $(".remove").removeClass("hidden");
+    // hideBackToResults(localStorage.getItem(localStorage.key(i)));
+
     console.log("`displayList` ran ");
   }
   handleRemove();
-  hideBackToResults();
 }
 
 /*
@@ -548,9 +550,12 @@ function handleRemove() {
     let listItem = $(this).parents("li");
     console.log(listItem);
     let inputID = listItem[0].attributes[1].value;
+    // let extraButton = listItem[0].children[6];
+    // console.log(extraButton);
+    // extraButton.remove();
     listItem.addClass("hidden");
     console.log(
-      "`handleRemove` ran and this key from localStorage: " + inputID
+      "`handleRemove` ran and removed this key from localStorage: " + inputID
     );
     localStorage.removeItem(inputID);
   });
@@ -597,9 +602,13 @@ function handleAddRemove(mediaID) {
 }
 
 /*
- * Responsible for hiding any "Back To Results" button from items in pickLlist
+ * Responsible for removing the "Back To Results" button from stored <li>
  */
-function hideBackToResults() {}
+// function hideBackToResults(listItem) {
+//   // let buttonToRemove = listItem[0].children[6];
+//   console.log(buttonToRemove);
+//   buttonToRemove.remove();
+// }
 
 /***^_^****/
 
