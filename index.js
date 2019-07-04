@@ -548,12 +548,11 @@ function handleRemove() {
     let listItem = $(this).parents("li");
     console.log(listItem);
     let inputID = listItem[0].attributes[1].value;
-
+    listItem.addClass("hidden");
     console.log(
       "`handleRemove` ran and this key from localStorage: " + inputID
     );
     localStorage.removeItem(inputID);
-    handleAddRemove(inputID);
   });
 }
 
