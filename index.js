@@ -142,6 +142,7 @@ function handleSearch() {
     $(".js-search").removeClass("hidden");
     $(".js-suggestion").addClass("hidden");
     $(".js-selectList").addClass("hidden");
+    hideDetails();
   });
 }
 
