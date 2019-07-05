@@ -27,6 +27,7 @@ function handleSuggest() {
       "`handleSuggest` has run due to 'Fill The Void' button being pressed"
     );
     $(".js-selectedList").addClass("hidden");
+    $(".suggest").removeClass("hidden");
     getSuggestion();
     hideList();
     viewList();
@@ -78,6 +79,10 @@ function displaySuggestion(responseJson) {
       responseJson.results[randomSelect].poster_path
     }`
   );
+
+  if (!responseJson.results[randomSelect].poster_path) {
+    $("#suggestedImage").attr("src", "missingImage.jpeg");
+  }
 
   $("#suggestedTitle").text(
     responseJson.results[randomSelect].original_title ||
@@ -302,6 +307,8 @@ function getSingleResult(mediaID, mediaForm) {
  * Responsible for handling single media response and displaying more details about selected media
  */
 function displayDetails(responseJson, mediaForm, mediaID) {
+  $(".backResults").removeClass("hidden");
+
   $("#js-singleDetail").attr("data-meidaId", `${mediaID}`);
 
   $("#selectedImage").attr(
@@ -384,7 +391,7 @@ function hideDetails() {
  */
 function handleBackToResults() {
   // Unhides the results div and hides the details div
-  $("#backResults").click(function() {
+  $(".backResults").click(function() {
     $(".js-details").addClass("hidden");
     resultList.removeClass("hidden");
     console.log("`handleBackToResults` ran");
@@ -517,6 +524,8 @@ function displayList() {
   for (let i = 0; i < localStorage.length; i++) {
     $(".js-pickList").append(localStorage.getItem(localStorage.key(i)));
     $(".addToList").addClass("hidden");
+    // target the "Back To Results" button to remove it
+    $(".backResults").addClass("hidden");
     $(".remove").removeClass("hidden");
     // hideBackToResults(localStorage.getItem(localStorage.key(i)));
 
@@ -550,10 +559,14 @@ function handleRemove() {
     let listItem = $(this).parents("li");
     console.log(listItem);
     let inputID = listItem[0].attributes[1].value;
-    // let extraButton = listItem[0].children[6];
-    // console.log(extraButton);
-    // extraButton.remove();
-    listItem.addClass("hidden");
+    console.log(listItem[0].parentElement);
+    // listItem.addClass("hidden");
+    if (`js-pickList:contains(${listItem})`) {
+      listItem.addClass("hidden");
+      console.log(
+        "This list item was a chlid of selectList and so it was hidden"
+      );
+    }
     console.log(
       "`handleRemove` ran and removed this key from localStorage: " + inputID
     );
