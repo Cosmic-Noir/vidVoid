@@ -128,7 +128,7 @@ function makePageRandom() {
   console.log("`makePageRandom` ran and the page is now: " + page);
 }
 
-/**
+/** 
  * 
 This sections handles the specific media search portion that returns a list of matching results.
  *
