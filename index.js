@@ -30,6 +30,7 @@ function handleSuggest() {
     $(".suggest").removeClass("hidden");
     getSuggestion();
     hideList();
+    hideResults();
     viewList();
   });
 }
@@ -556,20 +557,27 @@ function hideList() {
  */
 function handleRemove() {
   $(".remove").click(function() {
-    let listItem = $(this).parents("li");
+    let listItem = $(this).closest("li");
     console.log(listItem);
     let inputID = listItem[0].attributes[1].value;
     console.log(listItem[0].parentElement);
-    // listItem.addClass("hidden");
-    if (`js-pickList:contains(${listItem})`) {
-      listItem.addClass("hidden");
-      console.log(
-        "This list item was a chlid of selectList and so it was hidden"
-      );
-    }
+
     console.log(
       "`handleRemove` ran and removed this key from localStorage: " + inputID
     );
+
+    if (listItem.parents(".js-selectList").length == 1) {
+      // YES, the child element is inside the parent
+      console.log('the selected li is a child of ".js-selectList"');
+      listItem.addClass("hidden");
+    } else {
+      // NO, it is not inside
+      console.log('the selected li is not a chld of ".js-selectList"');
+      handleAddRemove();
+    }
+
+    // NO, it is not inside
+
     localStorage.removeItem(inputID);
   });
 }
