@@ -99,7 +99,11 @@ function displaySuggestion(responseJson) {
         responseJson.results[randomSelect].first_air_date)
   );
 
-  $("#suggestedDesc").text(responseJson.results[randomSelect].overview);
+  if (!responseJson.results[randomSelect].overview) {
+    $("#suggestedDesc").text("No description available at this time.");
+  } else {
+    $("#suggestedDesc").text(responseJson.results[randomSelect].overview);
+  }
 
   console.log(
     "`displaySuggestion` ran and suggested the title: " +
@@ -585,8 +589,6 @@ function handleRemove() {
       console.log('the selected li is not a chld of ".js-selectList"');
       handleAddRemove();
     }
-
-    // NO, it is not inside
 
     localStorage.removeItem(inputID);
   });
