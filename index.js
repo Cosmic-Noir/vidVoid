@@ -14,7 +14,7 @@ const nextButton = $("#next");
 
 /**
  * 
-This section handles the "Fill the Void" button, generating a single, random tv or movie suggestion.
+This section handles the "Fill the Void" button, generating a single, random tv or movie suggestion
  * 
 **/
 
@@ -24,10 +24,8 @@ This section handles the "Fill the Void" button, generating a single, random tv 
 function handleSuggest() {
   $("#genRandom").click(function() {
     console.log(
-      "`handleSuggest` has run due to 'Fill The Void' button being pressed"
+      "`handleSuggest` ran due to 'Fill The Void' button being pressed"
     );
-    $(".js-selectedList").addClass("hidden");
-    $(".suggest").removeClass("hidden");
     getSuggestion();
     hideList();
     hideResults();
@@ -54,19 +52,20 @@ function getSuggestion() {
 }
 
 /*
- * Responsible for unhiding the suggestion section and hiding the search area along with search list
+ * Responsible for unhiding the suggestion section
  */
-function unHideSuggestion() {
-  $(".js-suggestion").removeClass("hidden");
-  $(".js-search").addClass("hidden");
-  $(".js-details").addClass("hidden");
-  $(".js-selectedList").addClass("hidden");
+function unHideSuggestion() {}
+
+function hideSuggestion() {
+  $(".js-suggestion").addClass("hidden");
 }
 
 /*
  * Responsible for selecting a random result from the returned results array and displaying on DOM
  */
 function displaySuggestion(responseJson) {
+  $(".js-suggestion").removeClass("hidden");
+
   let randomSelect = Math.floor(Math.random() * 20);
 
   $(".suggest").attr(
@@ -74,15 +73,15 @@ function displaySuggestion(responseJson) {
     `${responseJson.results[randomSelect].id}`
   );
 
-  $("#suggestedImage").attr(
-    "src",
-    `http://image.tmdb.org/t/p/w185${
-      responseJson.results[randomSelect].poster_path
-    }`
-  );
-
   if (!responseJson.results[randomSelect].poster_path) {
     $("#suggestedImage").attr("src", "missingImage.jpeg");
+  } else {
+    $("#suggestedImage").attr(
+      "src",
+      `http://image.tmdb.org/t/p/w185${
+        responseJson.results[randomSelect].poster_path
+      }`
+    );
   }
 
   $("#suggestedTitle").text(
@@ -91,7 +90,7 @@ function displaySuggestion(responseJson) {
   );
 
   $("#suggestedRating").text(
-    "Average Rating: " + responseJson.results[randomSelect].vote_average
+    "Average Rating: " + responseJson.results[randomSelect].vote_average + "/10"
   );
 
   $("#suggestedRelease").text(
@@ -113,9 +112,10 @@ function displaySuggestion(responseJson) {
   );
   console.log("`displaySuggestion` ran with the returned object: ");
   console.log(responseJson);
-  unHideSuggestion();
+  hideDetails();
+  hideList();
+  hideResults();
   makePageRandom();
-  handleMissingPic(responseJson);
   handleAddRemove(responseJson.results[randomSelect].id);
   // handleAddRemove(responseJson.results[randomSelect].id);
 }
@@ -139,9 +139,10 @@ This sections handles the specific media search portion that returns a list of m
  */
 function handleSearch() {
   $("#showSearch").click(function() {
+    $("#js-searchForm").removeClass("hidden");
     $(".js-search").removeClass("hidden");
-    $(".js-suggestion").addClass("hidden");
-    $(".js-selectList").addClass("hidden");
+    hideSuggestion();
+    hideList();
     hideDetails();
   });
 }
@@ -269,7 +270,7 @@ function handleMissingPic(responseJson) {
  **/
 
 /*
- * Responsible for when any media <li> result is clicked, hides the results list, and unhides the details section
+ * Responsible for when any media <li> result is clicked and unhides the details section
  */
 function handleResultSelect(mediaForm) {
   $(".result").click(function() {
@@ -313,11 +314,15 @@ function displayDetails(responseJson, mediaForm, mediaID) {
 
   $(".js-singleDetail").attr("data-meidaId", `${mediaID}`);
 
-  $("#selectedImage").attr(
-    "src",
-    `http://image.tmdb.org/t/p/w185${responseJson.poster_path ||
-      responseJson.profile_path}`
-  );
+  if (!responseJson.poster_path && !responseJson.profile_path) {
+    $("#selectedImage").attr("src", "missingImage.jpeg");
+  } else {
+    $("#selectedImage").attr(
+      "src",
+      `http://image.tmdb.org/t/p/w185${responseJson.poster_path ||
+        responseJson.profile_path}`
+    );
+  }
 
   $("#selectedTitle").text(
     responseJson.original_title ||
@@ -325,11 +330,12 @@ function displayDetails(responseJson, mediaForm, mediaID) {
       responseJson.name
   );
 
+  $("#selectedDescription").text(responseJson.overview);
+
+  $("#selectedPopularity").text("Voter Average: " + responseJson.vote_average);
+
   if (mediaForm === "movie") {
     $("#selectedRelease").text("Release Date: " + responseJson.release_date);
-    $("#selectedPopularity").text(
-      "Voter Average: " + responseJson.vote_average
-    );
     if (responseJson.tagline) {
       $("#selectedTagline").text("Tagline: " + responseJson.tagline);
     } else {
@@ -339,13 +345,12 @@ function displayDetails(responseJson, mediaForm, mediaID) {
     $("#selectedRelease").text(
       "First Air-date: " + responseJson.first_air_date
     );
-    $("#selectedPopularity").text(
-      "Voter Average: " + responseJson.vote_average
-    );
+
     if (responseJson.homepage) {
       $("#selectedTagline").text("Homepage: " + responseJson.homepage);
     }
   } else {
+    // mediaForm === actor/actress
     $("#selectedTagline").text("Popularity: " + responseJson.popularity);
     if (responseJson.birthday === null) {
       $("#selectedPopularity").text("Birthday: Unknown");
@@ -364,7 +369,6 @@ function displayDetails(responseJson, mediaForm, mediaID) {
     }
   }
 
-  $("#selectedDescription").text(responseJson.overview);
   console.log(
     "`displayDetails` ran and provided details on: " +
       (responseJson.name ||
@@ -372,31 +376,32 @@ function displayDetails(responseJson, mediaForm, mediaID) {
         responseJson.original_title)
   );
 
-  // If the response doesn't have a pic, replace with missingImage
-  if (!responseJson.poster_path && !responseJson.profile_path) {
-    $("#selectedImage").attr("src", "missingImage.jpeg");
-  }
-
   hideResults();
   handleAddRemove(mediaID);
 }
 
+/*
+ * Responsible for hiding js-resultList
+ */
 function hideResults() {
   $(".js-results").addClass("hidden");
+  $("#js-searchForm").addClass("hidden");
 }
 
+/*
+ * Responsible for hiding js-singleDetail
+ */
 function hideDetails() {
   $(".js-details").addClass("hidden");
 }
+
 /*
- * Responsible for handling button click "Back to Results" which hides details and unhides results list
+ * Responsible for handling button click "Back to Results" unhides results list
  */
 function handleBackToResults() {
-  // Unhides the results div and hides the details div
   $(".backResults").click(function() {
-    $(".js-details").addClass("hidden");
     resultList.removeClass("hidden");
-    console.log("`handleBackToResults` ran");
+    hideDetails();
   });
 }
 
@@ -463,7 +468,7 @@ function trackPage() {
 
 /*
 *
-Section handles storing selected objects in localStorage to display in personal list  
+Section handles storing selected objects in localStorage to display in pickList  
 *
 */
 
@@ -489,14 +494,13 @@ function addToList() {
     console.log(listItem);
 
     let htmlContent = listItem[0].outerHTML;
-    // let stringItem = JSON.stringify(listItem);
-    console.log(htmlContent);
-    console.log(typeof htmlContent);
+
+    // console.log(htmlContent);
+    // console.log(typeof htmlContent);
 
     let storeKey = listItem[0].attributes[1].value;
 
     // Store the string value of the <li> with all media content
-    // Prevents duplicates
 
     localStorage.setItem(storeKey, htmlContent);
 
@@ -508,7 +512,7 @@ function addToList() {
 }
 
 /*
- * Responsible for displaying user's list in localStorage
+ * Responsible for when user clicks "View My List" button
  */
 function clickList() {
   $("#js-viewList").click(function() {
@@ -520,10 +524,13 @@ function clickList() {
   });
 }
 
+/*
+ * Responsible for displaying user's list in localStorage
+ */
 function displayList() {
   $(".js-pickList").empty();
   $(".js-selectList").removeClass("hidden");
-  $(".js-suggestion").addClass("hidden");
+
   for (let i = 0; i < localStorage.length; i++) {
     $(".js-pickList").append(localStorage.getItem(localStorage.key(i)));
     $(".addToList").addClass("hidden");
@@ -535,6 +542,7 @@ function displayList() {
     console.log("`displayList` ran ");
   }
   handleRemove();
+  hideSuggestion();
 }
 
 /*
@@ -642,7 +650,7 @@ function handleEmail() {
 
   $("#emailContent").attr(
     "href",
-    `mailto:?subject=VidVoid Pick List&body=${totalContent}`
+    "mailto:?subject=VidVoid Pick List&body=<h1>HI!!!</h1>"
   );
 }
 
