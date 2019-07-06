@@ -8,23 +8,29 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <header></header>
-    <main>
-      <section class="options">
-        <button id="genRandom">Fill The Void</button>
-        <button id="showSearch">Search The Void</button>
-        <button id="js-viewList" class="hidden">View My List</button>
-      </section>
+    <header>
+      <h1>VidVoid</h1>
+      <h2>Fill the video-void within you and be provided an infinite number of media suggestions, or search for a specific title by Searching The Void. Choose any and add them to your personal list.</h2>
+    </header>
+    <main class="flex-container">
+      <div class="flex-container">
+          <section class="options">
+              <button id="genRandom">Fill The Void</button>
+              <button id="showSearch">Search The Void</button>
+              <button id="js-viewList" class="hidden">View My List</button>
+            </section>
+      </div>
       <div class="hidden js-suggestion">
-        <li class="suggest"><img src="" alt="Suggested movie image" id="suggestedImage">
+        <section class="flex-container ">
+          <li class="suggest"><img src="" alt="Suggested movie image" id="suggestedImage">
           <h3 id="suggestedTitle">SUGGESTED MEDIA TITLE</h3>
           <h4 id="suggestedRating">Average Rating: </h4>
           <h4 id="suggestedRelease">Release Date: </h4>
           <p id="suggestedDesc">Description: </p>
           <button class="addToList">Add to List</button>
           <button class="hidden remove">Remove From List</button></li>
-      </div>
-      <section class="js-search hidden">
+        </section></div>
+      <div class="flex-container"><section class="js-search hidden">
         <form action="" id="js-searchForm">
           <label for="mediaSearch">Find:</label>
           <select id="media" name="mediaSearch">
@@ -38,24 +44,25 @@
             placeholder="Search..."
             id="js-query"
           />
-          <button type="submit">Fill the Void</button>
+          <button type="submit">Search...</button>
         </form>
-      </section>
+      </section></div>
       <div class="flex-container">
-        <div class="hidden js-results">
+        <section class="hidden js-results">
           <h2 class="hidden js-resultCounter">
             Results: <span id="js-resultNum"></span> total matching results
             found.
           </h2>
+          <h3>Click for details</h3>
           <ul id="js-resultList"></ul>
           <button id="next" class="hidden">Next</button>
           <h3 id="pageNum">Page:</h3>
           <button id="back" class="hidden">Back</button>
-        </div>
+        </section>
       </div>
       <div class="flex-container">
         <div class="hidden js-details">
-          <li id="js-singleDetail"><h2 id="selectedTitle">Selected Title</h2>
+          <li class="js-singleDetail"><h2 id="selectedTitle">Selected Title</h2>
             <img src="" alt="Selected Result Image" id="selectedImage">
             <h3 id="selectedTagline"></h3>
             <h4 id="selectedPopularity">Popularity:</h3>
@@ -66,8 +73,8 @@
             <button class="hidden remove">Remove From List</button></li>
         </div>
       </div>
-      <div class="flex-container">
-        <div class="js-selectList hidden">
+      <div class="js-selectList hidden">
+        <div class="flex-container">
             <button id="js-hideList">Hide List</button>
             <a id="emailContent" href=""><button id="js-emailList">Email List</button></a>
             <button id="js-clearList">Clear List</button>

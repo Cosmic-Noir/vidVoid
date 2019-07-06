@@ -311,7 +311,7 @@ function getSingleResult(mediaID, mediaForm) {
 function displayDetails(responseJson, mediaForm, mediaID) {
   $(".backResults").removeClass("hidden");
 
-  $("#js-singleDetail").attr("data-meidaId", `${mediaID}`);
+  $(".js-singleDetail").attr("data-meidaId", `${mediaID}`);
 
   $("#selectedImage").attr(
     "src",
@@ -624,12 +624,21 @@ function handleAddRemove(mediaID) {
   }
 }
 
+/*
+ * Responsible for updating "body" content of email list
+ */
 function handleEmail() {
-  let totalContent = "";
-  for (let i = 0; i < localStorage.length; i++) {
+  let totalContent;
+  for (let i = 1; i < localStorage.length + 1; i++) {
     let content = localStorage.getItem(localStorage.key(i));
     totalContent += content;
   }
+
+  let formatContent = document
+    .createRange()
+    .createContextualFragment(totalContent);
+
+  console.log(formatContent);
 
   $("#emailContent").attr(
     "href",
