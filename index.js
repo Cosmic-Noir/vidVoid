@@ -614,7 +614,7 @@ function handleEmail() {
     event.preventDefault();
 
     let totalContent;
-    for (let i = 1; i < localStorage.length + 1; i++) {
+    for (let i = 0; i < localStorage.length; i++) {
       let content = localStorage.getItem(localStorage.key(i));
       totalContent += content;
       console.log(totalContent);
@@ -643,12 +643,15 @@ function handleEmail() {
     fetch("https://api.emailjs.com/api/v1.0/email/send", options)
       .then(response => {
         if (response.ok) {
+          alert("Email sent to requested address!");
+          console.log("`handleEmail` ran and sent to email: " + emailAddress);
+        } else {
+          return response.text().then(text => Promise.reject(text));
         }
-        throw new Error(alert(response.statusText));
       })
-      .then(() => console.log("response successful, email should have sent"));
-
-    console.log("`handleEmail` ran and sent to email: " + emailAddress);
+      .catch(error => {
+        console.log("Oops... " + error);
+      });
   });
 }
 
