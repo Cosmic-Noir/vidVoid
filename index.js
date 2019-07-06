@@ -52,10 +52,8 @@ function getSuggestion() {
 }
 
 /*
- * Responsible for unhiding the suggestion section
+ * Responsible for hiding the suggestion section
  */
-function unHideSuggestion() {}
-
 function hideSuggestion() {
   $(".js-suggestion").addClass("hidden");
 }
@@ -99,7 +97,11 @@ function displaySuggestion(responseJson) {
         responseJson.results[randomSelect].first_air_date)
   );
 
-  $("#suggestedDesc").text(responseJson.results[randomSelect].overview);
+  if (!responseJson.results[randomSelect].overview) {
+    $("#suggestedDesc").text("No description available at this time.");
+  } else {
+    $("#suggestedDesc").text(responseJson.results[randomSelect].overview);
+  }
 
   console.log(
     "`displaySuggestion` ran and suggested the title: " +
@@ -518,7 +520,6 @@ function clickList() {
   $("#js-viewList").click(function() {
     displayList();
     console.log("`displayList` ran");
-    handleEmail();
     hideDetails();
     hideResults();
   });
@@ -586,8 +587,6 @@ function handleRemove() {
       handleAddRemove();
     }
 
-    // NO, it is not inside
-
     localStorage.removeItem(inputID);
   });
 }
@@ -608,9 +607,51 @@ function clearList() {
 /*
  * Responsible for creating e-mail with media list ready for e-mail
  */
-function emailList() {
+function handleEmail() {
+  let emailAddress;
   $("#js-emailList").click(function() {
-    console.log("`emailList` ran but currently doesnt do anything");
+    emailAddress = $("#toEmailAddress").val();
+    event.preventDefault();
+
+    let totalContent;
+    for (let i = 0; i < localStorage.length; i++) {
+      let content = localStorage.getItem(localStorage.key(i));
+      totalContent += content;
+      console.log(totalContent);
+    }
+
+    let params = {
+      user_id: "user_NbIPmNUvbtkVqjSpN62Vs",
+      service_id: "gmail",
+      template_id: "vidvoid_email",
+      template_params: {
+        emailAddress: emailAddress,
+        content: totalContent
+      }
+    };
+
+    let headers = {
+      "Content-type": "application/json"
+    };
+
+    let options = {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(params)
+    };
+
+    fetch("https://api.emailjs.com/api/v1.0/email/send", options)
+      .then(response => {
+        if (response.ok) {
+          alert("Email sent to requested address!");
+          console.log("`handleEmail` ran and sent to email: " + emailAddress);
+        } else {
+          return response.text().then(text => Promise.reject(text));
+        }
+      })
+      .catch(error => {
+        console.log("Oops... " + error);
+      });
   });
 }
 
@@ -635,24 +676,21 @@ function handleAddRemove(mediaID) {
 /*
  * Responsible for updating "body" content of email list
  */
-function handleEmail() {
-  let totalContent;
-  for (let i = 1; i < localStorage.length + 1; i++) {
-    let content = localStorage.getItem(localStorage.key(i));
-    totalContent += content;
-  }
+// function handleEmail() {
 
-  let formatContent = document
-    .createRange()
-    .createContextualFragment(totalContent);
+//   let formatContent = document
+//     .createRange()
+//     .createContextualFragment(totalContent);
 
-  console.log(formatContent);
+//   console.log(formatContent);
 
-  $("#emailContent").attr(
-    "href",
-    "mailto:?subject=VidVoid Pick List&body=<h1>HI!!!</h1>"
-  );
-}
+//   let htmlString = "<html><head></head><body><h1>Hello</h1></body></html>";
+
+//   $("#emailContent").attr(
+//     "href",
+//     `mailto:?subject=VidVoid Pick List&body=${htmlString}`
+//   );
+// }
 
 /***^_^****/
 

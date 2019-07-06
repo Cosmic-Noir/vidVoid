@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>VidVoid Home Page</title>
     <link rel="stylesheet" href="index.css" />
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("user_NbIPmNUvbtkVqjSpN62Vs");
+   })();
+</script>
   </head>
   <body>
     <header>
@@ -75,8 +81,10 @@
       </div>
       <div class="js-selectList hidden">
         <div class="flex-container">
+            
+            <input type="email" placeholder="yourEmail@Address.com" id="toEmailAddress"></input>
+            <button id="js-emailList">Email List</button>
             <button id="js-hideList">Hide List</button>
-            <a id="emailContent" href=""><button id="js-emailList">Email List</button></a>
             <button id="js-clearList">Clear List</button>
           <ul class="js-pickList"></ul>
         </div>
