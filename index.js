@@ -625,10 +625,15 @@ function handleAddRemove(mediaID) {
 }
 
 function handleEmail() {
-  let content = localStorage;
+  let totalContent = "";
+  for (let i = 0; i < localStorage.length; i++) {
+    let content = localStorage.getItem(localStorage.key(i));
+    totalContent += content;
+  }
+
   $("#emailContent").attr(
     "href",
-    `mailto:?subject=VidVoid Pick List&body=${content}`
+    `mailto:?subject=VidVoid Pick List&body=${totalContent}`
   );
 }
 
