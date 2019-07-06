@@ -514,6 +514,7 @@ function clickList() {
   $("#js-viewList").click(function() {
     displayList();
     console.log("`displayList` ran");
+    handleEmail();
     hideDetails();
     hideResults();
   });
@@ -623,14 +624,13 @@ function handleAddRemove(mediaID) {
   }
 }
 
-/*
- * Responsible for removing the "Back To Results" button from stored <li>
- */
-// function hideBackToResults(listItem) {
-//   // let buttonToRemove = listItem[0].children[6];
-//   console.log(buttonToRemove);
-//   buttonToRemove.remove();
-// }
+function handleEmail() {
+  let content = localStorage;
+  $("#emailContent").attr(
+    "href",
+    `mailto:?subject=VidVoid Pick List&body=${content}`
+  );
+}
 
 /***^_^****/
 
@@ -639,6 +639,7 @@ function vidVoid() {
   clearList();
   clickList();
   handleBack();
+  handleEmail();
   handleHide();
   handleNext();
   handleSearchForm();
