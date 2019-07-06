@@ -61,3 +61,7 @@ ul {
   padding: 5px;
   width: 100%;
 }
+
+.js-resultCounter {
+  color: white;
+}
