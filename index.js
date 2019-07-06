@@ -617,6 +617,7 @@ function handleEmail() {
     for (let i = 1; i < localStorage.length + 1; i++) {
       let content = localStorage.getItem(localStorage.key(i));
       totalContent += content;
+      console.log(totalContent);
     }
 
     let params = {
@@ -625,7 +626,7 @@ function handleEmail() {
       template_id: "vidvoid_email",
       template_params: {
         emailAddress: emailAddress,
-        totalcontent: totalContent
+        content: totalContent
       }
     };
 
@@ -643,7 +644,7 @@ function handleEmail() {
       .then(response => {
         if (response.ok) {
         }
-        throw new Error(response.statusText);
+        throw new Error(alert(response.statusText));
       })
       .then(() => console.log("response successful, email should have sent"));
 
