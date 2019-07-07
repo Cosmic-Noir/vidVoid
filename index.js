@@ -650,7 +650,7 @@ function handleEmail() {
         }
       })
       .catch(error => {
-        console.log("Oops... " + error);
+        alert("Please enter a valid e-mail address, error: " + error);
       });
   });
 }
@@ -672,25 +672,6 @@ function handleAddRemove(mediaID) {
     $(".remove").addClass("hidden");
   }
 }
-
-/*
- * Responsible for updating "body" content of email list
- */
-// function handleEmail() {
-
-//   let formatContent = document
-//     .createRange()
-//     .createContextualFragment(totalContent);
-
-//   console.log(formatContent);
-
-//   let htmlString = "<html><head></head><body><h1>Hello</h1></body></html>";
-
-//   $("#emailContent").attr(
-//     "href",
-//     `mailto:?subject=VidVoid Pick List&body=${htmlString}`
-//   );
-// }
 
 /***^_^****/
 
