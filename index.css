@@ -13,7 +13,7 @@ body {
 }
 
 button {
-  /* background-color: hsla(300, 50%, 50%, 0.5); */
+  background-color: hsla(300, 50%, 50%, 0.5);
   border-color: black;
   border-radius: 30px;
   margin: 5px;
@@ -21,7 +21,7 @@ button {
 }
 
 header {
-  /* background-color: hsla(300, 50%, 50%, 0.5); */
+  background-color: hsla(300, 50%, 50%, 0.5);
   border-radius: 30px;
   color: hsla(0, 0%, 0%, 0.9);
   max-width: 500px;
@@ -37,7 +37,7 @@ img {
 }
 
 li {
-  /* background-color: hsla(300, 50%, 50%, 0.5); */
+  background-color: hsla(300, 50%, 50%, 0.5);
   border: 1px solid black;
   border-radius: 30px;
   padding: 10px;
@@ -63,6 +63,7 @@ ul {
   width: 100%;
 }
 
-.js-resultCounter {
-  /* color: white; */
+.js-resultCounter,
+#pageNum {
+  color: white;
 }

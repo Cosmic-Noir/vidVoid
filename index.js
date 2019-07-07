@@ -605,7 +605,7 @@ function clearList() {
 }
 
 /*
- * Responsible for creating e-mail with media list ready for e-mail
+ * Responsible for creating e-mail with media list ready for e-mail by first creating the html string of content, and then snipping the buttons out of each substring.
  */
 function handleEmail() {
   let emailAddress;
@@ -613,12 +613,29 @@ function handleEmail() {
     emailAddress = $("#toEmailAddress").val();
     event.preventDefault();
 
-    let totalContent;
+    let totalContent = "<h2>Your personal VidVoid list:</h2>";
     for (let i = 0; i < localStorage.length; i++) {
       let content = localStorage.getItem(localStorage.key(i));
       totalContent += content;
-      console.log(totalContent);
+      totalContent = totalContent.replace(
+        `<button class="backResults">Back to Results</button>`,
+        ""
+      );
+      totalContent = totalContent.replace(
+        `<button class="addToList">Add to List</button>`,
+        ""
+      );
+      totalContent = totalContent.replace(
+        `<button class="hidden remove">Remove From List</button>`,
+        ""
+      );
+      totalContent = totalContent.replace(
+        `<button class="remove hidden">Remove From List</button>`,
+        ""
+      );
     }
+
+    console.log(totalContent);
 
     let params = {
       user_id: "user_NbIPmNUvbtkVqjSpN62Vs",
