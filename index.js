@@ -130,6 +130,15 @@ function makePageRandom() {
   console.log("`makePageRandom` ran and the page is now: " + page);
 }
 
+/*
+ * Responsible for when user clicks "Next Suggestion" button
+ */
+function nextSuggestion() {
+  $(".nextSugg").click(() => {
+    getSuggestion();
+  });
+}
+
 /** 
  * 
 This sections handles the specific media search portion that returns a list of matching results.
@@ -718,6 +727,7 @@ function vidVoid() {
   handleRemove();
   hideList();
   hideOrFlex();
+  nextSuggestion(); // May need to be moved
   viewList();
 
   console.log("VidVoid App Active");
