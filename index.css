@@ -16,7 +16,7 @@ button {
   background-color: hsla(332, 88.7%, 45.1%, 0.7);
   border: none;
   border-radius: 30px;
-  display: block;
+  /* display: block; */
   margin: 5px;
   padding: 5px;
   width: 100%;
@@ -55,6 +55,8 @@ ul {
   list-style-type: none;
 }
 
+/* Styled by Class */
+
 .hidden {
   display: none;
 }
@@ -77,4 +79,11 @@ ul {
 
 #vidVoid {
   color: hsl(282, 68.2%, 53.1%);
+}
+
+@media screen and (min-width: 400px) {
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+  }
 }
