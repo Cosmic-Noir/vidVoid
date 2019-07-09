@@ -57,6 +57,7 @@ function getSuggestion() {
  */
 function hideSuggestion() {
   $(".js-suggestion").addClass("hidden");
+  hideOrFlex();
 }
 
 /*
@@ -244,8 +245,9 @@ function displayResults(responseJson) {
 
   handleMissingPic(responseJson);
   handleResultSelect(mediaForm);
-  showNext(responseJson);
   hideBack(responseJson);
+  hideOrFlex();
+  showNext(responseJson);
   trackPage();
 }
 
@@ -387,6 +389,7 @@ function displayDetails(responseJson, mediaForm, mediaID) {
 function hideResults() {
   $(".js-results").addClass("hidden");
   $("#js-searchForm").addClass("hidden");
+  hideOrFlex();
 }
 
 /*
@@ -394,6 +397,7 @@ function hideResults() {
  */
 function hideDetails() {
   $(".js-details").addClass("hidden");
+  hideOrFlex();
 }
 
 /*
@@ -689,6 +693,15 @@ function handleAddRemove(mediaID) {
   }
 }
 
+function hideOrFlex() {
+  console.log($("li").classList);
+  if ($("li").hasClass("hidden")) {
+    li.removeClass("flex-container");
+  } else {
+    $("li").addClass("flex-container");
+  }
+}
+
 /***^_^****/
 
 function vidVoid() {
@@ -704,6 +717,7 @@ function vidVoid() {
   handleSuggest();
   handleRemove();
   hideList();
+  hideOrFlex();
   viewList();
 
   console.log("VidVoid App Active");
