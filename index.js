@@ -26,6 +26,7 @@ function handleSuggest() {
     console.log(
       "`handleSuggest` ran due to 'Fill The Void' button being pressed"
     );
+    makePageRandom();
     getSuggestion();
     hideList();
     hideResults();
@@ -63,7 +64,6 @@ function hideSuggestion() {
  */
 function displaySuggestion(responseJson) {
   $(".js-suggestion").removeClass("hidden");
-
   let randomSelect = Math.floor(Math.random() * 20);
 
   $(".suggest").attr(
@@ -117,7 +117,6 @@ function displaySuggestion(responseJson) {
   hideDetails();
   hideList();
   hideResults();
-  makePageRandom();
   handleAddRemove(responseJson.results[randomSelect].id);
   // handleAddRemove(responseJson.results[randomSelect].id);
 }
