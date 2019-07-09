@@ -15,7 +15,7 @@ body {
 button {
   background-color: hsla(332, 88.7%, 45.1%, 0.7);
   border: none;
-  border-radius: 30px;
+  border-radius: 10px;
   /* display: block; */
   margin: 5px 15px;
   padding: 10px;
@@ -46,7 +46,7 @@ li {
   /* border: 1px solid black; */
   border-radius: 30px;
   padding: 10px;
-  margin: 5px 15px;
+  margin: 5px;
   max-width: 90%;
   list-style-type: none;
 }
