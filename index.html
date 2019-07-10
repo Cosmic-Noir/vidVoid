@@ -19,7 +19,7 @@
       <image src="images/logo1.png" alt="VidVoid logo"></image>
       <a href="#menu"><img src="images/menuIcon1b.png" alt="Menu Icon" id="menuIcon"></a>
     </header>
-    <main class="">
+    <main>
       <div class ="js-menu" id="menu">
           <section class="flex-row">
               <button id="genRandom">. . . Fill The Void</button>                
@@ -30,8 +30,13 @@
             </section>
             <button id="js-viewList">View My List</button>
       </div>
-      <div class="js-suggestion hidden">
+      <div class="js-explain hidden">
         <section class="flex-container ">
+          
+        </section></div>
+      <div class="flex-container">
+      <div class="js-suggestion hidden">
+        <ul class="flex-container ">
           <li class="suggest"><img src="" alt="Suggested movie image" id="suggestedImage">
           <h3 id="suggestedTitle">SUGGESTED MEDIA TITLE</h3>
           <h4 id="suggestedRating">Average Rating: </h4>
@@ -40,16 +45,16 @@
           <button class="addToList">Add to List</button>
           <button class="hidden remove">Remove From List</button>
           <button class="nextSugg">Next Suggestion</button></li>
-        </section></div>
+          </ul></div>
       <div class="flex-container">
         <section class="js-search hidden">
-        <form action="" id="js-searchForm">
-          <label for="mediaSearch">Find:</label>
-          <select id="media" name="mediaSearch">
-            <option value="movie">Movies</option>
-            <option value="tv">TV Shows</option>
-            <option value="person">Actor/Actress</option>
-          </select>
+          <form action="" id="js-searchForm">
+            <label for="mediaSearch">Find:</label>
+            <select id="media" name="mediaSearch">
+              <option value="movie">Movies</option>
+              <option value="tv">TV Shows</option>
+              <option value="person">Actor/Actress</option>
+            </select>
           <input
             type="text"
             name="mediaSearch"
@@ -73,7 +78,7 @@
         </section>
       </div>
       <div class="flex-container">
-        <div class="hidden js-details">
+        <ul class="hidden js-details">
           <li class="js-singleDetail">
             <img src="" alt="Selected Result Image" id="selectedImage">
             <h2 id="selectedTitle">Selected Title</h2>
@@ -85,7 +90,7 @@
             <button class="hidden remove">Remove From List</button>
             <button class="backResults">Back to Results</button>
           </li>
-        </div>
+        </ul>
       </div>
       <div class="js-selectList hidden">
         <div class="flex-container">
