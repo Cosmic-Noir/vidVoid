@@ -294,6 +294,7 @@ function handleResultSelect(mediaForm) {
     let mediaID = $(this).attr("data-mediaId");
     getSingleResult(mediaID, mediaForm);
     handleBackToResults();
+    hideExplain();
     hideList();
     handleAddRemove(mediaID);
   });
@@ -558,6 +559,7 @@ function displayList() {
     console.log("`displayList` ran ");
   }
   handleRemove();
+  hideExplain();
   hideSuggestion();
 }
 
@@ -746,6 +748,25 @@ function isOnScreen(element) {
   return curTop > screenHeight ? false : true;
 }
 
+/*
+ * Responsible for revealing explanation section when user clicks Explain button
+ */
+function handleExplain() {
+  $("#explain").click(() => {
+    $(".js-explain").removeClass("hidden");
+    hideSuggestion();
+    hideList();
+    hideDetails();
+    hideResults();
+  });
+}
+
+/*
+ * Responsible for hiding js-explain section
+ */
+function hideExplain() {
+  $(".js-explain").addClass("hidden");
+}
 /***^_^****/
 
 function vidVoid() {
@@ -754,6 +775,7 @@ function vidVoid() {
   clickList();
   handleBack();
   handleEmail();
+  handleExplain();
   handleHide();
   handleNext();
   handleSearchForm();
@@ -774,15 +796,3 @@ function vidVoid() {
 /* Call */
 
 vidVoid();
-
-// Testing
-
-function test() {
-  let menuDiv = $(".js-menu");
-
-  if (isOnScreen(menuDiv)) {
-    console.log("the menu is on the screen");
-  } else {
-    console.log("the menu is not on the screen");
-  }
-}

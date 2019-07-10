@@ -21,18 +21,32 @@
     </header>
     <main>
       <div class ="js-menu" id="menu">
-          <section class="flex-row">
-              <button id="genRandom">. . . Fill The Void</button>                
-              <button id="genRandom">Explain</button>
-              <button id="showSearch">Search The Void . . .</button>
-              <br>
-              
-            </section>
-            <button id="js-viewList">View My List</button>
+        <section class="flex-row">
+          <button id="genRandom">. . . Fill The Void</button>                
+          <button id="explain">Explain</button>
+          <button id="showSearch">Search The Void . . .</button>
+          <br>
+        </section>
+        <button id="js-viewList">View My List</button>
       </div>
       <div class="js-explain hidden">
-        <section class="flex-container ">
-          
+        <section class="flex-container " role="Description of the application">
+          <h2>. . . An Explanation . . .</h2>
+          <p>VidVoid is a media playlist creation app. When you find yourself in need of a new
+            movie or TV show to fill the vast, <em>boring</em>, void within you, VidVoid is here!
+            Explore the cosmos of media entertainment with our ". . . Fill The Void" feature, which 
+            will provide a nearly endless but ever expanding universe of suggestions.
+            <br><br>
+            But if you feel the pull of an old memory among the stars, use our "Search The Void . . ."
+            feature to find the tale that's call to you, whether it be TV show, movie, or actor/actress. 
+            <br><br>
+            On your cosmic journey, add <em>any</em> result to a personal list that will persist even
+            after you leave our galaxy. 
+            <br><br>
+            Lasly, e-mail any list to anyone. Share your discoveries, your suggestions, your favorites. 
+            Create a scary movie list or a must-see list and send it to friends, family, or anyone you might
+            want to share a bit of the media galaxy with.
+           </p>
         </section></div>
       <div class="flex-container">
       <div class="js-suggestion hidden">
@@ -94,14 +108,12 @@
       </div>
       <div class="js-selectList hidden">
         <div class="flex-container">
-            
             <input type="email" placeholder="yourEmail@Address.com" id="toEmailAddress"></input>
             <button id="js-emailList">Email List</button>
             <button id="js-hideList">Hide List</button>
             <button id="js-clearList">Clear List</button>
           <ul class="js-pickList"></ul>
         </div>
-        
       </div>
     </main>
     <script
