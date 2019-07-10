@@ -65,6 +65,7 @@ function hideSuggestion() {
  */
 function displaySuggestion(responseJson) {
   $(".js-suggestion").removeClass("hidden");
+  $(".nextSugg").removeClass("hidden");
   let randomSelect = Math.floor(Math.random() * 20);
 
   $(".suggest").attr(
@@ -104,22 +105,22 @@ function displaySuggestion(responseJson) {
     $("#suggestedDesc").text(responseJson.results[randomSelect].overview);
   }
 
-  console.log(
-    "`displaySuggestion` ran and suggested the title: " +
-      (responseJson.results[randomSelect].name ||
-        responseJson.results[randomSelect].original_title) +
-      " at index: " +
-      randomSelect +
-      " on page: " +
-      page
-  );
+  // console.log(
+  //   "`displaySuggestion` ran and suggested the title: " +
+  //     (responseJson.results[randomSelect].name ||
+  //       responseJson.results[randomSelect].original_title) +
+  //     " at index: " +
+  //     randomSelect +
+  //     " on page: " +
+  //     page
+  // );
+
   console.log("`displaySuggestion` ran with the returned object: ");
   console.log(responseJson);
   hideDetails();
   hideList();
   hideResults();
   handleAddRemove(responseJson.results[randomSelect].id);
-  // handleAddRemove(responseJson.results[randomSelect].id);
 }
 
 /*
@@ -245,11 +246,11 @@ function displayResults(responseJson) {
           responseJson.results[i].id
         }" src="http://image.tmdb.org/t/p/w185${responseJson.results[i]
         .poster_path || responseJson.results[i].profile_path}"></img>
-        <img class="arrow" src="images/arrow3a.png"></img>
         <h3 id="title${responseJson.results[i].id}">
         ${responseJson.results[i].original_title ||
           responseJson.results[i].original_name ||
           responseJson.results[i].name}</h3>
+        <img class="arrow" src="images/arrow3a.png"></img>
       </li>`
     );
   }
@@ -549,7 +550,7 @@ function displayList() {
   for (let i = 0; i < localStorage.length; i++) {
     $(".js-pickList").append(localStorage.getItem(localStorage.key(i)));
     $(".addToList").addClass("hidden");
-    // target the "Back To Results" button to remove it
+    $(".nextSugg").addClass("hidden");
     $(".backResults").addClass("hidden");
     $(".remove").removeClass("hidden");
     // hideBackToResults(localStorage.getItem(localStorage.key(i)));
@@ -641,7 +642,7 @@ function handleEmail() {
         ""
       );
       totalContent = totalContent.replace(
-        `<button class="hidden remove">Remove From List</button>`,
+        `<button class="nextSugg">Next Suggestion</button>`,
         ""
       );
       totalContent = totalContent.replace(
@@ -699,7 +700,7 @@ function handleAddRemove(mediaID) {
     $(".addToList").addClass("hidden");
     $(".remove").removeClass("hidden");
   } else {
-    console.log("No match found, hides remove button and reveals add button");
+    // console.log("No match found, hides remove button and reveals add button");
     $(".addToList").removeClass("hidden");
     $(".remove").addClass("hidden");
   }
