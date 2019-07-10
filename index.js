@@ -219,7 +219,8 @@ function getMedia() {
       if (response.ok) {
         return response.json();
       }
-      throw new Error(response.statustext);
+      // throw new Error(response.statustext);
+      alert("Please enter a search term or title!");
     })
     .then(responseJson => {
       displayResults(responseJson);
@@ -244,6 +245,7 @@ function displayResults(responseJson) {
           responseJson.results[i].id
         }" src="http://image.tmdb.org/t/p/w185${responseJson.results[i]
         .poster_path || responseJson.results[i].profile_path}"></img>
+        <img class="arrow" src="images/arrow3a.png"></img>
         <h3 id="title${responseJson.results[i].id}">
         ${responseJson.results[i].original_title ||
           responseJson.results[i].original_name ||
@@ -572,7 +574,7 @@ function handleHide() {
  */
 function hideList() {
   $(".js-selectList").addClass("hidden");
-  console.log("`hideList` ran and hid selectedList");
+  // console.log("`hideList` ran and hid selectedList");
 }
 
 /*
@@ -593,6 +595,7 @@ function handleRemove() {
       // YES, the child element is inside the parent
       console.log('the selected li is a child of ".js-selectList"');
       listItem.addClass("hidden");
+      hideOrFlex();
     } else {
       // NO, it is not inside
       console.log('the selected li is not a chld of ".js-selectList"');
@@ -688,7 +691,7 @@ function handleEmail() {
  * Responsible for hiding "Add to List" button and unhiding "Remove From List" button
  */
 function handleAddRemove(mediaID) {
-  console.log("The mediaID used was : " + mediaID);
+  // console.log("The mediaID used was : " + mediaID);
   if (localStorage[mediaID]) {
     console.log(
       "The key existed in local storage so the remove button was revealed"
@@ -702,13 +705,44 @@ function handleAddRemove(mediaID) {
   }
 }
 
+/*
+ * Responsible for removing flex-container class from any element that should be hidden (conflicting classes) and vice versa
+ */
 function hideOrFlex() {
-  console.log($("li").classList);
-  if ($("li").hasClass("hidden")) {
-    li.removeClass("flex-container");
+  let thisItem = $("li");
+  if (thisItem.hasClass("hidden")) {
+    thisItem.removeClass("flex-container");
   } else {
     $("li").addClass("flex-container");
   }
+}
+
+/*
+ * Responsible for toggling the class on "menu" div as hidden or not when user clicks menu button
+ */
+function menu() {
+  let menuDiv = $(".js-menu");
+  $("#menuIcon").click(() => {
+    if (isOnScreen(menuDiv)) {
+      $(".js-menu").toggleClass("hidden");
+      console.log(
+        "`menu` ran and hid/unhid menu at user click on menuIcon due to section being visible"
+      );
+    } else {
+      $(".js-menu").removeClass("hidden");
+      console.log(
+        "`menu` ran and unhid menu at user click on menuIcon due to section NOT visible"
+      );
+    }
+  });
+}
+
+// returns a true or false
+function isOnScreen(element) {
+  var curPos = element.offset();
+  var curTop = curPos.top;
+  var screenHeight = $(window).height();
+  return curTop > screenHeight ? false : true;
 }
 
 /***^_^****/
@@ -727,6 +761,7 @@ function vidVoid() {
   handleRemove();
   hideList();
   hideOrFlex();
+  menu();
   nextSuggestion(); // May need to be moved
   viewList();
 
@@ -738,3 +773,15 @@ function vidVoid() {
 /* Call */
 
 vidVoid();
+
+// Testing
+
+function test() {
+  let menuDiv = $(".js-menu");
+
+  if (isOnScreen(menuDiv)) {
+    console.log("the menu is on the screen");
+  } else {
+    console.log("the menu is not on the screen");
+  }
+}

@@ -17,19 +17,20 @@
     <header>
       <!-- <h1 id="vidVoid">VidVoid</h1> -->
       <image src="images/logo1.png" alt="VidVoid logo"></image>
+      <a href="#menu"><img src="images/menuIcon1b.png" alt="Menu Icon" id="menuIcon"></a>
     </header>
     <main class="">
-      <div>
-          <section class="options flex-row">
-              <button id="genRandom">...Fill The Void</button>                
+      <div class ="js-menu" id="menu">
+          <section class="flex-row">
+              <button id="genRandom">. . . Fill The Void</button>                
               <button id="genRandom">Explain</button>
-              <button id="showSearch">Search The Void...</button>
+              <button id="showSearch">Search The Void . . .</button>
               <br>
               
             </section>
             <button id="js-viewList">View My List</button>
       </div>
-      <div class="hidden js-suggestion">
+      <div class="js-suggestion hidden">
         <section class="flex-container ">
           <li class="suggest"><img src="" alt="Suggested movie image" id="suggestedImage">
           <h3 id="suggestedTitle">SUGGESTED MEDIA TITLE</h3>
@@ -40,7 +41,8 @@
           <button class="hidden remove">Remove From List</button>
           <button class="nextSugg">Next Suggestion</button></li>
         </section></div>
-      <div class="flex-container"><section class="js-search hidden">
+      <div class="flex-container">
+        <section class="js-search hidden">
         <form action="" id="js-searchForm">
           <label for="mediaSearch">Find:</label>
           <select id="media" name="mediaSearch">

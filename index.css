@@ -27,13 +27,13 @@ header {
   background-color: hsla(332, 88.7%, 45.1%, 0.7);
   border-radius: 30px;
   color: hsla(304, 76.7%, 8.4%, 1);
-  max-width: 100%;
+  /* max-width: 100%; */
   margin: 15px 15px;
   /* margin-bottom: 15px;
   margin-top: 15px;
   margin-left: auto;
   margin-right: auto; */
-  padding: 10px;
+  padding: 0px;
 }
 
 img {
@@ -49,6 +49,7 @@ li {
   margin: 5px;
   max-width: 90%;
   list-style-type: none;
+  text-align: center;
 }
 
 ul {
@@ -56,6 +57,11 @@ ul {
 }
 
 /* Styled by Class */
+.arrow {
+  float: right;
+  height: 50px;
+  width: 50px;
+}
 
 .hidden {
   display: none;
@@ -76,6 +82,16 @@ ul {
 }
 
 /* Styling by ID */
+
+#menuIcon {
+  float: right;
+  height: 60px;
+  position: fixed;
+  top: 160px;
+  right: 20px;
+
+  width: 60px;
+}
 
 #vidVoid {
   color: hsl(282, 68.2%, 53.1%);
