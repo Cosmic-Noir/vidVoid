@@ -63,6 +63,17 @@ ul {
   width: 70px;
 }
 
+.js-explain {
+  background-color: hsla(332, 88.7%, 45.1%, 0.7);
+  /* border: 1px solid black; */
+  border-radius: 30px;
+  padding: 10px;
+  margin: 5px;
+  max-width: 90%;
+  list-style-type: none;
+  text-align: center;
+}
+
 .hidden {
   display: none;
 }
@@ -83,6 +94,10 @@ ul {
 
 /* Styling by ID */
 
+#explanation {
+  display: flex;
+}
+
 #menuIcon {
   float: right;
   height: 60px;
@@ -90,6 +105,11 @@ ul {
   top: 160px;
   right: 20px;
 
+  width: 60px;
+}
+
+#menuExmp {
+  height: 60px;
   width: 60px;
 }
 

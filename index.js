@@ -28,6 +28,7 @@ function handleSuggest() {
     );
     makePageRandom();
     getSuggestion();
+    hideExplain();
     hideList();
     hideResults();
     viewList();
@@ -154,6 +155,7 @@ function handleSearch() {
     $("#js-searchForm").removeClass("hidden");
     $(".js-search").removeClass("hidden");
     hideSuggestion();
+    hideExplain();
     hideList();
     hideDetails();
   });
@@ -536,6 +538,7 @@ function clickList() {
   $("#js-viewList").click(function() {
     displayList();
     console.log("`displayList` ran");
+    hideExplain();
     hideDetails();
     hideResults();
   });
@@ -754,6 +757,7 @@ function isOnScreen(element) {
 function handleExplain() {
   $("#explain").click(() => {
     $(".js-explain").removeClass("hidden");
+    // $(".js-explain").addClass("flex-box");
     hideSuggestion();
     hideList();
     hideDetails();
