@@ -25,9 +25,10 @@
           <button id="genRandom">. . . Fill The Void</button>                
           <button id="explain">Explain</button>
           <button id="showSearch">Search The Void . . .</button>
+          <button id="js-viewList">View My List</button></section>
         </section>
         <section class="flex-container">
-          <button id="js-viewList">View My List</button></section>
+          
         </div>
       <div class="js-explain hidden">
         <section class="flex-container " role="Description of the application">
@@ -37,7 +38,7 @@
             will provide a nearly endless but ever expanding universe of suggestions.
             <br><br>
             But if you feel the pull of an old memory among the stars, use our "Search The Void . . ."
-            feature to find the tale that's call to you, whether it be TV show, movie, or actor/actress. 
+            feature to find the tale that's calls to you, whether it be TV show, movie, or actor/actress. 
             <br><br>
             On your cosmic journey, add <em>any</em> result to a personal list that will persist even
             after you leave our galaxy. 
@@ -111,10 +112,22 @@
       </div>
       <div class="js-selectList hidden">
         <div class="flex-container">
-            <input type="email" placeholder="yourEmail@Address.com" id="toEmailAddress"></input>
-            <button id="js-emailList">Email List</button>
-            <button id="js-hideList">Hide List</button>
-            <button id="js-clearList">Clear List</button>
+          <button id="js-hideList">Hide List</button>
+          <button id="js-clearList">Clear List</button>
+          <button id="js-showEmail">Create List</button>
+          <section class="js-emailForm hidden" role="E-mail creation form">
+            <form action="" class="flex-container">
+              <label class="purple" for="listTitle">Playlist Title:</label>
+              <input type="text" placeholder="Brian's Haloween List 2019" id="listTitle"></input>
+              <label class="purple" for="emailAddress">E-mail:</label>
+              <input type="email" placeholder="yourEmail@Address.com" id="toEmailAddress"></input>
+              <label class="purple" for="message">Message:</label>
+              <textarea type="text" placeholder="Get ready to pee your pants..." id="message"></textarea><br>
+              <button id="js-emailList">Email List</button>
+              <button id="js-hideEmailForm">Cancel</button>
+              
+              </form>
+            </section>
           <ul class="js-pickList flex-container"></ul>
         </div>
       </div>

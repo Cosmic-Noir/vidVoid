@@ -622,9 +622,22 @@ function clearList() {
   $("#js-clearList").click(function() {
     localStorage.clear();
     console.log("`clearList` ran and has cleared localStorage");
+    hideEmail();
     hideList();
     viewList();
     displayList();
+  });
+}
+
+function showEmail() {
+  $("#js-showEmail").click(() => {
+    $(".js-emailForm").removeClass("hidden");
+  });
+}
+
+function hideEmail() {
+  $("#js-hideEmailForm").click(() => {
+    $(".js-emailForm").addClass("hidden");
   });
 }
 
@@ -632,12 +645,18 @@ function clearList() {
  * Responsible for creating e-mail with media list ready for e-mail by first creating the html string of content, and then snipping the buttons out of each substring.
  */
 function handleEmail() {
+  let title;
   let emailAddress;
+  let message;
+
   $("#js-emailList").click(function() {
+    title = $("#listTitle").val();
     emailAddress = $("#toEmailAddress").val();
+    message = $("#message").val();
     event.preventDefault();
 
-    let totalContent = "<h2>Your personal VidVoid list:</h2>";
+    let totalContent = `<h2>Your personal VidVoid list: ${title}</h2> <br>
+    <h3>Message: </h3> ${message}`;
     for (let i = 0; i < localStorage.length; i++) {
       let content = localStorage.getItem(localStorage.key(i));
       totalContent += content;
@@ -789,10 +808,12 @@ function vidVoid() {
   handleSearch();
   handleSuggest();
   handleRemove();
+  hideEmail();
   hideList();
   hideOrFlex();
   menu();
-  nextSuggestion(); // May need to be moved
+  nextSuggestion();
+  showEmail();
   viewList();
 
   console.log("VidVoid App Active");

@@ -43,7 +43,7 @@ li {
   /* border: 1px solid black; */
   border-radius: 30px;
   padding: 10px;
-  margin: 5px;
+  margin: 15px;
   max-width: 90%;
   list-style-type: none;
   text-align: center;
@@ -84,6 +84,8 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 0px;
+  margin-bottom: 15px;
   padding: 5px;
   width: 100%;
 }
@@ -93,6 +95,7 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 0px;
   padding: 5px;
   width: 100%;
 }
@@ -126,8 +129,8 @@ ul {
   color: hsl(282, 68.2%, 53.1%);
 }
 
-#js-viewList {
-  margin-top: 0px;
+#menu {
+  margin-bottom: 0px;
 }
 
 @media screen and (min-width: 500px) {
