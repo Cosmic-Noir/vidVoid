@@ -645,12 +645,18 @@ function hideEmail() {
  * Responsible for creating e-mail with media list ready for e-mail by first creating the html string of content, and then snipping the buttons out of each substring.
  */
 function handleEmail() {
+  let title;
   let emailAddress;
+  let message;
+
   $("#js-emailList").click(function() {
+    title = $("#listTitle").val();
     emailAddress = $("#toEmailAddress").val();
+    message = $("#message").val();
     event.preventDefault();
 
-    let totalContent = "<h2>Your personal VidVoid list:</h2>";
+    let totalContent = `<h2>Your personal VidVoid list: ${title}</h2> <br>
+    <h3>Message: </h3> ${message}`;
     for (let i = 0; i < localStorage.length; i++) {
       let content = localStorage.getItem(localStorage.key(i));
       totalContent += content;
