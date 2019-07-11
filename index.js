@@ -137,6 +137,7 @@ function makePageRandom() {
  */
 function nextSuggestion() {
   $(".nextSugg").click(() => {
+    makePageRandom();
     getSuggestion();
   });
 }
@@ -404,6 +405,7 @@ function displayDetails(responseJson, mediaForm, mediaID) {
 function hideResults() {
   $(".js-results").addClass("hidden");
   $("#js-searchForm").addClass("hidden");
+  $("#js-searchForm").removeClass("flex-container");
   hideOrFlex();
 }
 
@@ -538,6 +540,7 @@ function clickList() {
   $("#js-viewList").click(function() {
     displayList();
     console.log("`displayList` ran");
+    hideSuggestion();
     hideExplain();
     hideDetails();
     hideResults();
@@ -559,7 +562,7 @@ function displayList() {
     $(".remove").removeClass("hidden");
     // hideBackToResults(localStorage.getItem(localStorage.key(i)));
 
-    console.log("`displayList` ran ");
+    // console.log("`displayList` ran ");
   }
   handleRemove();
   hideExplain();

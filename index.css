@@ -5,6 +5,7 @@
 }
 
 body {
+  font-family: "Roboto", sans-serif;
   display: flex;
   background-image: url("images/void3b.jpg");
   background-attachment: fixed;
@@ -13,6 +14,7 @@ body {
 }
 
 button {
+  font-family: "Orbitron", sans-serif;
   background-color: hsla(332, 88.7%, 45.1%, 0.7);
   border: none;
   border-radius: 10px;
@@ -68,10 +70,14 @@ ul {
   /* border: 1px solid black; */
   border-radius: 30px;
   padding: 10px;
-  margin: 5px;
-  max-width: 90%;
+  margin: 15px;
+  max-width: 100%;
   list-style-type: none;
   text-align: center;
+}
+
+.js-results {
+  font-family: "Oribtron", sans-serif;
 }
 
 .hidden {

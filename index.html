@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>VidVoid Home Page</title>
     <link rel="stylesheet" href="index.css" />
+    <link href="https://fonts.googleapis.com/css?family=Orbitron|Roboto+One&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
 <script type="text/javascript">
    (function(){
@@ -14,10 +15,10 @@
 </script>
   </head>
   <body>
-    <header>
+    <header id="top">
       <!-- <h1 id="vidVoid">VidVoid</h1> -->
       <image src="images/logo1.png" alt="VidVoid logo"></image>
-      <a href="#menu"><img src="images/menuIcon1b.png" alt="Menu Icon" id="menuIcon"></a>
+      <a href="#top"><img src="images/menuIcon1b.png" alt="Menu Icon" id="menuIcon"></a>
     </header>
     <main>
       <div class ="js-menu" id="menu">
@@ -33,8 +34,7 @@
         <section class="flex-container " role="Description of the application">
           <h2>. . . An Explanation . . .</h2>
           <p id="">VidVoid is a media playlist creation app. When you find yourself in need of a new
-            movie or TV show to fill the vast, <em>boring</em>, void within you, VidVoid is here!
-            Explore the cosmos of media entertainment with our ". . . Fill The Void" feature, which 
+            movie or TV show, VidVoid is here! Explore the cosmos of media entertainment with our ". . . Fill The Void" feature, which 
             will provide a nearly endless but ever expanding universe of suggestions.
             <br><br>
             But if you feel the pull of an old memory among the stars, use our "Search The Void . . ."
@@ -46,13 +46,9 @@
             Lasly, e-mail any list to anyone. Share your discoveries, your suggestions, your favorites. 
             Create a scary movie list or a must-see list and send it to friends, family, or anyone you might
             want to share a bit of the media galaxy with.
-            <br>
-
-            Use the above menu icon to minimize or open your galaxy-exploring tools. 
-            <br><br>
            </p>
            <img src="images/menuIcon1b.png" alt="Menu Icon" id="menuExmp">
-           <p></p>
+           <p>Use the above exploration tool to return to the top of the screen if needed or to minimize menu. It will follow you on any search . . .</p>
         </section></div>
       <div class="flex-container">
       <div class="js-suggestion hidden">
@@ -68,19 +64,20 @@
           </ul></div>
       <div class="flex-container">
         <section class="js-search hidden">
-          <form action="" id="js-searchForm">
+          <form action="" id="js-searchForm" class="flex-container">
             <label for="mediaSearch">Find:</label>
             <select id="media" name="mediaSearch">
               <option value="movie">Movies</option>
               <option value="tv">TV Shows</option>
               <option value="person">Actor/Actress</option>
             </select>
+            <br>
           <input
             type="text"
             name="mediaSearch"
             placeholder="Search..."
             id="js-query"
-          />
+          /><br>
           <button type="submit">Search...</button>
         </form>
       </section></div>
