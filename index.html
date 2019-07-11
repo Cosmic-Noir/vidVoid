@@ -16,7 +16,6 @@
   </head>
   <body>
     <header id="top">
-      <!-- <h1 id="vidVoid">VidVoid</h1> -->
       <image src="images/logo1.png" alt="VidVoid logo"></image>
       <a href="#top"><img src="images/menuIcon1b.png" alt="Menu Icon" id="menuIcon"></a>
     </header>
@@ -26,10 +25,10 @@
           <button id="genRandom">. . . Fill The Void</button>                
           <button id="explain">Explain</button>
           <button id="showSearch">Search The Void . . .</button>
-          <br>
         </section>
-        <button id="js-viewList">View My List</button>
-      </div>
+        <section class="flex-container">
+          <button id="js-viewList">View My List</button></section>
+        </div>
       <div class="js-explain hidden">
         <section class="flex-container " role="Description of the application">
           <h2>. . . An Explanation . . .</h2>
@@ -63,10 +62,10 @@
           <button class="hidden remove">Remove From List</button>
           <button class="nextSugg">Next Suggestion</button></li>
           </ul></div>
-      <div class="flex-container">
-        <section class="js-search hidden">
-          <form action="" id="js-searchForm" class="flex-container">
-            <label for="mediaSearch">Find:</label>
+      <div class="js-search hidden">
+        <section class="flex-container">
+          <form action="" id="js-searchForm">
+            <label for="mediaSearch" class="purple">Find:</label>
             <select id="media" name="mediaSearch">
               <option value="movie">Movies</option>
               <option value="tv">TV Shows</option>
@@ -82,21 +81,21 @@
           <button type="submit">Search...</button>
         </form>
       </section></div>
-      <div class="flex-container">
-        <section class="hidden js-results">
+      <div class="hidden js-results">
+        <section class="flex-container">
           <h2 class="hidden js-resultCounter purple">
             Results: <span id="js-resultNum"></span> total matching results
             found.
           </h2>
           <h3 class="purple">Click for details</h3>
-          <ul id="js-resultList"></ul>
+          <ul id="js-resultList" class="flex-container"></ul>
           <button id="next" class="hidden purple">Next</button>
           <h3 id="pageNum" class="purple">Page:</h3>
           <button id="back" class="hidden purple">Back</button>
         </section>
       </div>
-      <div class="flex-container">
-        <ul class="hidden js-details">
+      <div class="hidden js-details">
+        <ul class="flex-container">
           <li class="js-singleDetail">
             <img src="" alt="Selected Result Image" id="selectedImage">
             <h2 id="selectedTitle">Selected Title</h2>

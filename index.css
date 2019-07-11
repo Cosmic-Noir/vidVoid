@@ -19,10 +19,9 @@ button {
   background-color: hsla(332, 88.7%, 45.1%, 0.7);
   border: none;
   border-radius: 10px;
-  /* display: block; */
   margin: 5px 15px;
   padding: 10px;
-  width: 90%;
+  width: 95%;
 }
 
 header {
@@ -30,12 +29,7 @@ header {
   background-color: hsla(332, 88.7%, 45.1%, 0.7);
   border-radius: 30px;
   color: hsla(304, 76.7%, 8.4%, 1);
-  /* max-width: 100%; */
-  margin: 15px 15px;
-  /* margin-bottom: 15px;
-  margin-top: 15px;
-  margin-left: auto;
-  margin-right: auto; */
+  margin: 15px 15px 0px;
   padding: 0px;
 }
 
@@ -68,7 +62,6 @@ ul {
 
 .js-explain {
   background-color: hsla(332, 88.7%, 45.1%, 0.7);
-  /* border: 1px solid black; */
   border-radius: 30px;
   padding: 10px;
   margin: 15px;
@@ -79,6 +72,7 @@ ul {
 
 .js-results {
   font-family: "Oribtron", sans-serif;
+  text-align: center;
 }
 
 .hidden {
@@ -94,8 +88,17 @@ ul {
   width: 100%;
 }
 
+.flex-row {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+  width: 100%;
+}
+
 .purple {
-  color: white;
+  color: rgb(175, 123, 197);
 }
 
 /* Styling by ID */
@@ -121,6 +124,10 @@ ul {
 
 #vidVoid {
   color: hsl(282, 68.2%, 53.1%);
+}
+
+#js-viewList {
+  margin-top: 0px;
 }
 
 @media screen and (min-width: 500px) {
