@@ -622,9 +622,22 @@ function clearList() {
   $("#js-clearList").click(function() {
     localStorage.clear();
     console.log("`clearList` ran and has cleared localStorage");
+    hideEmail();
     hideList();
     viewList();
     displayList();
+  });
+}
+
+function showEmail() {
+  $("#js-showEmail").click(() => {
+    $(".js-emailForm").removeClass("hidden");
+  });
+}
+
+function hideEmail() {
+  $("#js-hideEmailForm").click(() => {
+    $(".js-emailForm").addClass("hidden");
   });
 }
 
@@ -789,10 +802,12 @@ function vidVoid() {
   handleSearch();
   handleSuggest();
   handleRemove();
+  hideEmail();
   hideList();
   hideOrFlex();
   menu();
-  nextSuggestion(); // May need to be moved
+  nextSuggestion();
+  showEmail();
   viewList();
 
   console.log("VidVoid App Active");

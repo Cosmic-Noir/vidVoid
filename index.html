@@ -113,15 +113,17 @@
         <div class="flex-container">
           <button id="js-hideList">Hide List</button>
           <button id="js-clearList">Clear List</button>
-          <button id="js-emailList">Email List</button>
-          <section role="E-mail creation form">
-            <form action="">
-              <label for="listTitle">Playlist Title:</label>
+          <button id="js-showEmail">Create List</button>
+          <section class="js-emailForm hidden" role="E-mail creation form">
+            <form action="" class="flex-container">
+              <label class="purple" for="listTitle">Playlist Title:</label>
               <input type="text" placeholder="Brian's Haloween List 2019" id="listTitle"></input>
-              <label for=""></label>
+              <label class="purple" for="emailAddress">E-mail:</label>
               <input type="email" placeholder="yourEmail@Address.com" id="toEmailAddress"></input>
-              <label for="message">Message:</label>
+              <label class="purple" for="message">Message:</label>
               <input type="text" placeholder="Get ready to pee your pants..." id="message"></input>
+              <button id="js-emailList">Email List</button>
+              <button id="js-hideEmailForm">Cancel</button>
               
               </form>
             </section>
