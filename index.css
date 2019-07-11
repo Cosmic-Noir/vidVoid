@@ -43,7 +43,7 @@ li {
   /* border: 1px solid black; */
   border-radius: 30px;
   padding: 10px;
-  margin: 5px;
+  margin: 15px;
   max-width: 90%;
   list-style-type: none;
   text-align: center;
@@ -84,7 +84,8 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0px;
+  margin-top: 0px;
+  margin-bottom: 15px;
   padding: 5px;
   width: 100%;
 }
