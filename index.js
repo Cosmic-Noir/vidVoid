@@ -121,6 +121,7 @@ function displaySuggestion(responseJson) {
   hideDetails();
   hideList();
   hideResults();
+  hideSearch();
   handleAddRemove(responseJson.results[randomSelect].id);
 }
 
@@ -160,6 +161,10 @@ function handleSearch() {
     hideList();
     hideDetails();
   });
+}
+
+function hideSearch() {
+  $(".js-search").addClass("hidden");
 }
 
 /*
@@ -566,6 +571,7 @@ function displayList() {
   }
   handleRemove();
   hideExplain();
+  hideSearch();
   hideSuggestion();
 }
 
@@ -616,8 +622,7 @@ function handleRemove() {
 }
 
 /*
- * Responsible for when user clicks "Remove From List" button and removes media item from localStorage
- */
+ * Responsible for when user clicks "Clear List" button and removes all media items in storage */
 function clearList() {
   $("#js-clearList").click(function() {
     localStorage.clear();
@@ -629,12 +634,18 @@ function clearList() {
   });
 }
 
+/*
+ * Responsible for when user clicks "Create List" button and reveals e-mail form
+ */
 function showEmail() {
   $("#js-showEmail").click(() => {
     $(".js-emailForm").removeClass("hidden");
   });
 }
 
+/*
+ * Responsible for hiding e-mail form
+ */
 function hideEmail() {
   $("#js-hideEmailForm").click(() => {
     $(".js-emailForm").addClass("hidden");
@@ -784,6 +795,7 @@ function handleExplain() {
     hideList();
     hideDetails();
     hideResults();
+    hideSearch();
   });
 }
 
