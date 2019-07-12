@@ -19,19 +19,19 @@ This section handles the "Fill the Void" button, generating a single, random tv 
 **/
 
 /*
- * Responsible for when "Fill the Void" button is pressed and unhides .js-results <ul>
+ * Responsible for when "Fill the Void" button is pressed
  */
 function handleSuggest() {
   $("#genRandom").click(() => {
-    console.log(
-      "`handleSuggest` ran due to 'Fill The Void' button being pressed"
-    );
     makePageRandom();
     getSuggestion();
     hideExplain();
     hideList();
     hideResults();
     viewList();
+    console.log(
+      "`handleSuggest` ran due to 'Fill The Void' button being pressed"
+    );
   });
 }
 
@@ -239,7 +239,9 @@ function displayResults(responseJson) {
 
   for (let i = 0; i < responseJson.results.length; i++) {
     $("#js-resultList").append(
-      `<li class="result" data-mediaId="${responseJson.results[i].id}">
+      `<li class="result" data-mediaId="${
+        responseJson.results[i].id
+      }" role="Result">
         <img id="img${
           responseJson.results[i].id
         }" alt="Media poster for ${responseJson.results[i].title ||
@@ -251,7 +253,7 @@ function displayResults(responseJson) {
         ${responseJson.results[i].original_title ||
           responseJson.results[i].original_name ||
           responseJson.results[i].name}</h3>
-        <img class="arrow" src="images/arrow3a.png"></img>
+        <img class="arrow" src="images/arrow3a.png" alt="Cute arrow indicating to click on a result for more"></img>
       </li>`
     );
   }
@@ -660,7 +662,7 @@ function handleEmail() {
     message = $("#message").val();
     event.preventDefault();
 
-    let totalContent = `<div style="text-align:center;"><h2 style="font-size:25px;">Your personal <a href="https://cosmic-noir.github.io/vidVoid/" style="color:purple;">VidVoid</a> list:<br>${title}</h2> <br>
+    let totalContent = `<div style="text-align:center;" role="Contains e-mail content"><h2 style="font-size:25px;">Your personal <a href="https://cosmic-noir.github.io/vidVoid/" style="color:purple;">VidVoid</a> list:<br>${title}</h2> <br>
     <h3>Message:</h3><br><p> ${message}</p><br><ul style="list-style-type: none;">`;
     for (let i = 0; i < localStorage.length; i++) {
       let content = localStorage.getItem(localStorage.key(i));
@@ -833,7 +835,7 @@ function vidVoid() {
 
   console.log("VidVoid App Active");
   console.log("Number of items in local storage: " + localStorage.length);
-  console.log(localStorage);
+  // console.log(localStorage);
 }
 
 /* Call */

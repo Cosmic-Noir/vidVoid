@@ -18,27 +18,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
   </head>
   <body>
-    <header id="top">
+    <header id="top" role="Header section">
       <image src="images/logo1.png" alt="VidVoid logo" class="animated  fadeIn slower"></image>
       <a href="#top"><img src="images/menuIcon1b.png" alt="Menu Icon" id="menuIcon" class="animated infinite pulse"></a>
     </header>
     <main>
-      <div class ="js-menu animated fadeIn" id="menu">
+      <div class ="js-menu animated fadeIn" id="menu" role="Navigation menu">
         <section class="flex-row">
-          <button id="genRandom">. . . Fill The Void</button>                
+          <button id="genRandom">Fill The Void</button>                
           <button id="explain">Explain</button>
-          <button id="showSearch">Search The Void . . .</button>
+          <button id="showSearch">Search The Void</button>
           <button id="js-viewList">View My List</button></section>
         </section>
         <section class="flex-container">
-          
-        </div>
-      <div class="js-explain hidden animated fadeIn">
+      </div>
+      <div class="js-explain hidden animated fadeIn" role="Explanation of the app and how it can be used ">
         <section class="flex-container " role="Description of the application">
-          <h2>. . . An Explanation . . .</h2>
-          <p id="">VidVoid is a media playlist creation app. When you find yourself in need of a new movie or TV show, VidVoid is here to help. Explore the cosmos of media entertainment with our ". . . Fill The Void" feature, which will provide a nearly endless but ever-expanding universe of suggestions. 
+          <h2 id="expTitle">. . . An Explanation . . .</h2>
+          <p>VidVoid is a media playlist creation app. When you find yourself in need of a new movie or TV show, VidVoid is here to help. Explore the cosmos of media entertainment with our "Fill The Void" feature, which will provide a nearly endless but ever-expanding universe of suggestions. 
             <br><br>
-            If you're looking for a familiar star in the sky, use our "Search The Void . . ." feature to find the media that's calling to you, whether it be a TV show, movie, or actor/actress. 
+            If you're looking for a familiar star in the sky, use our "Search The Void" feature to find the movie or TV show that's calling to you.
             <br><br>
             On your cosmic journey, add any result to a personal list that will persist even after you leave our galaxy.  
             <br><br>
@@ -47,39 +46,42 @@
            <img src="images/menuIcon1b.png" alt="Menu Icon" id="menuExmp" class="animated infinite pulse">
            <p>Use the above exploration tool to return to the top of the screen if needed or to minimize the menu. It will follow you on any journey . . .</p>
            <p>This app is powered by <a href="https://www.themoviedb.org/">The Movie DataBase API</a> and <a href="https://www.emailjs.com/">The emailJS API</a>. </p>
-        </section></div>
+        </section>
+      </div>
       <div class="flex-container">
-      <div class="js-suggestion hidden animated fadeIn">
-        <ul class="flex-container ">
-          <li class="suggest"><img src="" alt="Suggested movie image" id="suggestedImage">
-          <h3 id="suggestedTitle">SUGGESTED MEDIA TITLE</h3>
-          <h4 id="suggestedRating">Average Rating: </h4>
-          <h4 id="suggestedRelease">Release Date: </h4>
-          <p id="suggestedDesc">Description: </p>
-          <button class="addToList">Add to List</button>
-          <button class="hidden remove">Remove From List</button>
-          <button class="nextSugg">Next Suggestion</button></li>
-          </ul></div>
-      <div class="js-search hidden animated fadeIn">
-        <section class="flex-container">
+        <section class="js-suggestion hidden animated fadeIn" role="Section where the suggested movie or TV show is displayed">
+          <ul class="flex-container">
+            <li class="suggest"><img src="" alt="Suggested movie image" id="suggestedImage">
+            <h3 id="suggestedTitle">SUGGESTED MEDIA TITLE</h3>
+            <h4 id="suggestedRating">Average Rating: </h4>
+            <h4 id="suggestedRelease">Release Date: </h4>
+            <p id="suggestedDesc">Description: </p>
+            <button class="addToList">Add to List</button>
+            <button class="hidden remove">Remove From List</button>
+            <button class="nextSugg">Next Suggestion</button></li>
+          </ul>
+        </section>
+      <div class="js-search hidden animated fadeIn" role="Section wherer the search form is displayed">
+        <section class="flex-container" role="Media search form for user input">
           <form action="" id="js-searchForm">
             <label for="mediaSearch" class="purple">Find:</label>
-            <select id="media" name="mediaSearch">
+            <select id="media" name="mediaSearch" role="Select type of media">
               <option value="movie">Movies</option>
               <option value="tv">TV Shows</option>
               <option value="person">Actor/Actress</option>
             </select>
             <br>
-          <input
-            type="text"
-            name="mediaSearch"
-            placeholder="Search..."
-            id="js-query"
-          /><br>
-          <button type="submit">Search...</button>
-        </form>
-      </section></div>
-      <div class="hidden js-results animated fadeIn">
+            <input
+              type="text"
+              name="mediaSearch"
+              placeholder="Search..."
+              id="js-query"
+            /><br>
+            <button type="submit">Search...</button>
+          </form>
+        </section>
+      </div>
+      <div class="hidden js-results animated fadeIn" role="Section wherer the search results are displayed">
         <section class="flex-container">
           <h2 class="hidden js-resultCounter purple">
             Results: <span id="js-resultNum"></span> total matching results
@@ -92,7 +94,7 @@
           <button id="back" class="hidden purple">Back</button>
         </section>
       </div>
-      <div class="hidden js-details animated fadeIn">
+      <div class="hidden js-details animated fadeIn" role="Display of media details about selected result">
         <ul class="flex-container">
           <li class="js-singleDetail">
             <img src="" alt="Selected Result Image" id="selectedImage">
@@ -107,13 +109,13 @@
           </li>
         </ul>
       </div>
-      <div class="js-selectList hidden animated fadeIn">
-        <div class="flex-container">
+      <div class="js-selectList hidden animated fadeIn" role="Section wherer the personal list is displayed">
+        <section class="flex-container" role="Personal list menu">
           <button id="js-hideList">Hide List</button>
           <button id="js-clearList">Clear List</button>
           <button id="js-showEmail">Create List</button>
           <section class="js-emailForm hidden animated fadeIn" role="E-mail creation form">
-            <form action="" class="flex-container">
+            <form action="" class="flex-container" role="Playlist creation form with user input">
               <label class="purple" for="listTitle">Playlist Title:</label>
               <input type="text" placeholder="Brian's Haloween List 2019" id="listTitle"></input>
               <label class="purple" for="emailAddress">E-mail:</label>
@@ -122,11 +124,10 @@
               <textarea type="text" placeholder="Get ready to pee your pants..." id="message"></textarea><br>
               <button id="js-emailList">Email List</button>
               <button id="js-hideEmailForm">Cancel</button>
-              
-              </form>
-            </section><br>
-          <ul id="pickListRow" class="js-pickList flex-container"></ul>
-        </div>
+            </form>
+          </section><br>
+          <ul id="pickListRow" class="js-pickList flex-container" role="Personal list of selected meia"></ul>
+        </section>
       </div>
     </main>
     <script
