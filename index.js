@@ -252,8 +252,11 @@ function displayResults(responseJson) {
       `<li class="result" data-mediaId="${responseJson.results[i].id}">
         <img id="img${
           responseJson.results[i].id
-        }" src="http://image.tmdb.org/t/p/w185${responseJson.results[i]
-        .poster_path || responseJson.results[i].profile_path}"></img>
+        }" alt="Media poster for ${responseJson.results[i].title ||
+        responseJson.results[i].original_title ||
+        responseJson.results[i]
+          .original_name}" src="http://image.tmdb.org/t/p/w185${responseJson
+        .results[i].poster_path || responseJson.results[i].profile_path}"></img>
         <h3 id="title${responseJson.results[i].id}">
         ${responseJson.results[i].original_title ||
           responseJson.results[i].original_name ||

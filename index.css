@@ -24,6 +24,10 @@ button {
   width: 95%;
 }
 
+button:hover {
+  background-color: rgb(198, 24, 217);
+}
+
 form {
   font-size: 20px;
 }
@@ -149,19 +153,27 @@ ul {
 }
 
 @media screen and (min-width: 750px) {
+  form {
+    font-size: 35px;
+    line-height: 41px;
+  }
+
+  li.result {
+    max-width: 400px;
+  }
+
   #js-searchForm {
     display: flex;
     flex-direction: row;
   }
+
   #js-resultList,
   #flex {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
   }
-  li.result {
-    max-width: 400px;
-  }
+
   #next,
   #back {
     max-width: 300px;
