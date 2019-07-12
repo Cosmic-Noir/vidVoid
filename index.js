@@ -669,8 +669,8 @@ function handleEmail() {
     message = $("#message").val();
     event.preventDefault();
 
-    let totalContent = `<h2>Your personal VidVoid list: ${title}</h2> <br>
-    <h3>Message: </h3> ${message}`;
+    let totalContent = `<div style="text-align:center;"><h2 style="font-size:25px;">Your personal <a href="https://cosmic-noir.github.io/vidVoid/" style="color:purple;">VidVoid</a> list:<br>${title}</h2> <br>
+    <h3>Message:</h3><br><p> ${message}</p><br><ul style="list-style-type: none;">`;
     for (let i = 0; i < localStorage.length; i++) {
       let content = localStorage.getItem(localStorage.key(i));
       totalContent += content;
@@ -692,7 +692,9 @@ function handleEmail() {
       );
     }
 
-    console.log(totalContent);
+    totalContent += "</ul></div>";
+
+    // console.log(totalContent);
 
     let params = {
       user_id: "user_NbIPmNUvbtkVqjSpN62Vs",
