@@ -21,6 +21,7 @@ button {
   border-radius: 10px;
   margin: 5px 15px;
   padding: 10px;
+  transition-duration: 1s;
   width: 95%;
 }
 
@@ -114,6 +115,14 @@ ul {
 
 .purple {
   color: rgb(175, 123, 197);
+}
+
+.result {
+  transition-duration: 1s;
+}
+
+.result:hover {
+  background-color: rgb(198, 24, 217);
 }
 
 /* Styling by ID */
