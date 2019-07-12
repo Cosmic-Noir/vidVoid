@@ -106,16 +106,6 @@ function displaySuggestion(responseJson) {
     $("#suggestedDesc").text(responseJson.results[randomSelect].overview);
   }
 
-  // console.log(
-  //   "`displaySuggestion` ran and suggested the title: " +
-  //     (responseJson.results[randomSelect].name ||
-  //       responseJson.results[randomSelect].original_title) +
-  //     " at index: " +
-  //     randomSelect +
-  //     " on page: " +
-  //     page
-  // );
-
   console.log("`displaySuggestion` ran with the returned object: ");
   console.log(responseJson);
   hideDetails();
@@ -552,6 +542,7 @@ function clickList() {
     hideExplain();
     hideDetails();
     hideResults();
+    giveMaxWidth();
   });
 }
 
@@ -810,6 +801,13 @@ function handleExplain() {
 function hideExplain() {
   $(".js-explain").addClass("hidden");
 }
+
+function giveMaxWidth() {
+  $("li.js-pickList").attr("width:", "400px;");
+  $("#pickListRow").removeClass("flex-container");
+  console.log("`giveMaxWidth` ran");
+}
+
 /***^_^****/
 
 function vidVoid() {

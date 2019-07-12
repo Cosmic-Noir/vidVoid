@@ -177,10 +177,15 @@ ul {
   }
 
   #js-resultList,
-  #flex {
+  #pickListRow {
+    /* align-items: center; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+  }
+  #pickListRow > li {
+    width: 400px;
   }
 
   #next,
