@@ -137,8 +137,8 @@ ul {
   position: fixed;
   top: 160px;
   right: 20px;
-
   width: 60px;
+  z-index: 10;
 }
 
 #menuExmp {
