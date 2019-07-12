@@ -22,7 +22,7 @@ This section handles the "Fill the Void" button, generating a single, random tv 
  * Responsible for when "Fill the Void" button is pressed and unhides .js-results <ul>
  */
 function handleSuggest() {
-  $("#genRandom").click(function() {
+  $("#genRandom").click(() => {
     console.log(
       "`handleSuggest` ran due to 'Fill The Void' button being pressed"
     );
@@ -143,7 +143,7 @@ This sections handles the specific media search portion that returns a list of m
  * Responsible for unhiding the "search" area when "Search The Void" button is pressed
  */
 function handleSearch() {
-  $("#showSearch").click(function() {
+  $("#showSearch").click(() => {
     $("#js-searchForm").removeClass("hidden");
     $(".js-search").removeClass("hidden");
     hideSuggestion();
@@ -419,7 +419,7 @@ function hideDetails() {
  * Responsible for handling button click "Back to Results" unhides results list
  */
 function handleBackToResults() {
-  $(".backResults").click(function() {
+  $(".backResults").click(() => {
     resultList.removeClass("hidden");
     hideDetails();
   });
@@ -456,7 +456,7 @@ function hideBack() {
  * Responsible for when user clicks "Next" button, increases page +1, and reveals the back button if page > 1
  */
 function handleNext() {
-  nextButton.click(function() {
+  nextButton.click(() => {
     page += 1;
     console.log("`handleNext` ran and page is now:" + page);
     getMedia(currentQuery);
@@ -471,7 +471,7 @@ function handleNext() {
  * Responsible for when user clicks "Back" button, decreasing page -1
  */
 function handleBack() {
-  backButton.click(function() {
+  backButton.click(() => {
     page -= 1;
     console.log("`handleBack` ran and page is now:" + page);
     getMedia(currentQuery);
@@ -654,7 +654,7 @@ function handleEmail() {
   let emailAddress;
   let message;
 
-  $("#js-emailList").click(function() {
+  $("#js-emailList").click(() => {
     title = $("#listTitle").val();
     emailAddress = $("#toEmailAddress").val();
     message = $("#message").val();
