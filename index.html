@@ -18,9 +18,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
   </head>
   <body>
-    <header id="top" role="banner">
+    <header role="banner">
       <image src="images/logo1.png" alt="VidVoid logo" class="animated  fadeIn slower"></image>
-      <a href="#top"><img src="images/menuIcon1b.png" alt="Menu Icon" id="menuIcon" class="animated infinite pulse"></a>
+      <img src="images/menuIcon1b.png" alt="Menu Icon" id="menuIcon" class="animated infinite pulse">
     </header>
     <main role="Main">
       <div class ="js-menu animated fadeIn" id="menu" role="Navigation">
@@ -88,9 +88,11 @@
           </h2>
           <h3 class="purple">Click for details</h3>
           <ul id="js-resultList" class="flex-container"></ul>
-          <button id="next" class="hidden purple" role="button">Next</button>
-          <h3 id="pageNum" class="purple" role="button">Page:</h3>
-          <button id="back" class="hidden purple" role="button">Back</button>
+          <section class="pageNav">
+            <button id="next" class="hidden purple" role="button" onclick="window.location.href='#js-searchForm'">Next</button>
+            <h3 id="pageNum" class="purple" role="button">Page:</h3>
+            <button id="back" class="hidden purple" role="button">Back</button>
+          </section>
         </section>
       </div>
       <div class="hidden js-details animated fadeIn">

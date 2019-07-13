@@ -120,13 +120,19 @@ ul {
 }
 
 .flex-row {
-  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-bottom: 0px;
   padding: 5px;
   width: 100%;
+}
+
+.pageNav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .purple {
@@ -153,6 +159,11 @@ ul {
   font-size: 25px;
   justify-content: center;
   align-items: center;
+}
+#nextLink {
+  margin: 5px 15px;
+  padding: 10px;
+  width: 95%;
 }
 
 #menuIcon {
@@ -182,6 +193,12 @@ ul {
   .flex-row {
     display: flex;
     flex-direction: row;
+  }
+  .pageNav {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
   }
 }
 
