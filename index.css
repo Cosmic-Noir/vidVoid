@@ -19,6 +19,7 @@ button {
   background-color: hsla(332, 88.7%, 45.1%, 0.7);
   border: none;
   border-radius: 10px;
+  color: black;
   margin: 5px 15px;
   padding: 10px;
   transition-duration: 1s;
@@ -191,5 +192,9 @@ ul {
   #next,
   #back {
     max-width: 300px;
+  }
+
+  #media {
+    min-width: 100px;
   }
 }
