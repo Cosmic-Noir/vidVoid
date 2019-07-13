@@ -1,4 +1,4 @@
-# VidVoid
+![vidVoid screen shot two](images/logo1.png)
 
 VidVoid is a cosmos-themed media suggestion app that gives a nealry endless list of suggested movies or TV shows. The app allows storage of selected media and allows the user to send custom playlists to themselves or others.
 
