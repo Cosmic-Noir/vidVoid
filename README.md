@@ -25,7 +25,7 @@ This is a mobile-first, progressive enhancment project that focuses on deliverin
 - Provide Movie/TV suggestions to user
 - Add any Movie/TV/Actor/Actress to a personal list
 - User can mail list with custom title and message to themselves or anyone
-- Search for any title or keyword for Movies, TV shows, or Actors and Actreses, all of which can be added to the user's list.
+- Search for any title or keyword for Movies, TV shows, or Actors and Actreses, all of which can be added to the user's list
 
 # Demo
 
