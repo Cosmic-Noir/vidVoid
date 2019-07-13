@@ -160,6 +160,7 @@ ul {
   justify-content: center;
   align-items: center;
 }
+
 #nextLink {
   margin: 5px 15px;
   padding: 10px;
@@ -167,10 +168,9 @@ ul {
 }
 
 #menuIcon {
-  float: right;
   height: 60px;
-  position: fixed;
-  top: 160px;
+  position: absolute;
+  top: 40px;
   right: 20px;
   width: 60px;
   z-index: 10;
