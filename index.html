@@ -18,23 +18,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
   </head>
   <body>
-    <header id="top" role="Header section">
+    <header id="top" role="banner">
       <image src="images/logo1.png" alt="VidVoid logo" class="animated  fadeIn slower"></image>
       <a href="#top"><img src="images/menuIcon1b.png" alt="Menu Icon" id="menuIcon" class="animated infinite pulse"></a>
     </header>
-    <main>
-      <div class ="js-menu animated fadeIn" id="menu" role="Navigation menu">
+    <main role="Main">
+      <div class ="js-menu animated fadeIn" id="menu" role="Navigation">
         <section class="flex-row">
-          <button id="genRandom">Fill The Void</button>                
-          <button id="explain">Explain</button>
-          <button id="showSearch">Search The Void</button>
-          <button id="js-viewList" class="animated fadeIn">View My List</button></section>
+          <button id="genRandom" role="button">Fill The Void</button>                
+          <button id="explain" role="button">Explain</button>
+          <button id="showSearch" role="button">Search The Void</button>
+          <button id="js-viewList" class="animated fadeIn" role="button">View My List</button></section>
         </section>
         <section class="flex-container">
       </div>
-      <div class="js-explain hidden animated fadeIn" role="Explanation of the app and how it can be used ">
-        <section class="flex-container " role="Description of the application">
-          <h2 id="expTitle">. . . An Explanation . . .</h2>
+      <div class="js-explain hidden animated fadeIn">
+        <section class="flex-container">
+          <h2 id="expTitle">Explanation</h2>
           <p>VidVoid is a media playlist creation app. When you find yourself in need of a new movie or TV show, VidVoid is here to help. Explore the cosmos of media entertainment with our "Fill The Void" feature, which will provide a nearly endless but ever-expanding universe of suggestions. 
             <br><br>
             If you're looking for a familiar star in the sky, use our "Search The Void" feature to find the movie or TV show that's calling to you.
@@ -56,16 +56,16 @@
             <h4 id="suggestedRating">Average Rating: </h4>
             <h4 id="suggestedRelease">Release Date: </h4>
             <p id="suggestedDesc">Description: </p>
-            <button class="addToList">Add to List</button>
-            <button class="hidden remove">Remove From List</button>
-            <button class="nextSugg">Next Suggestion</button></li>
+            <button class="addToList" role="button">Add to List</button>
+            <button class="hidden remove" role="button">Remove From List</button>
+            <button class="nextSugg" role="button">Next Suggestion</button></li>
           </ul>
         </section>
       <div class="js-search hidden animated fadeIn" role="Section wherer the search form is displayed">
-        <section class="flex-container" role="Media search form for user input">
-          <form action="" id="js-searchForm">
+        <section class="flex-container">
+          <form action="" id="js-searchForm" role="form">
             <label for="mediaSearch" class="purple">Find:</label>
-            <select id="media" name="mediaSearch" role="Select type of media">
+            <select id="media" name="mediaSearch" role="listbox">
               <option value="movie">Movies</option>
               <option value="tv">TV Shows</option>
               <option value="person">Actor/Actress</option>
@@ -76,11 +76,11 @@
               placeholder="Search..."
               id="js-query"
             /><br>
-            <button type="submit">Search...</button>
+            <button type="submit" role="button">Search...</button>
           </form>
         </section>
       </div>
-      <div class="hidden js-results animated fadeIn" role="Section wherer the search results are displayed">
+      <div class="hidden js-results animated fadeIn">
         <section class="flex-container">
           <h2 class="hidden js-resultCounter purple">
             Results: <span id="js-resultNum"></span> total matching results
@@ -88,12 +88,12 @@
           </h2>
           <h3 class="purple">Click for details</h3>
           <ul id="js-resultList" class="flex-container"></ul>
-          <button id="next" class="hidden purple">Next</button>
-          <h3 id="pageNum" class="purple">Page:</h3>
-          <button id="back" class="hidden purple">Back</button>
+          <button id="next" class="hidden purple" role="button">Next</button>
+          <h3 id="pageNum" class="purple" role="button">Page:</h3>
+          <button id="back" class="hidden purple" role="button">Back</button>
         </section>
       </div>
-      <div class="hidden js-details animated fadeIn" role="Display of media details about selected result">
+      <div class="hidden js-details animated fadeIn">
         <ul class="flex-container">
           <li class="js-singleDetail">
             <img src="" alt="Selected Result Image" id="selectedImage">
@@ -102,30 +102,30 @@
             <h4 id="selectedPopularity">Popularity:</h3>
             <h4 id="selectedRelease"></h4>
               <p id="selectedDescription">Description</p>
-            <button class="addToList">Add to List</button>
-            <button class="hidden remove">Remove From List</button>
-            <button class="backResults">Back to Results</button>
+            <button class="addToList" role="button">Add to List</button>
+            <button class="hidden remove" role="button">Remove From List</button>
+            <button class="backResults" role="button">Back to Results</button>
           </li>
         </ul>
       </div>
-      <div class="js-selectList hidden animated fadeIn" role="Section wherer the personal list is displayed">
+      <div class="js-selectList hidden animated fadeIn">
         <section class="flex-container" role="Personal list menu">
-          <button id="js-hideList">Hide List</button>
-          <button id="js-clearList">Clear List</button>
-          <button id="js-showEmail">Create List</button>
-          <section class="js-emailForm hidden animated fadeIn" role="E-mail creation form">
-            <form action="" class="flex-container" role="Playlist creation form with user input">
+          <button id="js-hideList" role="button">Hide List</button>
+          <button id="js-clearList" role="button">Clear List</button>
+          <button id="js-showEmail" role="button">Create List</button>
+          <section class="js-emailForm hidden animated fadeIn">
+            <form action="" class="flex-container" role="form">
               <label class="purple" for="listTitle">Playlist Title:</label>
               <input type="text" placeholder="Brian's Haloween List 2019" id="listTitle"></input>
               <label class="purple" for="emailAddress">E-mail:</label>
               <input type="email" placeholder="yourEmail@Address.com" id="toEmailAddress"></input>
               <label class="purple" for="message">Message:</label>
               <textarea type="text" placeholder="Get ready to pee your pants..." id="message"></textarea><br>
-              <button id="js-emailList">Email List</button>
-              <button id="js-hideEmailForm">Cancel</button>
+              <button id="js-emailList" role="button">Email List</button>
+              <button id="js-hideEmailForm" role="button">Cancel</button>
             </form>
           </section><br>
-          <ul id="pickListRow" class="js-pickList flex-container" role="Personal list of selected meia"></ul>
+          <ul id="pickListRow" class="js-pickList flex-container" role=""></ul>
         </section>
       </div>
     </main>

@@ -200,6 +200,11 @@ ul {
     margin: 10px;
   }
 
+  p {
+    font-size: 18px;
+    max-width: 1200px;
+  }
+
   li.result {
     max-width: 400px;
   }
