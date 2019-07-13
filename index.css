@@ -15,11 +15,12 @@ body {
 }
 
 button {
-  font-family: "Orbitron", sans-serif;
   background-color: hsla(332, 88.7%, 45.1%, 0.7);
   border: none;
   border-radius: 10px;
   color: black;
+  font-family: "Orbitron", sans-serif;
+  font-size: 15px;
   margin: 5px 15px;
   padding: 10px;
   transition-duration: 1s;
@@ -68,6 +69,14 @@ ul {
 }
 
 /* Styled by Class */
+.api {
+  color: white;
+}
+
+.api:visited {
+  color: white;
+}
+
 .arrow {
   float: right;
   height: 70px;
@@ -163,6 +172,9 @@ ul {
 }
 
 @media screen and (min-width: 750px) {
+  button {
+    font-size: 20px;
+  }
   form {
     font-size: 35px;
     line-height: 41px;
