@@ -13,6 +13,13 @@ This is a mobile-first, progressive enhancment project that focuses on deliverin
 - JavaScript
 - jQuery
 
+# APIs
+
+1. [The Movie DataBase API](https://developers.themoviedb.org/3/getting-started/introduction)
+   - Utilized the "Trending", "People", Movies, "TV", and "Search" endpoints depending on user input to populate content
+2. [emailJS API](https://www.emailjs.com/)
+   - Utilized their API to turn string content into rendered HTML in e-mail format for delivery of formatted playlists.
+
 # Features
 
 - Provide Movie/TV suggestions to user
