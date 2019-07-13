@@ -29,9 +29,6 @@ function handleSuggest() {
     hideList();
     hideResults();
     viewList();
-    console.log(
-      "`handleSuggest` ran due to 'Fill The Void' button being pressed"
-    );
   });
 }
 
@@ -42,7 +39,6 @@ function getSuggestion() {
   let url =
     "https://api.themoviedb.org/3/trending/all/week?api_key=41852c5354f2d366f322d470d71ec51f&page=" +
     page;
-  console.log("`getSuggestion` ran with the url: " + url);
   fetch(url)
     .then(response => {
       if (response.ok) {
@@ -106,8 +102,6 @@ function displaySuggestion(responseJson) {
     $("#suggestedDesc").text(responseJson.results[randomSelect].overview);
   }
 
-  console.log("`displaySuggestion` ran with the returned object: ");
-  console.log(responseJson);
   hideDetails();
   hideList();
   hideResults();
@@ -120,7 +114,6 @@ function displaySuggestion(responseJson) {
  */
 function makePageRandom() {
   page = Math.floor(Math.random() * 1000);
-  console.log("`makePageRandom` ran and the page is now: " + page);
 }
 
 /*
@@ -167,12 +160,6 @@ function handleSearchForm() {
     currentQuerry = $("#js-query").val();
     mediaForm = $("#media").val();
 
-    console.log(
-      "`handleSearchForm` ran with the user search term: " +
-        currentQuerry +
-        "with mediaForm: " +
-        mediaForm
-    );
     hideBack();
     getMedia();
     hideList();
@@ -204,7 +191,6 @@ function createURL() {
 
   const queryString = formatQueryParams(params);
   const rawurl = baseURL + mediaForm + "?" + queryString;
-  console.log("`createURL` ran and produced this url: " + rawurl);
   return rawurl;
 }
 
@@ -223,8 +209,6 @@ function getMedia() {
     })
     .then(responseJson => {
       displayResults(responseJson);
-      console.log("`getMedia` ran and returned: ");
-      console.log(responseJson);
     });
 }
 
@@ -276,7 +260,6 @@ function handleMissingPic(responseJson) {
       !responseJson.results[i].profile_path
     ) {
       $(`#img${responseJson.results[i].id}`).attr("src", "missingImage.jpeg");
-      console.log("`handleMissingPic` ran");
     }
   }
 }
@@ -292,7 +275,6 @@ function handleMissingPic(responseJson) {
  */
 function handleResultSelect(mediaForm) {
   $(".result").click(function() {
-    console.log("`handleResultSelect` ran and hid results list");
     $(".js-details").removeClass("hidden");
     let mediaID = $(this).attr("data-mediaId");
     getSingleResult(mediaID, mediaForm);
@@ -310,7 +292,6 @@ function getSingleResult(mediaID, mediaForm) {
   // let mediaID = 609256; // Default test value - works
 
   let url = `https://api.themoviedb.org/3/${mediaForm}/${mediaID}?api_key=${apiKey}`;
-  console.log(url);
   fetch(url)
     .then(response => {
       if (response.ok) {
@@ -319,8 +300,6 @@ function getSingleResult(mediaID, mediaForm) {
       throw new Error(response.statustext);
     })
     .then(responseJson => {
-      console.log("`getSingleResult` ran and returned: ");
-      console.log(responseJson);
       displayDetails(responseJson, mediaForm, mediaID);
     });
 }
@@ -388,13 +367,6 @@ function displayDetails(responseJson, mediaForm, mediaID) {
     }
   }
 
-  console.log(
-    "`displayDetails` ran and provided details on: " +
-      (responseJson.name ||
-        responseJson.original_name ||
-        responseJson.original_title)
-  );
-
   hideResults();
   handleAddRemove(mediaID);
 }
@@ -439,7 +411,6 @@ function handleBackToResults() {
 function showNext(responseJson) {
   if (page === responseJson.total_pages) {
     nextButton.addClass("hidden");
-    console.log('`showNext` ran and hid "Next" button as max page reached');
   } else if (responseJson.total_results > 20) {
     nextButton.removeClass("hidden");
   }
@@ -460,7 +431,6 @@ function hideBack() {
 function handleNext() {
   nextButton.click(() => {
     page += 1;
-    console.log("`handleNext` ran and page is now:" + page);
     getMedia(currentQuery);
     if (page > 1) {
       backButton.removeClass("hidden");
@@ -475,7 +445,6 @@ function handleNext() {
 function handleBack() {
   backButton.click(() => {
     page -= 1;
-    console.log("`handleBack` ran and page is now:" + page);
     getMedia(currentQuery);
     trackPage();
   });
@@ -513,21 +482,11 @@ function addToList() {
   $(".addToList").click(function() {
     // Select the parent <li> to store as a string and gain their data-mediaId value to use as a storage key
     let listItem = $(this).parents("li");
-    console.log(listItem);
-
     let htmlContent = listItem[0].outerHTML;
-
-    // console.log(htmlContent);
-    // console.log(typeof htmlContent);
-
     let storeKey = listItem[0].attributes[1].value;
 
     // Store the string value of the <li> with all media content
-
     localStorage.setItem(storeKey, htmlContent);
-
-    console.log(localStorage);
-    console.log("`addToList` ran ");
     viewList();
     handleAddRemove(storeKey);
   });
@@ -539,7 +498,6 @@ function addToList() {
 function clickList() {
   $("#js-viewList").click(function() {
     displayList();
-    console.log("`displayList` ran");
     hideSuggestion();
     hideExplain();
     hideDetails();
@@ -561,9 +519,6 @@ function displayList() {
     $(".nextSugg").addClass("hidden");
     $(".backResults").addClass("hidden");
     $(".remove").removeClass("hidden");
-    // hideBackToResults(localStorage.getItem(localStorage.key(i)));
-
-    // console.log("`displayList` ran ");
   }
   handleRemove();
   hideExplain();
@@ -585,7 +540,6 @@ function handleHide() {
  */
 function hideList() {
   $(".js-selectList").addClass("hidden");
-  // console.log("`hideList` ran and hid selectedList");
 }
 
 /*
@@ -594,22 +548,14 @@ function hideList() {
 function handleRemove() {
   $(".remove").click(function() {
     let listItem = $(this).closest("li");
-    console.log(listItem);
     let inputID = listItem[0].attributes[1].value;
-    console.log(listItem[0].parentElement);
-
-    console.log(
-      "`handleRemove` ran and removed this key from localStorage: " + inputID
-    );
 
     if (listItem.parents(".js-selectList").length == 1) {
       // YES, the child element is inside the parent
-      console.log('the selected li is a child of ".js-selectList"');
       listItem.addClass("hidden");
       hideOrFlex();
     } else {
       // NO, it is not inside
-      console.log('the selected li is not a chld of ".js-selectList"');
       handleAddRemove();
     }
 
@@ -622,7 +568,6 @@ function handleRemove() {
 function clearList() {
   $("#js-clearList").click(function() {
     localStorage.clear();
-    console.log("`clearList` ran and has cleared localStorage");
     hideEmail();
     hideList();
     viewList();
@@ -687,8 +632,6 @@ function handleEmail() {
 
     totalContent += "</ul></div>";
 
-    // console.log(totalContent);
-
     let params = {
       user_id: "user_NbIPmNUvbtkVqjSpN62Vs",
       service_id: "gmail",
@@ -713,7 +656,6 @@ function handleEmail() {
       .then(response => {
         if (response.ok) {
           alert("Email sent to requested address!");
-          console.log("`handleEmail` ran and sent to email: " + emailAddress);
         } else {
           return response.text().then(text => Promise.reject(text));
         }
@@ -728,15 +670,10 @@ function handleEmail() {
  * Responsible for hiding "Add to List" button and unhiding "Remove From List" button
  */
 function handleAddRemove(mediaID) {
-  // console.log("The mediaID used was : " + mediaID);
   if (localStorage[mediaID]) {
-    console.log(
-      "The key existed in local storage so the remove button was revealed"
-    );
     $(".addToList").addClass("hidden");
     $(".remove").removeClass("hidden");
   } else {
-    // console.log("No match found, hides remove button and reveals add button");
     $(".addToList").removeClass("hidden");
     $(".remove").addClass("hidden");
   }
@@ -762,14 +699,8 @@ function menu() {
   $("#menuIcon").click(() => {
     if (isOnScreen(menuDiv)) {
       $(".js-menu").toggleClass("hidden");
-      console.log(
-        "`menu` ran and hid/unhid menu at user click on menuIcon due to section being visible"
-      );
     } else {
       $(".js-menu").removeClass("hidden");
-      console.log(
-        "`menu` ran and unhid menu at user click on menuIcon due to section NOT visible"
-      );
     }
   });
 }
@@ -807,7 +738,6 @@ function hideExplain() {
 function giveMaxWidth() {
   $("li.js-pickList").attr("width:", "400px;");
   $("#pickListRow").removeClass("flex-container");
-  console.log("`giveMaxWidth` ran");
 }
 
 /***^_^****/
@@ -832,10 +762,6 @@ function vidVoid() {
   nextSuggestion();
   showEmail();
   viewList();
-
-  console.log("VidVoid App Active");
-  console.log("Number of items in local storage: " + localStorage.length);
-  // console.log(localStorage);
 }
 
 /* Call */
