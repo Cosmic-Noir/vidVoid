@@ -45,7 +45,7 @@ This is a mobile-first, progressive enhancment project that focuses on deliverin
 
 ![vidVoid screen shot three](images/vidVoid3.png)
 
-###### Using Search feature for movies about space, Screen width > 750px
+###### Using Search feature for movies about food, Screen width > 750px
 
 ![vidVoid screen shot five](images/vidVoid5.png)
 
