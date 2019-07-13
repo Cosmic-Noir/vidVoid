@@ -49,6 +49,12 @@ img {
   padding: 10px;
 }
 
+input,
+select {
+  font-size: 15px;
+  margin: 5px;
+}
+
 li {
   background-color: hsla(332, 88.7%, 45.1%, 0.7);
   /* border: 1px solid black; */
@@ -141,6 +147,14 @@ ul {
   display: flex;
 }
 
+#js-searchForm {
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+  justify-content: center;
+  align-items: center;
+}
+
 #menuIcon {
   float: right;
   height: 60px;
@@ -180,6 +194,12 @@ ul {
     line-height: 41px;
   }
 
+  input,
+  select {
+    font-size: 20px;
+    margin: 10px;
+  }
+
   li.result {
     max-width: 400px;
   }
@@ -187,6 +207,8 @@ ul {
   #js-searchForm {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 
   #js-resultList,
