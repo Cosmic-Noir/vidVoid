@@ -1,3 +1,7 @@
-# Example Readme
+# VidVoid
 
-This is a sample readme file for testing purposes. I'm learning Markdown.
+VidVoid is a cosmos-themed media suggestion app that gives
+
+- This is a test
+- markdown is cool
+- Uh huh uh uh
