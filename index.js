@@ -331,7 +331,9 @@ function displayDetails(responseJson, mediaForm, mediaID) {
 
   $("#selectedDescription").text(responseJson.overview);
 
-  $("#selectedPopularity").text("Voter Average: " + responseJson.vote_average);
+  $("#selectedPopularity").text(
+    "Voter Average: " + responseJson.vote_average + "/10"
+  );
 
   if (mediaForm === "movie") {
     $("#selectedRelease").text("Release Date: " + responseJson.release_date);
