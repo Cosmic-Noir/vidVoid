@@ -163,6 +163,7 @@ function handleSearchForm() {
     hideBack();
     getMedia();
     hideList();
+    hideDetails();
   });
 }
 
