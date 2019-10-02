@@ -75,9 +75,7 @@ function displaySuggestion(responseJson) {
   } else {
     $("#suggestedImage").attr(
       "src",
-      `http://image.tmdb.org/t/p/w185${
-        responseJson.results[randomSelect].poster_path
-      }`
+      `http://image.tmdb.org/t/p/w185${responseJson.results[randomSelect].poster_path}`
     );
   }
 
@@ -620,15 +618,15 @@ function handleEmail() {
         ""
       );
       totalContent = totalContent.replace(
-        `<button class="addToList">Add to List</button>`,
+        `<button class="addToList" role="button">Add to List</button>`,
         ""
       );
       totalContent = totalContent.replace(
-        `<button class="nextSugg">Next Suggestion</button>`,
+        ` <button class="nextSugg" role="button">Next Suggestion</button>`,
         ""
       );
       totalContent = totalContent.replace(
-        `<button class="remove hidden">Remove From List</button>`,
+        `<button class="hidden remove" role="button">Remove From List</button>`,
         ""
       );
     }
@@ -659,6 +657,7 @@ function handleEmail() {
       .then(response => {
         if (response.ok) {
           alert("Email sent to requested address!");
+          console.log(totalContent);
         } else {
           return response.text().then(text => Promise.reject(text));
         }
