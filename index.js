@@ -613,8 +613,14 @@ function handleEmail() {
     for (let i = 0; i < localStorage.length; i++) {
       let content = localStorage.getItem(localStorage.key(i));
       totalContent += content;
+
+      // Scrub content to remove buttons from sent e-mail
       totalContent = totalContent.replace(
         `<button class="backResults">Back to Results</button>`,
+        ""
+      );
+      totalContent = totalContent.replace(
+        `<button class="backResults" role="button">Back to Results</button>`,
         ""
       );
       totalContent = totalContent.replace(
@@ -627,6 +633,10 @@ function handleEmail() {
       );
       totalContent = totalContent.replace(
         `<button class="hidden remove" role="button">Remove From List</button>`,
+        ""
+      );
+      totalContent = totalContent.replace(
+        `<button class="remove hidden" role="button">Remove From List</button>`,
         ""
       );
     }
